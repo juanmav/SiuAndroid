@@ -7,7 +7,7 @@ public class InspeccionDTO implements InterfaceDTO {
 
 	private Long id;
 	private String calle;
-	private String altura;
+	private Integer altura;
 	private TemaDTO tema;
 	private Double latitude;
 	private Double longitude;
@@ -21,7 +21,7 @@ public class InspeccionDTO implements InterfaceDTO {
 		
 	}
 	
-	public InspeccionDTO(Long id, String calle, String altura, TemaDTO tema,
+	public InspeccionDTO(Long id, String calle, Integer altura, TemaDTO tema,
 			 Double latitude, Double longitude,Date fecha) {
 		super();
 		this.id = id;
@@ -33,7 +33,7 @@ public class InspeccionDTO implements InterfaceDTO {
 		this.fecha = fecha;
 	}
 	
-	public InspeccionDTO(Long id, String calle, String altura, TemaDTO tema,
+	public InspeccionDTO(Long id, String calle, Integer altura, TemaDTO tema,
 			 Double latitude, Double longitude, Date fecha, String img1, String img2, String img3) {
 		super();
 		this.id = id;
@@ -61,11 +61,11 @@ public class InspeccionDTO implements InterfaceDTO {
 		this.calle = calle;
 	}
 	
-	public String getAltura() {
+	public Integer getAltura() {
 		return altura;
 	}
 	
-	public void setAltura(String altura) {
+	public void setAltura(Integer altura) {
 		this.altura = altura;
 	}
 	

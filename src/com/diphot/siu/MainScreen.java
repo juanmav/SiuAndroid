@@ -1,5 +1,8 @@
 package com.diphot.siu;
 
+import com.diphot.siu.model.JsonService;
+import com.diphot.siuweb.shared.dtos.InspeccionDTO;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -22,7 +25,11 @@ public class MainScreen extends Activity {
 	
 	public void addName(View view) {
 		System.out.println("Apretaron el boton");
+		InspeccionDTO idto = new InspeccionDTO();
+		idto.setCalle("Android Calle");
+		idto.setAltura(1000);
 		
+		System.out.println("Creacion Realizada");
 		
 	}
 
