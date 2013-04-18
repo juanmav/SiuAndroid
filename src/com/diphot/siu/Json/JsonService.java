@@ -40,18 +40,16 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 		new JsonServiceAsync().execute(jsonDTO);
 	}
 	
-	/*public void createInspeccion(InspeccionDTO dto) {
-		Gson gson;
+	public void create(InterfaceDTO objeto) {
 		GsonBuilder builder = new GsonBuilder();
 		JsonAdapter adapter = new JsonAdapter(ACTION.PUT);
 		builder.registerTypeAdapter(InterfaceDTO.class,adapter);
 		gson = builder.create();
-		String jsonDTO = gson.toJson(dto, InterfaceDTO.class);
+		String jsonDTO = gson.toJson(objeto, InterfaceDTO.class);
 		System.out.println("Pedido: ");
 		System.out.println(jsonDTO);
 		new JsonServiceAsync().execute(jsonDTO);
-		//System.out.println(stringResponse);
-	}*/
+	}
 	
 	private class JsonServiceAsync extends AsyncTask<String, String, String> {
 
@@ -65,8 +63,8 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 				httpost.setEntity(se);
 				HttpResponse response = httpclient.execute(httpost);
 				respuestaString = EntityUtils.toString(response.getEntity());
-				System.out.println("Respuesta: ");
-				System.out.println(respuestaString);
+				//System.out.println("Respuesta: ");
+				//System.out.println(respuestaString);
 				setChanged();
 			    notifyObservers(gson.fromJson(respuestaString,type));
 			} catch (ClientProtocolException e) {

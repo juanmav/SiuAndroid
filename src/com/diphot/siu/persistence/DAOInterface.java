@@ -8,4 +8,5 @@ public interface DAOInterface<DTO extends InterfaceDTO> {
 	void create(DTO dto);
 	DTO findbyId(Long dto);
 	ArrayList<DTO> getList();
+	ArrayList<DTO> findbyParentID(Long id);
 }
