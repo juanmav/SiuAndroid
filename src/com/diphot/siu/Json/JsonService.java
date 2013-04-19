@@ -77,5 +77,4 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 			return respuestaString;
 		}
 	}
-	
 }

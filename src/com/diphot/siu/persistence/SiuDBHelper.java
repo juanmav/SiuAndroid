@@ -1,9 +1,5 @@
 package com.diphot.siu.persistence;
 
-import java.util.Date;
-
-import com.diphot.siuweb.shared.dtos.TemaDTO;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -17,7 +13,7 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 	String sqlAreaCreate = "CREATE TABLE Area (id INTEGER PRIMARY KEY, nombre TEXT)";
 	String sqlTipoRelevamientoCreate = "CREATE TABLE TipoRelevamiento (id INTEGER PRIMARY KEY, nombre TEXT, areaid INTEGER)";
 	String sqlTemaCreate = "CREATE TABLE Tema (id INTEGER PRIMARY KEY, nombre TEXT, tiporelevamientoid)";
-	String sqlInspeccionCreate = "CREATE TABLE Inspecccion (id INTEGER PRIMARY KEY, " +
+	String sqlInspeccionCreate = "CREATE TABLE Inspeccion (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 															"temaid INTEGER, " +
 															"calle TEXT, " +
 															"altura INTEGER, " +
@@ -33,6 +29,7 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 		db.execSQL(sqlAreaCreate);
 		db.execSQL(sqlTipoRelevamientoCreate);
 		db.execSQL(sqlTemaCreate);
+		db.execSQL(sqlInspeccionCreate);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {

@@ -12,11 +12,10 @@ public class InspeccionDTO implements InterfaceDTO {
 	private Double latitude;
 	private Double longitude;
 	private Date fecha;
-	private String img1;
-	private String img2;
-	private String img3;
-	
-	
+	private String img1 = "";
+	private String img2 = "";
+	private String img3 = "";
+		
 	public InspeccionDTO(){
 		
 	}
