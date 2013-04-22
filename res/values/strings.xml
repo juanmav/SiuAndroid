@@ -4,5 +4,8 @@
     <string name="app_name">SiuAndroid</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_area_selection">AreaSelection</string>
+    <string name="title_activity_tipo_selection">TipoSelection</string>
+    <string name="title_activity_tema_selection">TemaSelection</string>
 
 </resources>

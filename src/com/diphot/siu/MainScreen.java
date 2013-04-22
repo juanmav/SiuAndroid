@@ -10,6 +10,7 @@ import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siu.persistence.TemaDAO;
 import com.diphot.siu.persistence.TipoRelevamientoDAO;
+import com.diphot.siu.views.AreaSelection;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
@@ -18,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -37,23 +39,10 @@ public class MainScreen extends Activity implements Observer{
 		jsonserviceTipoRelevamiento.addObserver(this);
 		jsonserviceTema.addObserver(this);
 		jsonserviceInspeccion.addObserver(this);
-		this.createAreaCombos();
 		
 	}
 
-	private void createAreaCombos(){
-		LinearLayout ll = (LinearLayout) this.findViewById(R.id.linerLayout);
-		
-		AreaDAO adao = new AreaDAO(this);
-		CheckBox cbox;
-		for (AreaDTO a : adao.getList()){
-			cbox = new CheckBox(this);
-			cbox.setText(a.getNombre());
-			cbox.setId(Integer.parseInt(a.getId().toString()));
-			ll.addView(cbox);
-		}
-		
-	}
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,11 +64,14 @@ public class MainScreen extends Activity implements Observer{
 	}
 
 	public void createIns(View view){
-		TemaDAO temaDAO = new TemaDAO(this);
+		/*TemaDAO temaDAO = new TemaDAO(this);
 		TemaDTO tdto = temaDAO.findbyId(3L);
 		InspeccionDAO idao = new InspeccionDAO(this);
 		InspeccionDTO idto = new InspeccionDTO(null, "Calle Android", 100, tdto, 22.2, 3.0, new Date());
-		idao.create(idto);
+		idao.create(idto);*/
+		Intent intent = new Intent(MainScreen.this, AreaSelection.class);
+        startActivity(intent);      
+        //finish();
 	}
 
 	public void enviarIns (View view){
