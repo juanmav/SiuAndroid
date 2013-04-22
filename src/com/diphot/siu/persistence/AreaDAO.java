@@ -53,4 +53,13 @@ public class AreaDAO implements DAOInterface<AreaDTO>{
 		// No tiene Padres
 		return null;
 	}
+
+	@Override
+	public void massiveCreate(ArrayList<AreaDTO> list) {
+		for (AreaDTO a : list) {
+			System.out.println(a.getNombre());
+			this.create(a);
+		}
+		
+	}
 }

@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 public class MainScreen extends Activity implements Observer{
 
@@ -34,8 +36,25 @@ public class MainScreen extends Activity implements Observer{
 		jsonserviceArea.addObserver(this);
 		jsonserviceTipoRelevamiento.addObserver(this);
 		jsonserviceTema.addObserver(this);
+		jsonserviceInspeccion.addObserver(this);
+		this.createAreaCombos();
+		
 	}
 
+	private void createAreaCombos(){
+		LinearLayout ll = (LinearLayout) this.findViewById(R.id.linerLayout);
+		
+		AreaDAO adao = new AreaDAO(this);
+		CheckBox cbox;
+		for (AreaDTO a : adao.getList()){
+			cbox = new CheckBox(this);
+			cbox.setText(a.getNombre());
+			cbox.setId(Integer.parseInt(a.getId().toString()));
+			ll.addView(cbox);
+		}
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -66,12 +85,9 @@ public class MainScreen extends Activity implements Observer{
 	public void enviarIns (View view){
 		InspeccionDAO idao = new InspeccionDAO(this);
 		InspeccionDTO idto = idao.getNotSended();
-
 		if (idto != null ){
 			// TODO hacer el envio aca.
 			jsonserviceInspeccion.create(idto);
-
-			//idao.updateToSended(idto.getId());
 		}
 
 	}
@@ -83,24 +99,15 @@ public class MainScreen extends Activity implements Observer{
 		if ( observable == jsonserviceArea){
 			ArrayList<AreaDTO> areas = (ArrayList<AreaDTO>)data;
 			AreaDAO adao = new AreaDAO(this);
-			for (AreaDTO a : areas) {
-				System.out.println(a.getNombre());
-				adao.create(a);
-			}
+			adao.massiveCreate(areas);
 		} else if (observable == jsonserviceTipoRelevamiento){
 			ArrayList<TipoRelevamientoDTO> tipos = (ArrayList<TipoRelevamientoDTO>)data;
 			TipoRelevamientoDAO tdao = new TipoRelevamientoDAO(this);
-			for (TipoRelevamientoDTO t : tipos){
-				System.out.println(t.getNombre());
-				tdao.create(t);
-			}
+			tdao.massiveCreate(tipos);
 		} else if (observable == jsonserviceTema){
 			ArrayList<TemaDTO> temas = (ArrayList<TemaDTO>)data;
 			TemaDAO tdao = new TemaDAO(this);
-			for (TemaDTO t : temas){
-				System.out.println(t.getNombre());
-				tdao.create(t);
-			}
+			tdao.massiveCreate(temas);
 		} else if (observable == jsonserviceInspeccion){
 			System.out.println("Y aca que hago");
 			System.out.println(data);

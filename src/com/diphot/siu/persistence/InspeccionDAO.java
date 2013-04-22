@@ -88,4 +88,9 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		System.out.println("UPDATE Inspeccion SET enviado = 1 where id=" +id);
 		db.execSQL("UPDATE Inspeccion SET enviado = 1 where id=" +id);
 	}
+	@Override
+	public void massiveCreate(ArrayList<InspeccionDTO> list) {
+		// TODO Auto-generated method stub
+		
+	}
 }

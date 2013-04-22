@@ -64,4 +64,12 @@ public class TipoRelevamientoDAO implements DAOInterface<TipoRelevamientoDTO>{
 		}
 		return dtos;
 	}
+
+	@Override
+	public void massiveCreate(ArrayList<TipoRelevamientoDTO> list) {
+		for (TipoRelevamientoDTO t : list){
+			System.out.println(t.getNombre());
+			this.create(t);
+		}
+	}
 }

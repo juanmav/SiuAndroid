@@ -2,6 +2,7 @@ package com.diphot.siu.Json;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import org.apache.http.HttpResponse;
@@ -13,15 +14,20 @@ import org.apache.http.util.EntityUtils;
 import android.os.AsyncTask;
 import com.diphot.siu.Json.JsonAdapter.ACTION;
 import com.diphot.siuweb.shared.dtos.InterfaceDTO;
+import com.diphot.siuweb.shared.dtos.PostResult;
+import com.diphot.siuweb.shared.dtos.TemaDTO;
+
 import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public class JsonService<O extends InterfaceDTO> extends Observable{
 
 	private static String url = "http://192.168.0.113:8888/mobileendpointService";
 	private Gson gson;
 	private Type type;
+	private Type backupType;
 	private O dto;
 	
 	public JsonService(O dto, Type listType){
@@ -48,6 +54,9 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 		String jsonDTO = gson.toJson(objeto, InterfaceDTO.class);
 		System.out.println("Pedido: ");
 		System.out.println(jsonDTO);
+		// Cambio el Type.
+		this.backupType = this.type;
+		this.type = new TypeToken<PostResult>(){}.getType();
 		new JsonServiceAsync().execute(jsonDTO);
 	}
 	
@@ -67,6 +76,8 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 				//System.out.println(respuestaString);
 				setChanged();
 			    notifyObservers(gson.fromJson(respuestaString,type));
+			    // Devuelvo el viejo type, si es que lo cambie.
+			    type = backupType;
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

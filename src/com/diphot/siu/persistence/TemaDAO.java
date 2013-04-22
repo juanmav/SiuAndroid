@@ -64,4 +64,12 @@ public class TemaDAO implements DAOInterface<TemaDTO> {
 		}
 		return dtos;
 	}
+
+	@Override
+	public void massiveCreate(ArrayList<TemaDTO> list) {
+		for (TemaDTO t : list){
+			System.out.println(t.getNombre());
+			this.create(t);
+		}
+	}
 }
