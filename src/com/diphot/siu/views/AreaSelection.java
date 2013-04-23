@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class AreaSelection extends Activity {
 
@@ -32,24 +33,26 @@ public class AreaSelection extends Activity {
 	private void createAreaCombos(){
 		LinearLayout ll = (LinearLayout) this.findViewById(R.id.arealinerLayout);	
 		AreaDAO adao = new AreaDAO(this);
-		CheckBox cbox;
 		OnClickListener o = new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				System.out.println(((CheckBox) v).getId());
+				System.out.println(((RadioButton) v).getId());
 				Bundle b = new Bundle();
-				b.putInt("area", ((CheckBox) v).getId());
+				b.putInt("area", ((RadioButton) v).getId());
 				Intent intent = new Intent(AreaSelection.this, TipoSelection.class);
 				intent.putExtras(b);
 				startActivity(intent);
 			}
 		};
+		RadioButton radio;
+		RadioGroup radioGroup = new RadioGroup(this);
 		for (AreaDTO a : adao.getList()){
-			cbox = new CheckBox(this);
-			cbox.setText(a.getNombre());
-			cbox.setId(Integer.parseInt(a.getId().toString()));
-			cbox.setOnClickListener(o);
-			ll.addView(cbox);
+			radio = new RadioButton(this);
+			radio.setText(a.getNombre());
+			radio.setId(Integer.parseInt(a.getId().toString()));
+			radio.setOnClickListener(o);
+			radioGroup.addView(radio);
 		}	
+		ll.addView(radioGroup);
 	}
 }

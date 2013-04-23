@@ -13,6 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import android.os.AsyncTask;
 import com.diphot.siu.Json.JsonAdapter.ACTION;
+import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.InterfaceDTO;
 import com.diphot.siuweb.shared.dtos.PostResult;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
@@ -22,15 +23,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-public class JsonService<O extends InterfaceDTO> extends Observable{
+public class JsonListService<O extends InterfaceDTO> extends Observable{
 
 	private static String url = "http://192.168.0.113:8888/mobileendpointService";
 	private Gson gson;
 	private Type type;
-	private Type backupType;
 	private O dto;
 	
-	public JsonService(O dto, Type listType){
+	public JsonListService(O dto, Type listType){
 		this.type = listType;
 		this.dto = dto;
 	}
@@ -43,20 +43,6 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 		String jsonDTO = gson.toJson(dto, InterfaceDTO.class);
 		System.out.println("Pedido: ");
 		System.out.println(jsonDTO);
-		new JsonServiceAsync().execute(jsonDTO);
-	}
-	
-	public void create(InterfaceDTO objeto) {
-		GsonBuilder builder = new GsonBuilder();
-		JsonAdapter adapter = new JsonAdapter(ACTION.PUT);
-		builder.registerTypeAdapter(InterfaceDTO.class,adapter);
-		gson = builder.create();
-		String jsonDTO = gson.toJson(objeto, InterfaceDTO.class);
-		System.out.println("Pedido: ");
-		System.out.println(jsonDTO);
-		// Cambio el Type.
-		this.backupType = this.type;
-		this.type = new TypeToken<PostResult>(){}.getType();
 		new JsonServiceAsync().execute(jsonDTO);
 	}
 	
@@ -77,7 +63,6 @@ public class JsonService<O extends InterfaceDTO> extends Observable{
 				setChanged();
 			    notifyObservers(gson.fromJson(respuestaString,type));
 			    // Devuelvo el viejo type, si es que lo cambie.
-			    type = backupType;
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

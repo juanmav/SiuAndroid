@@ -7,5 +7,8 @@
     <string name="title_activity_area_selection">AreaSelection</string>
     <string name="title_activity_tipo_selection">TipoSelection</string>
     <string name="title_activity_tema_selection">TemaSelection</string>
+    <string name="title_activity_observacion">Observacion</string>
+    <string name="title_activity_foto_selection">FotoSelection</string>
+    <string name="title_activity_ubicacion_selection">UbicacionSelection</string>
 
 </resources>

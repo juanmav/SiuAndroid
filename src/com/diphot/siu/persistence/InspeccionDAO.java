@@ -30,6 +30,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				")";
 		System.out.println(sqlString); 
 		db.execSQL(sqlString);
+		db.close();
 	}
 	@Override
 	public InspeccionDTO findbyId(Long dto) {
@@ -69,24 +70,15 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 			idto.setImg2(c.getString(8));
 			idto.setImg3(c.getString(9));
 		}
+		db.close();
 		return idto;
-		/*"(id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-				"temaid INTEGER, " + 
-				"calle TEXT, " + 
-				"altura INTEGER, " +
-				"latitude REAL, " +
-				"longitude REAL, " +
-				"fecha TEXT, " +
-				"img1 TEXT, " +
-				"img2 TEXT, " +
-				"img3 TEXT, " +
-				"enviado INTEGER)";*/
 	}
 
 	public void updateToSended(Long id){
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("UPDATE Inspeccion SET enviado = 1 where id=" +id);
 		db.execSQL("UPDATE Inspeccion SET enviado = 1 where id=" +id);
+		db.close();
 	}
 	@Override
 	public void massiveCreate(ArrayList<InspeccionDTO> list) {

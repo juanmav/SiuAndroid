@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.diphot.siu.Json.JsonService;
+import com.diphot.siu.Json.JsonCreateService;
+import com.diphot.siu.Json.JsonListService;
 import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siu.persistence.TemaDAO;
@@ -27,10 +28,10 @@ import android.widget.LinearLayout;
 
 public class MainScreen extends Activity implements Observer{
 
-	private JsonService<AreaDTO> jsonserviceArea = new JsonService<AreaDTO>(new AreaDTO(), new TypeToken<ArrayList<AreaDTO>>(){}.getType());
-	private JsonService<TipoRelevamientoDTO> jsonserviceTipoRelevamiento = new JsonService<TipoRelevamientoDTO>(new TipoRelevamientoDTO(), new TypeToken<ArrayList<TipoRelevamientoDTO>>(){}.getType());
-	private JsonService<TemaDTO> jsonserviceTema = new JsonService<TemaDTO>(new TemaDTO(), new TypeToken<ArrayList<TemaDTO>>(){}.getType());
-	private JsonService<InspeccionDTO> jsonserviceInspeccion = new JsonService<InspeccionDTO>(new InspeccionDTO(), new TypeToken<ArrayList<InspeccionDTO>>(){}.getType());
+	private JsonListService<AreaDTO> jsonserviceArea = new JsonListService<AreaDTO>(new AreaDTO(), new TypeToken<ArrayList<AreaDTO>>(){}.getType());
+	private JsonListService<TipoRelevamientoDTO> jsonserviceTipoRelevamiento = new JsonListService<TipoRelevamientoDTO>(new TipoRelevamientoDTO(), new TypeToken<ArrayList<TipoRelevamientoDTO>>(){}.getType());
+	private JsonListService<TemaDTO> jsonserviceTema = new JsonListService<TemaDTO>(new TemaDTO(), new TypeToken<ArrayList<TemaDTO>>(){}.getType());
+	private JsonCreateService<InspeccionDTO> jsonserviceInspeccion = new JsonCreateService<InspeccionDTO>(new InspeccionDTO(), new TypeToken<ArrayList<InspeccionDTO>>(){}.getType());
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +40,6 @@ public class MainScreen extends Activity implements Observer{
 		jsonserviceTipoRelevamiento.addObserver(this);
 		jsonserviceTema.addObserver(this);
 		jsonserviceInspeccion.addObserver(this);
-		
 	}
 
 
@@ -103,6 +103,10 @@ public class MainScreen extends Activity implements Observer{
 		} else if (observable == jsonserviceInspeccion){
 			System.out.println("Y aca que hago");
 			System.out.println(data);
+			Object[] objetos = (Object[]) data;
+			System.out.println(objetos[0]);
+			System.out.println(objetos[1]);
+			new InspeccionDAO(this).updateToSended(Long.valueOf(((String)objetos[1])));
 		}
 	}
 }

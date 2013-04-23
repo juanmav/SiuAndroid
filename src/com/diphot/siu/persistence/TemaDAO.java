@@ -19,6 +19,7 @@ public class TemaDAO implements DAOInterface<TemaDTO> {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("INSERT INTO Tema (id,nombre,tiporelevamientoid) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "'," + dto.getTiporelevamientodto().getId() + ")" );
 		db.execSQL("INSERT OR REPLACE INTO Tema (id,nombre,tiporelevamientoid) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "'," + dto.getTiporelevamientodto().getId() + ")" );
+		db.close();
 	}
 	@Override
 	public TemaDTO findbyId(Long id) {
@@ -32,6 +33,7 @@ public class TemaDAO implements DAOInterface<TemaDTO> {
 			dto.setId(c.getLong(0));
 			dto.setNombre(c.getString(1));
 		}
+		db.close();
 		return dto;
 	}
 	@Override
@@ -47,6 +49,7 @@ public class TemaDAO implements DAOInterface<TemaDTO> {
 				dtos.add(tema);
 			} while(c.moveToNext());
 		}
+		db.close();
 		return dtos;
 	}
 	@Override
@@ -62,6 +65,7 @@ public class TemaDAO implements DAOInterface<TemaDTO> {
 				dtos.add(tema);
 			} while(c.moveToNext());
 		}
+		db.close();
 		return dtos;
 	}
 

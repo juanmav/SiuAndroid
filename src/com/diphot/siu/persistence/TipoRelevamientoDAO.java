@@ -19,6 +19,7 @@ public class TipoRelevamientoDAO implements DAOInterface<TipoRelevamientoDTO>{
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("INSERT INTO TipoRelevamiento (id,nombre,areaid) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "'," + dto.getAreadto().getId() + ")" );
 		db.execSQL("INSERT OR REPLACE INTO TipoRelevamiento (id,nombre,areaid) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "'," + dto.getAreadto().getId() + ")" );
+		db.close();
 	}
 	@Override
 	public TipoRelevamientoDTO findbyId(Long id) {
@@ -32,6 +33,7 @@ public class TipoRelevamientoDAO implements DAOInterface<TipoRelevamientoDTO>{
 			dto.setId(c.getLong(0));
 			dto.setNombre(c.getString(1));
 		}
+		db.close();
 		return dto;
 	}
 	@Override
@@ -47,6 +49,7 @@ public class TipoRelevamientoDAO implements DAOInterface<TipoRelevamientoDTO>{
 				dtos.add(tipo);
 			} while(c.moveToNext());
 		}
+		db.close();
 		return dtos;
 	}
 	@Override
@@ -62,6 +65,7 @@ public class TipoRelevamientoDAO implements DAOInterface<TipoRelevamientoDTO>{
 				dtos.add(tipo);
 			} while(c.moveToNext());
 		}
+		db.close();
 		return dtos;
 	}
 

@@ -21,6 +21,7 @@ public class AreaDAO implements DAOInterface<AreaDTO>{
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("INSERT INTO area (id,nombre) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "')" );
 		db.execSQL("INSERT OR REPLACE INTO area (id,nombre) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "')" );
+		db.close();
 	}
 
 	@Override
@@ -32,6 +33,7 @@ public class AreaDAO implements DAOInterface<AreaDTO>{
 		if (c.moveToFirst()){
 			dto = new AreaDTO(c.getLong(0), c.getString(1));
 		}
+		db.close();
 		return dto;
 	}
 
@@ -45,6 +47,7 @@ public class AreaDAO implements DAOInterface<AreaDTO>{
 				dtos.add(new AreaDTO(c.getLong(0),c.getString(1)));
 			} while(c.moveToNext());
 		}
+		db.close();
 		return dtos;
 	}
 
