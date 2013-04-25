@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 
 public class Observacion extends Activity {
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

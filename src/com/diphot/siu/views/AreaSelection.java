@@ -29,7 +29,7 @@ public class AreaSelection extends Activity {
 		getMenuInflater().inflate(R.menu.area_selection, menu);
 		return true;
 	}
-	
+
 	private void createAreaCombos(){
 		LinearLayout ll = (LinearLayout) this.findViewById(R.id.arealinerLayout);	
 		AreaDAO adao = new AreaDAO(this);
@@ -37,11 +37,10 @@ public class AreaSelection extends Activity {
 			@Override
 			public void onClick(View v) {
 				System.out.println(((RadioButton) v).getId());
-				Bundle b = new Bundle();
-				b.putInt("area", ((RadioButton) v).getId());
-				Intent intent = new Intent(AreaSelection.this, TipoSelection.class);
-				intent.putExtras(b);
-				startActivity(intent);
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra(SiuConstants.AREA_ID_PROPERTY,((RadioButton) v).getId());
+				setResult(RESULT_OK,returnIntent);        
+				finish();
 			}
 		};
 		RadioButton radio;

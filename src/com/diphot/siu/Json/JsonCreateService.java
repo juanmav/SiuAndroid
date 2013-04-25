@@ -60,12 +60,11 @@ public class JsonCreateService<O extends InterfaceDTO> extends Observable{
 				respuestaString = EntityUtils.toString(response.getEntity());
 				//System.out.println("Respuesta: ");
 				//System.out.println(respuestaString);
-				setChanged();
 				Object[] objetos = new Object[2];
 				objetos[0] = gson.fromJson(respuestaString,type);
 				objetos[1] = jsons[1];
+				setChanged();
 				notifyObservers(objetos);
-				// Devuelvo el viejo type, si es que lo cambie.
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -12,6 +12,7 @@ import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siu.persistence.TemaDAO;
 import com.diphot.siu.persistence.TipoRelevamientoDAO;
 import com.diphot.siu.views.AreaSelection;
+import com.diphot.siu.views.SelectionController;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
@@ -25,6 +26,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainScreen extends Activity implements Observer{
 
@@ -42,8 +44,6 @@ public class MainScreen extends Activity implements Observer{
 		jsonserviceInspeccion.addObserver(this);
 	}
 
-
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -69,9 +69,9 @@ public class MainScreen extends Activity implements Observer{
 		InspeccionDAO idao = new InspeccionDAO(this);
 		InspeccionDTO idto = new InspeccionDTO(null, "Calle Android", 100, tdto, 22.2, 3.0, new Date());
 		idao.create(idto);*/
-		Intent intent = new Intent(MainScreen.this, AreaSelection.class);
-        startActivity(intent);      
-        //finish();
+		Intent intent = new Intent(MainScreen.this, SelectionController.class);
+		startActivity(intent);      
+		//finish();
 	}
 
 	public void enviarIns (View view){
@@ -104,9 +104,15 @@ public class MainScreen extends Activity implements Observer{
 			System.out.println("Y aca que hago");
 			System.out.println(data);
 			Object[] objetos = (Object[]) data;
+			// TODO ver el post result.
 			System.out.println(objetos[0]);
 			System.out.println(objetos[1]);
 			new InspeccionDAO(this).updateToSended(Long.valueOf(((String)objetos[1])));
+			// TODO ver porque se rompe el Toast aca.
+			//Toast.makeText(getBaseContext(),"Inspeccion ENVIADA con exito", Toast.LENGTH_LONG).show();
 		}
 	}
+
+	
+
 }

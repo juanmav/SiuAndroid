@@ -20,7 +20,7 @@ public class TemaSelection extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tema_selection);
 		Bundle b = getIntent().getExtras();
-		int tipoid = b.getInt("tipo");
+		int tipoid = b.getInt(SiuConstants.TIPO_ID_PROPERTY);
 		System.out.println("Selecionaron el area numero " + tipoid);
 		createTemasCombos(tipoid);
 	}
@@ -32,11 +32,10 @@ public class TemaSelection extends Activity {
 			@Override
 			public void onClick(View v) {
 				System.out.println(((RadioButton) v).getId());
-				Bundle b = new Bundle();
-				b.putInt("tema", ((RadioButton) v).getId());
-				Intent intent = new Intent(TemaSelection.this, Observacion.class);
-				intent.putExtras(b);
-				startActivity(intent);
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra(SiuConstants.TEMA_ID_PROPERTY,((RadioButton) v).getId());
+				setResult(RESULT_OK,returnIntent);        
+				finish();
 			}
 		};
 		RadioButton radio;

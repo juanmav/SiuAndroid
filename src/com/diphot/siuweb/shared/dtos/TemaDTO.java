@@ -9,6 +9,10 @@ public class TemaDTO implements  InterfaceDTO {
 	public TemaDTO() {
 		
 	}
+	
+	public TemaDTO(int id) {
+		this.id = Long.valueOf(id);
+	}
 		
 	public TemaDTO (Long id, String nombre, TipoRelevamientoDTO tiporelevamientodto){
 		this.id = id;

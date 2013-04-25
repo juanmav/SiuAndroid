@@ -9,8 +9,9 @@
         android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -60,7 +61,15 @@
         </activity>
         <activity
             android:name="com.diphot.siu.views.UbicacionSelection"
-            android:label="@string/title_activity_ubicacion_selection" >
+            android:configChanges="orientation"
+            android:label="@string/title_activity_ubicacion_selection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.SelectionController"
+            android:label="@string/title_activity_selection_controller" 
+            android:configChanges="orientation" 
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

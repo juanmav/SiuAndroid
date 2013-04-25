@@ -21,7 +21,7 @@ public class TipoSelection extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tipo_selection);
 		Bundle b = getIntent().getExtras();
-		int areaid = b.getInt("area");
+		int areaid = b.getInt(SiuConstants.AREA_ID_PROPERTY);
 		System.out.println("Selecionaron el area numero " + areaid);
 		createTiposCombos(areaid);
 		
@@ -34,11 +34,10 @@ public class TipoSelection extends Activity {
 			@Override
 			public void onClick(View v) {
 				System.out.println(((RadioButton) v).getId());
-				Bundle b = new Bundle();
-				b.putInt("tipo", ((RadioButton) v).getId());
-				Intent intent = new Intent(TipoSelection.this, TemaSelection.class);
-				intent.putExtras(b);
-				startActivity(intent);
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra(SiuConstants.TIPO_ID_PROPERTY,((RadioButton) v).getId());
+				setResult(RESULT_OK,returnIntent);        
+				finish();
 			}
 		};
 		RadioButton radio;

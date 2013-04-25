@@ -10,5 +10,6 @@
     <string name="title_activity_observacion">Observacion</string>
     <string name="title_activity_foto_selection">FotoSelection</string>
     <string name="title_activity_ubicacion_selection">UbicacionSelection</string>
+    <string name="title_activity_selection_controller">SelectionController</string>
 
 </resources>
