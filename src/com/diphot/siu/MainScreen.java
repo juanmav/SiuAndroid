@@ -30,50 +30,44 @@ import android.widget.Toast;
 
 public class MainScreen extends Activity implements Observer{
 
-	private JsonListService<AreaDTO> jsonserviceArea = new JsonListService<AreaDTO>(new AreaDTO(), new TypeToken<ArrayList<AreaDTO>>(){}.getType());
-	private JsonListService<TipoRelevamientoDTO> jsonserviceTipoRelevamiento = new JsonListService<TipoRelevamientoDTO>(new TipoRelevamientoDTO(), new TypeToken<ArrayList<TipoRelevamientoDTO>>(){}.getType());
-	private JsonListService<TemaDTO> jsonserviceTema = new JsonListService<TemaDTO>(new TemaDTO(), new TypeToken<ArrayList<TemaDTO>>(){}.getType());
-	private JsonCreateService<InspeccionDTO> jsonserviceInspeccion = new JsonCreateService<InspeccionDTO>(new InspeccionDTO(), new TypeToken<ArrayList<InspeccionDTO>>(){}.getType());
+	private JsonListService<AreaDTO> jsonserviceArea;
+	private JsonListService<TipoRelevamientoDTO> jsonserviceTipoRelevamiento;
+	private JsonListService<TemaDTO> jsonserviceTema;
+	private JsonCreateService<InspeccionDTO> jsonserviceInspeccion;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_screen);
+		/*CReacion de los servicios*/
+		this.jsonserviceArea = new JsonListService<AreaDTO>(new AreaDTO(), new TypeToken<ArrayList<AreaDTO>>(){}.getType(),this);
+		this.jsonserviceTipoRelevamiento = new JsonListService<TipoRelevamientoDTO>(new TipoRelevamientoDTO(), new TypeToken<ArrayList<TipoRelevamientoDTO>>(){}.getType(),this);
+		this.jsonserviceTema = new JsonListService<TemaDTO>(new TemaDTO(), new TypeToken<ArrayList<TemaDTO>>(){}.getType(),this);
+		this.jsonserviceInspeccion = new JsonCreateService<InspeccionDTO>(new InspeccionDTO(), new TypeToken<ArrayList<InspeccionDTO>>(){}.getType(),this);
+		/*Registracion de observables*/
 		jsonserviceArea.addObserver(this);
 		jsonserviceTipoRelevamiento.addObserver(this);
 		jsonserviceTema.addObserver(this);
 		jsonserviceInspeccion.addObserver(this);
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_screen, menu);
 		return true;
 	}
-
 	public void addAreas(View view) {
 		jsonserviceArea.getList();
 	}
-
 	public void addTipoRelevamientos(View view){
 		jsonserviceTipoRelevamiento.getList();
 	}
-
 	public void addTemas(View view){
 		jsonserviceTema.getList();
 	}
-
 	public void createIns(View view){
-		/*TemaDAO temaDAO = new TemaDAO(this);
-		TemaDTO tdto = temaDAO.findbyId(3L);
-		InspeccionDAO idao = new InspeccionDAO(this);
-		InspeccionDTO idto = new InspeccionDTO(null, "Calle Android", 100, tdto, 22.2, 3.0, new Date());
-		idao.create(idto);*/
 		Intent intent = new Intent(MainScreen.this, SelectionController.class);
 		startActivity(intent);      
-		//finish();
 	}
-
 	public void enviarIns (View view){
 		InspeccionDAO idao = new InspeccionDAO(this);
 		InspeccionDTO idto = idao.getNotSended();
@@ -81,38 +75,23 @@ public class MainScreen extends Activity implements Observer{
 			// TODO hacer el envio aca.
 			jsonserviceInspeccion.create(idto);
 		}
-
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable observable, Object data) {
 		System.out.println("Me viene la respueta del backend");
 		if ( observable == jsonserviceArea){
-			ArrayList<AreaDTO> areas = (ArrayList<AreaDTO>)data;
-			AreaDAO adao = new AreaDAO(this);
-			adao.massiveCreate(areas);
+			// Sincro OK
 		} else if (observable == jsonserviceTipoRelevamiento){
-			ArrayList<TipoRelevamientoDTO> tipos = (ArrayList<TipoRelevamientoDTO>)data;
-			TipoRelevamientoDAO tdao = new TipoRelevamientoDAO(this);
-			tdao.massiveCreate(tipos);
+			// Sincro OK
 		} else if (observable == jsonserviceTema){
-			ArrayList<TemaDTO> temas = (ArrayList<TemaDTO>)data;
-			TemaDAO tdao = new TemaDAO(this);
-			tdao.massiveCreate(temas);
+			// Sincro OK
 		} else if (observable == jsonserviceInspeccion){
-			System.out.println("Y aca que hago");
-			System.out.println(data);
-			Object[] objetos = (Object[]) data;
-			// TODO ver el post result.
-			System.out.println(objetos[0]);
-			System.out.println(objetos[1]);
-			new InspeccionDAO(this).updateToSended(Long.valueOf(((String)objetos[1])));
-			// TODO ver porque se rompe el Toast aca.
-			//Toast.makeText(getBaseContext(),"Inspeccion ENVIADA con exito", Toast.LENGTH_LONG).show();
+			// Creacion OK
 		}
 	}
-
 	
-
+	public void actualizaCuenta(){
+		
+	}
 }

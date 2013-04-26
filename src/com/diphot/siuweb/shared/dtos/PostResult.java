@@ -12,4 +12,8 @@ public class PostResult {
 	public String getToGson(){
 		return new Gson().toJson(this);
 	}
+	
+	public Result getResult(){
+		return this.result;
+	}
 }

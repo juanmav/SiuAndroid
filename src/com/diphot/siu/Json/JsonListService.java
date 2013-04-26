@@ -11,17 +11,18 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import android.os.AsyncTask;
-import com.diphot.siu.Json.JsonAdapter.ACTION;
-import com.diphot.siuweb.shared.dtos.InspeccionDTO;
-import com.diphot.siuweb.shared.dtos.InterfaceDTO;
-import com.diphot.siuweb.shared.dtos.PostResult;
-import com.diphot.siuweb.shared.dtos.TemaDTO;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.Toast;
+
+import com.diphot.siu.Json.JsonAdapter.ACTION;
+import com.diphot.siu.persistence.DAOFactory;
+import com.diphot.siu.persistence.DAOInterface;
+import com.diphot.siuweb.shared.dtos.InterfaceDTO;
 import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 public class JsonListService<O extends InterfaceDTO> extends Observable{
 
@@ -29,10 +30,12 @@ public class JsonListService<O extends InterfaceDTO> extends Observable{
 	private Gson gson;
 	private Type type;
 	private O dto;
+	private Context context;
 	
-	public JsonListService(O dto, Type listType){
+	public JsonListService(O dto, Type listType, Context context){
 		this.type = listType;
 		this.dto = dto;
+		this.context = context;
 	}
 	
 	public void getList(){
@@ -47,7 +50,6 @@ public class JsonListService<O extends InterfaceDTO> extends Observable{
 	}
 	
 	private class JsonServiceAsync extends AsyncTask<String, String, String> {
-
 		@Override
 		protected String doInBackground(String... jsons) {
 			String respuestaString = "";
@@ -58,11 +60,9 @@ public class JsonListService<O extends InterfaceDTO> extends Observable{
 				httpost.setEntity(se);
 				HttpResponse response = httpclient.execute(httpost);
 				respuestaString = EntityUtils.toString(response.getEntity());
-				//System.out.println("Respuesta: ");
-				//System.out.println(respuestaString);
-				setChanged();
-			    notifyObservers(gson.fromJson(respuestaString,type));
-			    // Devuelvo el viejo type, si es que lo cambie.
+				ArrayList<InterfaceDTO> list = gson.fromJson(respuestaString,type);
+				DAOInterface<InterfaceDTO> dao = DAOFactory.getDAOImpl(list.get(0), context);
+				dao.massiveCreate(list);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -72,5 +72,16 @@ public class JsonListService<O extends InterfaceDTO> extends Observable{
 			}
 			return respuestaString;
 		}
+	
+		@Override
+		protected void onPostExecute(String result) {
+			if (result == ""){
+				Toast.makeText(context.getApplicationContext(), "FALLO!", Toast.LENGTH_SHORT).show();
+			} else {
+				setChanged();
+				notifyObservers();
+				Toast.makeText(context.getApplicationContext(), "Sincronizado!", Toast.LENGTH_SHORT).show();
+			}
+	     }
 	}
 }

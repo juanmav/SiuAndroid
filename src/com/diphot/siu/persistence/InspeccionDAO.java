@@ -16,7 +16,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	@Override
 	public void create(InspeccionDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
-		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img2, enviado) " +
+		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, enviado) " +
 				"VALUES ("+ dto.getTema().getId().toString() + ",'" +
 				dto.getCalle() + "'," +
 				dto.getAltura() + "," +
