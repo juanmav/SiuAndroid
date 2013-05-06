@@ -16,7 +16,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	@Override
 	public void create(InspeccionDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
-		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, enviado) " +
+		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, enviado) " +
 				"VALUES ("+ dto.getTema().getId().toString() + ",'" +
 				dto.getCalle() + "'," +
 				dto.getAltura() + "," +
@@ -25,7 +25,8 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				dto.getFecha().toString() + "','" +
 				dto.getImg1() + "','" +
 				dto.getImg2() + "','" +
-				dto.getImg3()	+ "'," +
+				dto.getImg3()	+ "','" +
+				dto.getObservacion() + "'," +
 				"0" +
 				")";
 		System.out.println(sqlString); 
@@ -39,9 +40,41 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	}
 	@Override
 	public ArrayList<InspeccionDTO> getList() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<InspeccionDTO> idtos = new ArrayList<InspeccionDTO>();
+		SQLiteDatabase db = dbhelper.getReadableDatabase();
+		String[] args = new String[] {};
+		// TODO ajustar query.
+		Cursor c = db.rawQuery("SELECT * FROM Inspeccion WHERE enviado=0",args);
+		if (c.moveToFirst()) {
+			do {
+				idtos.add(getSimpleDTO(c));
+			} while(c.moveToNext());
+		}
+		return idtos;
 	}
+	
+	/* Toma el primer registro del cursor y devuelve el dto
+	 * Este metodo no avanza el cursor.
+	 * */
+	private InspeccionDTO getSimpleDTO(Cursor c){
+		InspeccionDTO idto = new InspeccionDTO();
+		idto.setId(c.getLong(0));
+		TemaDTO temaDTO = new TemaDTO();
+		temaDTO.setId(c.getLong(1));
+		idto.setTema(temaDTO);
+		idto.setCalle(c.getString(2));
+		idto.setAltura(c.getInt(3));
+		idto.setLatitude(c.getDouble(4));
+		idto.setLongitude(c.getDouble(5));
+		// TODO crear la fecha.
+		idto.setFecha(new Date());
+		idto.setObservacion(c.getString(7));
+		idto.setImg1(c.getString(8));
+		idto.setImg2(c.getString(9));
+		idto.setImg3(c.getString(10));
+		return idto;
+	}
+	
 	@Override
 	public ArrayList<InspeccionDTO> findbyParentID(Long id) {
 		// TODO Auto-generated method stub
@@ -53,22 +86,8 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
 		String[] args = new String[] {};
 		Cursor c = db.rawQuery("SELECT * FROM Inspeccion WHERE enviado=0",args);
-		
 		if (c.moveToFirst()){
-			idto = new InspeccionDTO();
-			idto.setId(c.getLong(0));
-			TemaDTO temaDTO = new TemaDTO();
-			temaDTO.setId(c.getLong(1));
-			idto.setTema(temaDTO);
-			idto.setCalle(c.getString(2));
-			idto.setAltura(c.getInt(3));
-			idto.setLatitude(c.getDouble(4));
-			idto.setLongitude(c.getDouble(5));
-			// TODO crear la fecha.
-			idto.setFecha(new Date());
-			idto.setImg1(c.getString(7));
-			idto.setImg2(c.getString(8));
-			idto.setImg3(c.getString(9));
+			idto = getSimpleDTO(c);
 		}
 		db.close();
 		return idto;
@@ -83,6 +102,5 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	@Override
 	public void massiveCreate(ArrayList<InspeccionDTO> list) {
 		// TODO Auto-generated method stub
-		
 	}
 }

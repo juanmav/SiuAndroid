@@ -59,6 +59,12 @@ public class SelectionController extends Activity {
 				this.inspeccion.setImg1(img1);
 				this.inspeccion.setImg2(img2);
 				this.inspeccion.setImg3(img3);
+				intent = new Intent(SelectionController.this, ObservacionSelect.class);
+				startActivityForResult(intent, SiuConstants.OBSERVACION_SELECT);
+				break;
+			case SiuConstants.OBSERVACION_SELECT:
+				String observacion = data.getStringExtra(SiuConstants.OBSERVACION_PROPERTY);
+				this.inspeccion.setObservacion(observacion);
 				intent = new Intent(SelectionController.this, UbicacionSelection.class);
 				startActivityForResult(intent, SiuConstants.UBICACION_SELECT);
 				break;
@@ -67,7 +73,6 @@ public class SelectionController extends Activity {
 				this.inspeccion.setAltura(Integer.parseInt(data.getStringExtra(SiuConstants.ALTURA_PROPERTY)));
 				this.inspeccion.setLatitude(Double.parseDouble(data.getStringExtra(SiuConstants.LATITUDE_PROPERTY)));
 				this.inspeccion.setLongitude(Double.parseDouble(data.getStringExtra(SiuConstants.LONGITUDE_PROPERTY)));
-				
 				creacionTerminada();
 				break;
 			default:

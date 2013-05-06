@@ -20,6 +20,7 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 															"latitude REAL, " +
 															"longitude REAL, " +
 															"fecha TEXT, " +
+															"observacion TEXT," +
 															"img1 TEXT, " +
 															"img2 TEXT, " +
 															"img3 TEXT, " +

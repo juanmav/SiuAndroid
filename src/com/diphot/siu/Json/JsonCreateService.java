@@ -9,6 +9,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.diphot.siu.Json.JsonAdapter.ACTION;
 import com.diphot.siu.persistence.InspeccionDAO;
+import com.diphot.siu.views.SiuConstants;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.InterfaceDTO;
 import com.diphot.siuweb.shared.dtos.PostResult;
@@ -28,7 +32,6 @@ import com.google.gson.reflect.TypeToken;
 
 public class JsonCreateService<O extends InterfaceDTO> extends Observable{
 
-	private static String url = "http://192.168.0.113:8888/mobileendpointService";
 	private Gson gson;
 	private Type type;
 	private O dto;
@@ -59,8 +62,12 @@ public class JsonCreateService<O extends InterfaceDTO> extends Observable{
 		protected String doInBackground(String... jsons) {
 			String respuestaString = "";
 			try {
-				DefaultHttpClient httpclient = new DefaultHttpClient();
-				HttpPost httpost = new HttpPost(URI.create(url));
+				HttpParams params = new BasicHttpParams();
+				HttpConnectionParams.setConnectionTimeout(params, 10000);
+				HttpConnectionParams.setSoTimeout(params, 15000);
+				
+				DefaultHttpClient httpclient = new DefaultHttpClient(params);
+				HttpPost httpost = new HttpPost(URI.create(SiuConstants.URL_BACKED));
 				StringEntity se = new StringEntity(jsons[0]);
 				httpost.setEntity(se);
 				HttpResponse response = httpclient.execute(httpost);

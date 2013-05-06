@@ -8,11 +8,15 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
-public class Observacion extends Activity {
+public class ObservacionSelect extends Activity {
+	
+	private EditText edittext1;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_observacion);
+		this.edittext1 = (EditText) this.findViewById(R.id.editText1);
 	}
 
 	@Override
@@ -21,15 +25,13 @@ public class Observacion extends Activity {
 		getMenuInflater().inflate(R.menu.observacion, menu);
 		return true;
 	}
-	
+
 	public void next(View v) {
-		Intent intent = new Intent(Observacion.this, FotoSelection.class);
-		Bundle b = getIntent().getExtras();
-		intent.putExtras(b);
-		System.out.println("Tema id seleccionado al final" + b.getInt("tema"));
-		EditText e = (EditText)this.findViewById(R.id.editText1);
-		b.putString("observacion", e.getText().toString());
-		startActivity(intent);
+		// TODO agtregar la observacion al DTO
+		Intent returnIntent = new Intent();
+		returnIntent.putExtra(SiuConstants.OBSERVACION_PROPERTY,this.edittext1.getText().toString());
+		setResult(RESULT_OK,returnIntent);        
+		finish();
 	}
 
 }

@@ -1,17 +1,12 @@
 package com.diphot.siu;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
 import com.diphot.siu.Json.JsonCreateService;
 import com.diphot.siu.Json.JsonListService;
-import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.InspeccionDAO;
-import com.diphot.siu.persistence.TemaDAO;
-import com.diphot.siu.persistence.TipoRelevamientoDAO;
-import com.diphot.siu.views.AreaSelection;
 import com.diphot.siu.views.SelectionController;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
@@ -24,9 +19,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class MainScreen extends Activity implements Observer{
 
@@ -72,7 +64,6 @@ public class MainScreen extends Activity implements Observer{
 		InspeccionDAO idao = new InspeccionDAO(this);
 		InspeccionDTO idto = idao.getNotSended();
 		if (idto != null ){
-			// TODO hacer el envio aca.
 			jsonserviceInspeccion.create(idto);
 		}
 	}

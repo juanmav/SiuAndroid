@@ -5,6 +5,7 @@ public interface SiuConstants {
 	public static final int TIPO_SELECT = 2;
 	public static final int TEMA_SELECT = 3;
 	public static final int FOTO_SELECT = 4;
+	public static final int OBSERVACION_SELECT = 6;
 	public static final int UBICACION_SELECT = 5;
 			
 	public static String AREA_ID_PROPERTY = "areaid";
@@ -19,4 +20,6 @@ public interface SiuConstants {
 	public static String ALTURA_PROPERTY = "altura";
 	public static String LATITUDE_PROPERTY = "latitude";
 	public static String LONGITUDE_PROPERTY = "longitude";
+	
+	public static String URL_BACKED = "http://192.168.0.101:8888/mobileendpointService";
 }
