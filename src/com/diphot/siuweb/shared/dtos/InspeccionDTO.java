@@ -15,6 +15,7 @@ public class InspeccionDTO implements InterfaceDTO {
 	private String img1 = "";
 	private String img2 = "";
 	private String img3 = "";
+	private String observacion;
 		
 	public InspeccionDTO(){
 		
@@ -122,5 +123,13 @@ public class InspeccionDTO implements InterfaceDTO {
 
 	public void setImg2(String img2) {
 		this.img2 = img2;
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 }
