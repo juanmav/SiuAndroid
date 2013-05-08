@@ -18,7 +18,9 @@ public class FotoSelection extends Activity {
 	private ImageView imageView1;
 	private ImageView imageView2;
 	private ImageView imageView3;
-	private Bundle bundle;
+	private Bitmap bm1;
+	private Bitmap bm2;
+	private Bitmap bm3;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,7 +39,6 @@ public class FotoSelection extends Activity {
 		this.imageView2.setOnClickListener(o);
 		this.imageView3.setOnClickListener(o);
 		// Inicializo el bundle para poner las fotos.
-		this.bundle = new Bundle();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,8 +46,28 @@ public class FotoSelection extends Activity {
 		getMenuInflater().inflate(R.menu.foto_selection, menu);
 		return true;
 	}
-	public void tomarFoto(View v){
 
+	// Guarda las imagenes si por algun motivo se destruye y se vuelve a crear
+	// la Activity. Es suele suceder en las rotaciones de pantalla.
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		savedInstanceState.putParcelable(SiuConstants.IMG1_PROPERTY, bm1);
+		savedInstanceState.putParcelable(SiuConstants.IMG2_PROPERTY, bm2);
+		savedInstanceState.putParcelable(SiuConstants.IMG3_PROPERTY, bm3);
+		// al final llamamos a la super clase.
+		super.onSaveInstanceState(savedInstanceState);  
+	}  
+
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		bm1 = savedInstanceState.getParcelable(SiuConstants.IMG1_PROPERTY);
+		bm2 = savedInstanceState.getParcelable(SiuConstants.IMG2_PROPERTY);
+		bm3 = savedInstanceState.getParcelable(SiuConstants.IMG3_PROPERTY);
+		if (bm1 != null)
+			imageView1.setImageBitmap(bm1);
+		if (bm2 != null)
+			imageView2.setImageBitmap(bm2);
+		if (bm3 != null)
+			imageView3.setImageBitmap(bm3);
 	}
 
 	@Override
@@ -54,27 +75,40 @@ public class FotoSelection extends Activity {
 		// TODO hacer tres fotos distintas.
 		if (resultCode == RESULT_OK) {
 			Bitmap bm = (Bitmap) data.getExtras().get("data"); 
+			if (requestCode == CAMERA_REQUEST + this.imageView1.getId()){
+				bm1 = bm;
+				imageView1.setImageBitmap(bm1);
+			} else if (requestCode == CAMERA_REQUEST + this.imageView2.getId()){
+				bm2 = bm;
+				imageView2.setImageBitmap(bm2);
+			} else if (requestCode == CAMERA_REQUEST + this.imageView3.getId()){
+				bm3 = bm;
+				imageView3.setImageBitmap(bm3);
+			}
+		}  
+	}
+
+	public String getEncodedImage(Bitmap bm){
+		String encodedImage;
+		if (bm != null){
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 			bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
 			byte[] b = baos.toByteArray(); 
-			String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-			System.out.println(encodedImage);
-			if (requestCode == CAMERA_REQUEST + this.imageView1.getId()){
-				bundle.putString(SiuConstants.IMG1_PROPERTY, encodedImage);
-				imageView1.setImageBitmap(bm);
-			} else if (requestCode == CAMERA_REQUEST + this.imageView2.getId()){
-				bundle.putString(SiuConstants.IMG2_PROPERTY, encodedImage);
-				imageView2.setImageBitmap(bm);
-			} else if (requestCode == CAMERA_REQUEST + this.imageView3.getId()){
-				bundle.putString(SiuConstants.IMG3_PROPERTY, encodedImage);
-				imageView3.setImageBitmap(bm);
-			}
-		}  
-	} 
+			encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+		}else {
+			encodedImage = "";
+		}
+		return encodedImage;
+	}
+
 
 	public void next(View v){
 		Intent returnIntent = new Intent();
-		returnIntent.putExtras(this.bundle);
+		Bundle bundle = new Bundle();
+		bundle.putString(SiuConstants.IMG1_PROPERTY, getEncodedImage(bm1));
+		bundle.putString(SiuConstants.IMG2_PROPERTY, getEncodedImage(bm2));
+		bundle.putString(SiuConstants.IMG3_PROPERTY, getEncodedImage(bm3));
+		returnIntent.putExtras(bundle);
 		setResult(RESULT_OK,returnIntent);        
 		finish();
 	}

@@ -14,6 +14,12 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
+        <Button android:id="@+id/btn_checkWifi"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="checkWifi"
+            android:text="Chequear Wifi"/>
+        
         <Button
             android:id="@+id/btn_areas"
             android:layout_width="fill_parent"
@@ -49,9 +55,12 @@
             android:onClick="enviarIns"
             android:text="Enviar Inspeccion" />
         
-        
-        
-        
+        <Button
+            android:id="@+id/btn_verListaIns"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="verLista"
+            android:text="Ver Lista Inspecciones" />
     </LinearLayout>
     
 </RelativeLayout>

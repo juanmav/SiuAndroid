@@ -21,5 +21,8 @@ public interface SiuConstants {
 	public static String LATITUDE_PROPERTY = "latitude";
 	public static String LONGITUDE_PROPERTY = "longitude";
 	
-	public static String URL_BACKED = "http://192.168.0.101:8888/mobileendpointService";
+	public static String URL_BACKED = "http://siuwebs.appspot.com/mobileendpointService";
+	
+	//public static String URL_BACKED = "http://192.168.0.101:8888/mobileendpointService";
+	public static String HostIP = "8.8.8.8";
 }

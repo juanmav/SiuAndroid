@@ -1,5 +1,8 @@
 package com.diphot.siu;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,17 +11,22 @@ import com.diphot.siu.Json.JsonCreateService;
 import com.diphot.siu.Json.JsonListService;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siu.views.SelectionController;
+import com.diphot.siu.views.inspecciones.InspeccionList;
+import com.diphot.siu.wifi.ConnectionChecker;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
 import com.google.gson.reflect.TypeToken;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainScreen extends Activity implements Observer{
 
@@ -81,8 +89,15 @@ public class MainScreen extends Activity implements Observer{
 			// Creacion OK
 		}
 	}
-	
-	public void actualizaCuenta(){
-		
+
+	public void verLista(View view){
+		Intent intent = new Intent(MainScreen.this, InspeccionList.class);
+		startActivity(intent);      
 	}
+
+
+	public void checkWifi(View view) {
+		new ConnectionChecker(this).execute("");
+	}
+
 }

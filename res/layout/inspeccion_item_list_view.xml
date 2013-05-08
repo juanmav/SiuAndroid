@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    >
+
+    <TextView
+        android:id="@+id/inspeccionid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:textSize="19sp"
+        android:textStyle="bold" 
+        android:text="id"/>
+
+    <TextView
+        android:id="@+id/calle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/inspeccionid"
+        android:textColor="#32cd32"
+        android:textSize="19sp"
+        android:textStyle="bold" 
+        android:text="calle"/>
+
+    <TextView
+        android:id="@+id/altura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calle"
+        android:layout_toRightOf="@id/inspeccionid" 
+        android:text="altura"/>
+
+    <TextView
+        android:id="@+id/observacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/altura"
+        android:layout_toRightOf="@id/inspeccionid"
+        android:textColor="#32cd32"
+        android:textSize="12sp"
+        android:textStyle="bold" 
+        android:text="observacion"
+        />
+</RelativeLayout>
