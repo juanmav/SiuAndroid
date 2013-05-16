@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+@Deprecated
 public abstract class JsonCreateService<O extends InterfaceDTO> extends AsyncTask<String, String, String>{
 
 	private Gson gson;

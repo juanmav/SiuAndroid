@@ -21,6 +21,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
         android:debuggable="true">
+        <service android:enabled="true" android:name="com.diphot.siu.services.deprecated.DataBaseSincro"/>
+        <service android:enabled="true" android:name="com.diphot.siu.services.deprecated.InspeccionSincro"/>
         <activity
             android:name="com.diphot.siu.MainScreen"
             android:configChanges="orientation"
