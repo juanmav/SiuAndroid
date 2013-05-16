@@ -28,19 +28,19 @@ import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class JsonListService<O extends InterfaceDTO> extends Observable{
+public abstract class JsonListService<O extends InterfaceDTO> extends AsyncTask<String, String, String>{
 
 	private Gson gson;
 	private Type type;
 	private O dto;
 	private Context context;
-	
+
 	public JsonListService(O dto, Type listType, Context context){
 		this.type = listType;
 		this.dto = dto;
 		this.context = context;
 	}
-	
+
 	public void getList(){
 		GsonBuilder builder = new GsonBuilder();
 		JsonAdapter adapter = new JsonAdapter(ACTION.LIST);
@@ -49,45 +49,44 @@ public class JsonListService<O extends InterfaceDTO> extends Observable{
 		String jsonDTO = gson.toJson(dto, InterfaceDTO.class);
 		System.out.println("Pedido: ");
 		System.out.println(jsonDTO);
-		new JsonServiceAsync().execute(jsonDTO);
+		this.execute(jsonDTO);
 	}
-	
-	private class JsonServiceAsync extends AsyncTask<String, String, String> {
-		@Override
-		protected String doInBackground(String... jsons) {
-			String respuestaString = "";
-			try {
-				HttpParams params = new BasicHttpParams();
-				HttpConnectionParams.setConnectionTimeout(params, 10000);
-				HttpConnectionParams.setSoTimeout(params, 15000);
-				DefaultHttpClient httpclient = new DefaultHttpClient(params);
-				HttpPost httpost = new HttpPost(URI.create(SiuConstants.URL_BACKED));
-				StringEntity se = new StringEntity(jsons[0]);
-				httpost.setEntity(se);
-				HttpResponse response = httpclient.execute(httpost);
-				respuestaString = EntityUtils.toString(response.getEntity());
-				ArrayList<InterfaceDTO> list = gson.fromJson(respuestaString,type);
-				DAOInterface<InterfaceDTO> dao = DAOFactory.getDAOImpl(list.get(0), context);
-				dao.massiveCreate(list);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return respuestaString;
+
+	@Override
+	protected String doInBackground(String... jsons) {
+		String respuestaString = "";
+		try {
+			HttpParams params = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(params, 10000);
+			HttpConnectionParams.setSoTimeout(params, 15000);
+			DefaultHttpClient httpclient = new DefaultHttpClient(params);
+			HttpPost httpost = new HttpPost(URI.create(SiuConstants.URL_BACKED));
+			StringEntity se = new StringEntity(jsons[0]);
+			httpost.setEntity(se);
+			HttpResponse response = httpclient.execute(httpost);
+			respuestaString = EntityUtils.toString(response.getEntity());
+			ArrayList<InterfaceDTO> list = gson.fromJson(respuestaString,type);
+			DAOInterface<InterfaceDTO> dao = DAOFactory.getDAOImpl(list.get(0), context);
+			dao.massiveCreate(list);
+			sincronized();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	
-		@Override
-		protected void onPostExecute(String result) {
-			if (result == ""){
-				Toast.makeText(context.getApplicationContext(), "FALLO!", Toast.LENGTH_SHORT).show();
-			} else {
-				setChanged();
-				notifyObservers();
-				Toast.makeText(context.getApplicationContext(), "Sincronizado!", Toast.LENGTH_SHORT).show();
-			}
-	     }
+		return respuestaString;
 	}
+
+	@Override
+	protected void onPostExecute(String result) {
+		if (result == ""){
+			Toast.makeText(context.getApplicationContext(), "FALLO!", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(context.getApplicationContext(), "Sincronizado!", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	protected abstract void sincronized();
 }

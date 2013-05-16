@@ -2,8 +2,6 @@ package com.diphot.siu.Json;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Observable;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
@@ -21,7 +19,6 @@ import android.widget.Toast;
 import com.diphot.siu.Json.JsonAdapter.ACTION;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siu.views.SiuConstants;
-import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.InterfaceDTO;
 import com.diphot.siuweb.shared.dtos.PostResult;
 
@@ -30,7 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-public class JsonCreateService<O extends InterfaceDTO> extends Observable{
+public abstract class JsonCreateService<O extends InterfaceDTO> extends AsyncTask<String, String, String>{
 
 	private Gson gson;
 	private Type type;
@@ -43,7 +40,7 @@ public class JsonCreateService<O extends InterfaceDTO> extends Observable{
 		this.context = context;
 	}
 
-	public void create(InterfaceDTO objeto) {
+	public void send(O objeto) {
 		GsonBuilder builder = new GsonBuilder();
 		JsonAdapter adapter = new JsonAdapter(ACTION.PUT);
 		builder.registerTypeAdapter(InterfaceDTO.class,adapter);
@@ -51,51 +48,52 @@ public class JsonCreateService<O extends InterfaceDTO> extends Observable{
 		String jsonDTO = gson.toJson(objeto, InterfaceDTO.class);
 		System.out.println("Pedido: ");
 		System.out.println(jsonDTO);
-		// Cambio el Type.
 		this.type = new TypeToken<PostResult>(){}.getType();
-		new JsonServiceAsync().execute(jsonDTO,((InspeccionDTO)objeto).getId().toString());
+		this.execute(jsonDTO,objeto.getId().toString());
 	}
 
-	private class JsonServiceAsync extends AsyncTask<String, String, String> {
+	@Override
+	protected String doInBackground(String... jsons) {
+		String respuestaString = "";
+		try {
+			HttpParams params = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(params, 10000);
+			HttpConnectionParams.setSoTimeout(params, 15000);
 
-		@Override
-		protected String doInBackground(String... jsons) {
-			String respuestaString = "";
-			try {
-				HttpParams params = new BasicHttpParams();
-				HttpConnectionParams.setConnectionTimeout(params, 10000);
-				HttpConnectionParams.setSoTimeout(params, 15000);
-				
-				DefaultHttpClient httpclient = new DefaultHttpClient(params);
-				HttpPost httpost = new HttpPost(URI.create(SiuConstants.URL_BACKED));
-				StringEntity se = new StringEntity(jsons[0]);
-				httpost.setEntity(se);
-				HttpResponse response = httpclient.execute(httpost);
-				respuestaString = EntityUtils.toString(response.getEntity());
-				PostResult postResult = gson.fromJson(respuestaString,type);
-				if (postResult.getResult() == PostResult.Result.OK){
-					new InspeccionDAO(context).updateToSended(Long.valueOf((jsons[1])));
-					respuestaString = "OK";
-				}
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			DefaultHttpClient httpclient = new DefaultHttpClient(params);
+			HttpPost httpost = new HttpPost(URI.create(SiuConstants.URL_BACKED));
+			StringEntity se = new StringEntity(jsons[0]);
+			httpost.setEntity(se);
+			HttpResponse response = httpclient.execute(httpost);
+			respuestaString = EntityUtils.toString(response.getEntity());
+			PostResult postResult = gson.fromJson(respuestaString,type);
+			if (postResult.getResult() == PostResult.Result.OK){
+				new InspeccionDAO(context).updateToSended(Long.valueOf((jsons[1])));
+				respuestaString = "OK";
 			}
-			return respuestaString;
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return respuestaString;
+	}
+
+	@Override
+	protected void onPostExecute(String result) {
+		if (result == ""){
+			Toast.makeText(context.getApplicationContext(), "FALLO!", Toast.LENGTH_SHORT).show();
+			failtoSend();
+		} else {
+			Toast.makeText(context.getApplicationContext(), "ENVIADO!", Toast.LENGTH_SHORT).show();
+			sended();
 		}
 		
-		@Override
-		protected void onPostExecute(String result) {
-			if (result == ""){
-				Toast.makeText(context.getApplicationContext(), "FALLO!", Toast.LENGTH_SHORT).show();
-			} else {
-				setChanged();
-				notifyObservers();
-				Toast.makeText(context.getApplicationContext(), "ENVIADO!", Toast.LENGTH_SHORT).show();
-			}
-	     }
 	}
+	
+	public abstract void sended();
+	public abstract void failtoSend();
 }
+

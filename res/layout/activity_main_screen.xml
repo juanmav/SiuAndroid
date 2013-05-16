@@ -9,51 +9,17 @@
     tools:context=".MainScreen" >
 
     <LinearLayout
-        android:id="@+id/linerLayout"
+        android:id="@+id/mainscreenLinerLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
-
-        <Button android:id="@+id/btn_checkWifi"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="checkWifi"
-            android:text="Chequear Wifi"/>
-        
-        <Button
-            android:id="@+id/btn_areas"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="addAreas"
-            android:text="Execute Consulta Areas" />
-
-        <Button
-            android:id="@+id/btn_tipos"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="addTipoRelevamientos"
-            android:text="Execute Consulta Tipos" />
-        
-        <Button
-            android:id="@+id/btn_temas"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="addTemas"
-            android:text="Execute Consulta Temas" />
-
+      
         <Button
             android:id="@+id/btn_crearIns"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="createIns"
             android:text="Crear Inspeccion" />
-	
-        <Button
-            android:id="@+id/btn_enviarIns"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="enviarIns"
-            android:text="Enviar Inspeccion" />
         
         <Button
             android:id="@+id/btn_verListaIns"

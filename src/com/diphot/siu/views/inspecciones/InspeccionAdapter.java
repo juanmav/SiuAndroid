@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class InspeccionAdapter extends BaseAdapter{
@@ -47,6 +48,7 @@ public class InspeccionAdapter extends BaseAdapter{
 		TextView calle = (TextView) convertView.findViewById(R.id.calle);
 		TextView altura = (TextView) convertView.findViewById(R.id.altura);
 		TextView observacion = (TextView) convertView.findViewById(R.id.observacion);
+		Switch enviado = (Switch) convertView.findViewById(R.id.enviado);
 		
 		InspeccionDTO dto = this.list.get(position);
 		
@@ -54,6 +56,13 @@ public class InspeccionAdapter extends BaseAdapter{
 		calle.setText(dto.getCalle());
 		altura.setText(dto.getAltura().toString());
 		observacion.setText(dto.getObservacion());
+		
+		if (dto.getEnviado() == 0){
+			enviado.setChecked(false);
+		} else {
+			enviado.setChecked(true);
+		}
+		
 		
 		return convertView;
 	}

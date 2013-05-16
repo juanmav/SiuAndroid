@@ -16,10 +16,12 @@ public class InspeccionDTO implements InterfaceDTO {
 	private String img2 = "";
 	private String img3 = "";
 	private String observacion;
+	private int enviado;
 		
 	public InspeccionDTO(){
 		
 	}
+	
 	
 	public InspeccionDTO(Long id, String calle, Integer altura, TemaDTO tema,
 			 Double latitude, Double longitude,Date fecha) {
@@ -131,5 +133,14 @@ public class InspeccionDTO implements InterfaceDTO {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+
+	public int getEnviado() {
+		return enviado;
+	}
+
+	public void setEnviado(int enviado) {
+		this.enviado = enviado;
 	}
 }

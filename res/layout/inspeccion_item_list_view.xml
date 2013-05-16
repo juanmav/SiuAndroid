@@ -43,4 +43,15 @@
         android:textStyle="bold" 
         android:text="observacion"
         />
+
+    <Switch
+        android:id="@+id/enviado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/altura"
+        android:layout_alignBottom="@+id/altura"
+        android:layout_alignParentRight="true"
+        android:enabled="false"
+        android:text="Enviado" />
+
 </RelativeLayout>

@@ -44,7 +44,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
 		String[] args = new String[] {};
 		// TODO ajustar query.
-		Cursor c = db.rawQuery("SELECT * FROM Inspeccion WHERE enviado=0",args);
+		Cursor c = db.rawQuery("SELECT * FROM Inspeccion",args);
 		if (c.moveToFirst()) {
 			do {
 				idtos.add(getSimpleDTO(c));
@@ -72,6 +72,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		idto.setImg1(c.getString(8));
 		idto.setImg2(c.getString(9));
 		idto.setImg3(c.getString(10));
+		idto.setEnviado(c.getInt(11));
 		return idto;
 	}
 	

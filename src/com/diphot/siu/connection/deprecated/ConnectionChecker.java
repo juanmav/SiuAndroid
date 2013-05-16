@@ -1,4 +1,4 @@
-package com.diphot.siu.wifi;
+package com.diphot.siu.connection.deprecated;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,12 +22,14 @@ import android.widget.Toast;
 
 // Los genericos que se completan son para las siguientes funciones/metodos.
 // Tipo entrada execute, algo mas, tipo entrada postresult.
-public class ConnectionChecker extends AsyncTask<String, String, Boolean[]>{
+@Deprecated
+public abstract class ConnectionChecker extends AsyncTask<String, String, Boolean[]>{
 
 	private Context context;
-
+	
 	public ConnectionChecker(Context context) {
 		this.context = context;
+		
 	} 
 
 	@Override
@@ -65,13 +67,17 @@ public class ConnectionChecker extends AsyncTask<String, String, Boolean[]>{
 	protected void onPostExecute(Boolean[] result) {
 		if (result[0]){
 			if (result[1]){
-				Toast.makeText(this.context.getApplicationContext(), "Host OK", Toast.LENGTH_SHORT).show();
+				HostOK();
 			} else {
-				Toast.makeText(this.context.getApplicationContext(), "No se encuentra el HOST", Toast.LENGTH_SHORT).show();
+				HostNotOK();
 			}
 		} else {
-			Toast.makeText(this.context.getApplicationContext(), "Debe Tener el WIFI encendido", Toast.LENGTH_SHORT).show();
+			wifiNotOK();
 		}
 	}
+
+	public abstract void HostOK();
+	public abstract void HostNotOK();
+	public abstract void wifiNotOK();
 
 }
