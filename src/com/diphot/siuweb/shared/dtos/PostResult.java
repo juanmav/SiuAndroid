@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 
 public class PostResult {
 	Result result;
+	Object extra;
 	public enum Result {OK,FALSE,NOSTRATEGY};
-	public PostResult(Result result){
+	public PostResult(Result result, Object extra){
 		this.result = result;
+		this.extra = extra;
 	}
 
 	public String getToGson(){
@@ -16,4 +18,6 @@ public class PostResult {
 	public Result getResult(){
 		return this.result;
 	}
+	
+	
 }

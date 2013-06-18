@@ -1,30 +1,32 @@
 package com.diphot.siuweb.shared.dtos;
 
-import java.util.Date;
+import java.io.Serializable;
 
+public class InspeccionDTO implements Serializable, InterfaceDTO {
 
-public class InspeccionDTO implements InterfaceDTO {
-
+	private static final long serialVersionUID = -359471250000224506L;
 	private Long id;
 	private String calle;
 	private Integer altura;
 	private TemaDTO tema;
 	private Double latitude;
 	private Double longitude;
-	private Date fecha;
-	private String img1 = "";
-	private String img2 = "";
-	private String img3 = "";
+	private String fecha;
+	private String img1;
+	private String img2;
+	private String img3;
 	private String observacion;
-	private int enviado;
-		
+	
 	public InspeccionDTO(){
 		
 	}
 	
+	public InspeccionDTO(Long id){
+		this.id = id;
+	}
 	
 	public InspeccionDTO(Long id, String calle, Integer altura, TemaDTO tema,
-			 Double latitude, Double longitude,Date fecha) {
+			 Double latitude, Double longitude,String fecha) {
 		super();
 		this.id = id;
 		this.calle = calle;
@@ -35,8 +37,8 @@ public class InspeccionDTO implements InterfaceDTO {
 		this.fecha = fecha;
 	}
 	
-	public InspeccionDTO(Long id, String calle, Integer altura, TemaDTO tema,
-			 Double latitude, Double longitude, Date fecha, String img1, String img2, String img3) {
+	public InspeccionDTO(Long id, String calle, Integer altura, String observacion, TemaDTO tema,
+			 Double latitude, Double longitude, String fecha, String img1, String img2, String img3) {
 		super();
 		this.id = id;
 		this.calle = calle;
@@ -45,6 +47,10 @@ public class InspeccionDTO implements InterfaceDTO {
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.fecha = fecha;
+		this.img1 = img1;
+		this.img2 = img2;
+		this.img3 = img3;
+		this.observacion = observacion;
 	}
 
 	public Long getId() {
@@ -95,11 +101,11 @@ public class InspeccionDTO implements InterfaceDTO {
 		this.latitude = latitude;
 	}
 	
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 	
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
@@ -133,14 +139,5 @@ public class InspeccionDTO implements InterfaceDTO {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
-	}
-
-
-	public int getEnviado() {
-		return enviado;
-	}
-
-	public void setEnviado(int enviado) {
-		this.enviado = enviado;
 	}
 }

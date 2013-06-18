@@ -20,6 +20,7 @@ public class ConsoleOnScreen extends EditText{
 			instance = new ConsoleOnScreen(context);
 			instance.setEnabled(false);
 			instance.setMaxLines(15);
+			System.out.println(instance.getParent());
 			return instance;
 		} else {
 			return instance;

@@ -1,7 +1,11 @@
 package com.diphot.siuweb.shared.dtos;
 
+import java.io.Serializable;
 
-public class TemaDTO implements  InterfaceDTO {
+
+public class TemaDTO implements Serializable,  InterfaceDTO {
+
+	private static final long serialVersionUID = -1154524751777580522L;
 	private String nombre;
 	private Long id;
 	private TipoRelevamientoDTO tiporelevamientodto;
@@ -9,11 +13,15 @@ public class TemaDTO implements  InterfaceDTO {
 	public TemaDTO() {
 		
 	}
-	
+
 	public TemaDTO(int id) {
 		this.id = Long.valueOf(id);
+	}	
+	
+	public String toString(){
+		return this.nombre;
 	}
-		
+	
 	public TemaDTO (Long id, String nombre, TipoRelevamientoDTO tiporelevamientodto){
 		this.id = id;
 		this.nombre = nombre;

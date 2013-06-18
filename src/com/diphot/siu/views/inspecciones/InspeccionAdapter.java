@@ -56,12 +56,12 @@ public class InspeccionAdapter extends BaseAdapter{
 		calle.setText(dto.getCalle());
 		altura.setText(dto.getAltura().toString());
 		observacion.setText(dto.getObservacion());
-		
-		if (dto.getEnviado() == 0){
+		// TODO verificar esto
+		/*if (dto.getEnviado() == 0){
 			enviado.setChecked(false);
 		} else {
 			enviado.setChecked(true);
-		}
+		}*/
 		
 		
 		return convertView;

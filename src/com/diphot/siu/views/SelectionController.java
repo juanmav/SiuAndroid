@@ -88,7 +88,8 @@ public class SelectionController extends Activity {
 
 	// Creo La inspeccion y salgo
 	private void creacionTerminada(){
-		this.inspeccion.setFecha(new Date());
+		// TODO ver fecha
+		this.inspeccion.setFecha(new Date().toString());
 		new InspeccionDAO(this).create(this.inspeccion);
 		Toast.makeText(getBaseContext(),"Inspeccion Generada con exito", Toast.LENGTH_LONG).show();
 		ConsoleOnScreen.addText("Inspeccion Generada con exito");

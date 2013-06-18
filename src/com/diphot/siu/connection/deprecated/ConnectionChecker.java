@@ -18,7 +18,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.widget.Toast;
+
 
 // Los genericos que se completan son para las siguientes funciones/metodos.
 // Tipo entrada execute, algo mas, tipo entrada postresult.
@@ -45,7 +45,7 @@ public abstract class ConnectionChecker extends AsyncTask<String, String, Boolea
 				HttpConnectionParams.setSoTimeout(params, 15000);
 
 				DefaultHttpClient httpclient = new DefaultHttpClient(params);
-				HttpGet httpget = new HttpGet(URI.create(SiuConstants.URL_BACKED));
+				HttpGet httpget = new HttpGet(URI.create(SiuConstants.URL_BACKEND));
 				httpclient.execute(httpget);
 				HttpResponse response = httpclient.execute(httpget);
 				String respuestaString = EntityUtils.toString(response.getEntity());

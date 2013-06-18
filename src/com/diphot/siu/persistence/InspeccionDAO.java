@@ -67,12 +67,12 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		idto.setLatitude(c.getDouble(4));
 		idto.setLongitude(c.getDouble(5));
 		// TODO crear la fecha.
-		idto.setFecha(new Date());
+		//idto.setFecha(new Date());
 		idto.setObservacion(c.getString(7));
 		idto.setImg1(c.getString(8));
 		idto.setImg2(c.getString(9));
 		idto.setImg3(c.getString(10));
-		idto.setEnviado(c.getInt(11));
+		//idto.setEnviado(c.getInt(11));
 		return idto;
 	}
 	
