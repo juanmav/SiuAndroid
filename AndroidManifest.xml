@@ -9,30 +9,32 @@
         android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-	<uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
-        android:debuggable="true">
-        <service android:enabled="true" android:name="com.diphot.siu.services.deprecated.DataBaseSincro"/>
-        <service android:enabled="true" android:name="com.diphot.siu.services.deprecated.InspeccionSincro"/>
+        android:theme="@style/AppTheme" >
+        <service
+            android:name="com.diphot.siu.services.deprecated.DataBaseSincro"
+            android:enabled="true" />
+        <service
+            android:name="com.diphot.siu.services.deprecated.InspeccionSincro"
+            android:enabled="true" />
+
         <activity
-            android:name="com.diphot.siu.MainScreen"
+            android:name="com.diphot.siu.views.MainScreen"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.diphot.siu.views.AreaSelection"
@@ -81,6 +83,16 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_inspeccion_list"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.Login"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

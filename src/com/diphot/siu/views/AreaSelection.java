@@ -2,17 +2,20 @@ package com.diphot.siu.views;
 
 
 import com.diphot.siu.R;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.diphot.siu.persistence.AreaDAO;
+import com.diphot.siu.util.Util;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.LightingColorFilter;
 import android.view.Menu;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
 public class AreaSelection extends Activity {
 
@@ -31,27 +34,39 @@ public class AreaSelection extends Activity {
 	}
 
 	private void createAreaCombos(){
-		LinearLayout ll = (LinearLayout) this.findViewById(R.id.arealinerLayout);	
+		TableLayout table = (TableLayout) this.findViewById(R.id.arealinerLayout);	
 		AreaDAO adao = new AreaDAO(this);
 		OnClickListener o = new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				System.out.println(((RadioButton) v).getId());
+				System.out.println(((Button) v).getId());
 				Intent returnIntent = new Intent();
-				returnIntent.putExtra(SiuConstants.AREA_ID_PROPERTY,((RadioButton) v).getId());
+				returnIntent.putExtra(SiuConstants.AREA_ID_PROPERTY,((Button) v).getId());
 				setResult(RESULT_OK,returnIntent);        
 				finish();
 			}
 		};
-		RadioButton radio;
-		RadioGroup radioGroup = new RadioGroup(this);
+		Button button;
+		TableRow row = (TableRow) LayoutInflater.from(this).inflate(R.layout.custom_row_line, null);
+		int count = 1;
 		for (AreaDTO a : adao.getList()){
-			radio = new RadioButton(this);
-			radio.setText(a.getNombre());
-			radio.setId(Integer.parseInt(a.getId().toString()));
-			radio.setOnClickListener(o);
-			radioGroup.addView(radio);
-		}	
-		ll.addView(radioGroup);
+			if (count == 1) {
+				button = (Button) row.findViewById(R.id.rowbutton1);
+				button.setText(a.getNombre());
+				button.setId(Integer.parseInt(a.getId().toString()));
+				button.getBackground().setColorFilter(new LightingColorFilter(Util.getColor(a.getId()), Util.getColor(a.getId())));
+				button.setOnClickListener(o);
+			} else if (count == 2){
+				button = (Button) row.findViewById(R.id.rowbutton2);
+				button.setText(a.getNombre());
+				button.setId(Integer.parseInt(a.getId().toString()));
+				button.getBackground().setColorFilter(new LightingColorFilter(Util.getColor(a.getId()), Util.getColor(a.getId())));
+				button.setOnClickListener(o);
+				count = 0;
+				table.addView(row);
+				row = (TableRow) LayoutInflater.from(this).inflate(R.layout.custom_row_line, null);
+			}
+			count++;
+		}
 	}
 }

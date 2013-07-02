@@ -9,18 +9,88 @@
         android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service
+            android:name="com.diphot.siu.services.deprecated.DataBaseSincro"
+            android:enabled="true" />
+        <service
+            android:name="com.diphot.siu.services.deprecated.InspeccionSincro"
+            android:enabled="true" />
+
         <activity
-            android:name="com.diphot.siu.MainScreen"
-            android:label="@string/app_name" >
+            android:name="com.diphot.siu.views.MainScreen"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.AreaSelection"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_area_selection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.TipoSelection"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_tipo_selection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.TemaSelection"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_tema_selection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.ObservacionSelect"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_observacion"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.FotoSelection"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_foto_selection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.UbicacionSelection"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_ubicacion_selection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.SelectionController"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_selection_controller"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.views.inspecciones.InspeccionList"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_inspeccion_list"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.diphot.siu.Login"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
