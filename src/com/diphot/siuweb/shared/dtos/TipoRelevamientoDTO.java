@@ -1,5 +1,4 @@
 package com.diphot.siuweb.shared.dtos;
-
 import java.io.Serializable;
 
 

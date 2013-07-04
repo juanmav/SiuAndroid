@@ -78,12 +78,18 @@ public class FotoSelection extends Activity {
 			if (requestCode == CAMERA_REQUEST + this.imageView1.getId()){
 				bm1 = bm;
 				imageView1.setImageBitmap(bm1);
+				imageView1.getLayoutParams().height = 250;
+				imageView1.getLayoutParams().width = 250;
 			} else if (requestCode == CAMERA_REQUEST + this.imageView2.getId()){
 				bm2 = bm;
 				imageView2.setImageBitmap(bm2);
+				imageView2.getLayoutParams().height = 250;
+				imageView2.getLayoutParams().width = 250;
 			} else if (requestCode == CAMERA_REQUEST + this.imageView3.getId()){
 				bm3 = bm;
 				imageView3.setImageBitmap(bm3);
+				imageView3.getLayoutParams().height = 250;
+				imageView3.getLayoutParams().width = 250;
 			}
 		}  
 	}

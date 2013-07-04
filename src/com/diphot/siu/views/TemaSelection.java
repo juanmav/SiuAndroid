@@ -2,16 +2,18 @@ package com.diphot.siu.views;
 
 import com.diphot.siu.R;
 import com.diphot.siu.persistence.TemaDAO;
+import com.diphot.siu.util.Util;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.LightingColorFilter;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 public class TemaSelection extends Activity {
 
@@ -27,27 +29,28 @@ public class TemaSelection extends Activity {
 
 	private void createTemasCombos(int tipoid){
 		LinearLayout ll = (LinearLayout) this.findViewById(R.id.temalinerLayout);	
+		RelativeLayout screen = (RelativeLayout)this.findViewById(R.id.temaScreen);
+		screen.setBackgroundResource(Util.getColor(tipoid));
 		TemaDAO tdao = new TemaDAO(this);
 		OnClickListener o = new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				System.out.println(((RadioButton) v).getId());
+				System.out.println(((Button) v).getId());
 				Intent returnIntent = new Intent();
-				returnIntent.putExtra(SiuConstants.TEMA_ID_PROPERTY,((RadioButton) v).getId());
+				returnIntent.putExtra(SiuConstants.TEMA_ID_PROPERTY,((Button) v).getId());
 				setResult(RESULT_OK,returnIntent);        
 				finish();
 			}
 		};
-		RadioButton radio;
-		RadioGroup radioGroup = new RadioGroup(this);
+		Button button;
 		for (TemaDTO temaDTO : tdao.findbyParentID(Long.valueOf(tipoid))){
-			radio = new RadioButton(this);
-			radio.setText(temaDTO.getNombre());
-			radio.setId(Integer.parseInt(temaDTO.getId().toString()));
-			radio.setOnClickListener(o);
-			radioGroup.addView(radio);
+			button = new Button(this);
+			button.setText(temaDTO.getNombre());
+			button.setId(Integer.parseInt(temaDTO.getId().toString()));
+			button.setBackgroundResource(Util.getColor(temaDTO.getId()));
+			button.setOnClickListener(o);
+			ll.addView(button);
 		}	
-		ll.addView(radioGroup);
 	}
 	
 	@Override

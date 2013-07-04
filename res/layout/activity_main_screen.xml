@@ -19,6 +19,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
+
             <Button
                 android:id="@+id/btn_crearIns"
                 android:layout_width="0dp"
@@ -26,6 +27,7 @@
                 android:layout_weight=".50"
                 android:onClick="createIns"
                 android:text="Crear Inspeccion"
+                android:background="@drawable/btn_green"
                 android:textSize="20sp" />
 
             <Button
@@ -34,21 +36,30 @@
                 android:layout_height="70dp"
                 android:layout_weight=".50"
                 android:onClick="verLista"
+                android:background="@drawable/btn_grey"
                 android:text="Ver Lista Inspecciones"
                 android:textSize="20sp" />
         </LinearLayout>
-           <LinearLayout
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
+
             <Button
                 android:id="@+id/btn_crearAu"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".50"
-                android:onClick="createIns"
+                android:background="@drawable/btn_red"
                 android:text="Listado de Auditorias"
                 android:textSize="20sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight=".50" >
+            </View>
         </LinearLayout>
     </LinearLayout>
 

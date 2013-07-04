@@ -1,7 +1,13 @@
 package com.diphot.siu.views;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.diphot.siu.R;
+
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -33,7 +39,7 @@ public class UbicacionSelection extends Activity implements LocationListener {
 		longitudeField = (TextView) findViewById(R.id.TextView02);
 		calle = (EditText) findViewById(R.id.calle);
 		altura = (EditText)findViewById(R.id.altura);
-		
+
 
 		// Get the location manager
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -92,6 +98,19 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	public void onLocationChanged(Location location) {
 		latituteField.setText(String.valueOf(location.getLatitude()));
 		longitudeField.setText(String.valueOf(location.getLongitude()));
+		try {
+			Geocoder geoCoder = new Geocoder(this);
+			List<Address> matches;
+			matches = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+			Address bestMatch = (matches.isEmpty() ? null : matches.get(0));
+			if (bestMatch != null){
+				System.out.print("Direccion: " + bestMatch.getAddressLine(0));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -110,7 +129,7 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	public void onProviderDisabled(String provider) {
 		Toast.makeText(this, "Disabled provider " + provider, Toast.LENGTH_SHORT).show();
 	}
-	
+
 	public void salvar(View view){
 		// TODO agtregar la observacion al DTO
 		Intent returnIntent = new Intent();
@@ -120,6 +139,6 @@ public class UbicacionSelection extends Activity implements LocationListener {
 		returnIntent.putExtra(SiuConstants.LONGITUDE_PROPERTY,longitudeField.getText().toString());
 		setResult(RESULT_OK,returnIntent);        
 		finish();
-		
+
 	}
 }

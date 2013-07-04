@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF0000"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dip"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/enviar"
         android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicacion en Coordenadas"
+            android:textSize="20dip" />
+
         <TextView
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
@@ -17,48 +25,71 @@
             android:text="unknown"
             android:textSize="20dip" >
         </TextView>
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unknown"
+            android:textSize="20dip" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
         
         <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="unknown"
-        android:textSize="20dip" />
-    
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direccion Sugerida por el GPS"
+            android:textSize="20dip" />
+         
+         <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unknown"
+            android:textSize="20dip" />
+        
+         <View
+             android:layout_width="wrap_content"
+             android:layout_height="40dp" />
+         
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calle"
+            android:textSize="20dip" />
+
+        <EditText
+            android:id="@+id/calle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Altura"
+            android:textSize="20dip" />
+
+        <EditText
+            android:id="@+id/altura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
     </LinearLayout>
-
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Calle"/>
-    
-    <EditText
-        android:id="@+id/calle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Altura"/>
-    
-    
-    <EditText
-        android:id="@+id/altura"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
 
     <Button
         android:id="@+id/enviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salvar" 
-        android:onClick="salvar"/>
-    
-</LinearLayout> 
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_blue"
+        android:onClick="salvar"
+        android:text="Salvar" />
+
+</RelativeLayout>

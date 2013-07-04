@@ -1,25 +1,41 @@
 package com.diphot.siu.util;
 
+import com.diphot.siu.R;
+
 public class Util {
 
 	public static int getColor(Long ident){
 		int ID = Integer.parseInt(ident.toString());
-
-		switch (ID) {
+		return getColor(ID);
+	}
+	
+	public static int getColor(int i){
+		if (i > 9){
+			i = i % 10;
+		}
+		switch (i) {
+		case 0:
+			return R.drawable.btn_grey;
 		case 1:
-			return 0xFF0000;
+			return R.drawable.btn_red;
 		case 2:
-			return 0x00FF00;
+			return R.drawable.btn_green;
 		case 3:
-			return 0x0000FF;
+			return R.drawable.btn_blue;
 		case 4:
-			return 0xFFFF00;
+			return R.drawable.btn_yellow;
 		case 5:
-			return 0x00FFFF;
+			return R.drawable.btn_cyan;
 		case 6:
-			return 0xFF00FF;
+			return R.drawable.btn_orange;
+		case 7:
+			return R.drawable.btn_black;
+		case 8:
+			return R.drawable.btn_pink;
+		case 9: 
+			return R.drawable.btn_purple;
 		default:
-			return 0xFFFFFF;
+			return R.drawable.btn_black;
 		}
 	}
 

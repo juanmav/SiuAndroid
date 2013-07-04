@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:background="#FF0000"
+    android:fillViewport="true"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editText1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="textMultiLine" >
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/button1"
+        android:orientation="vertical" >
 
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Observaciones:" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:inputType="textMultiLine" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:layout_marginRight="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:onClick="next"
+        android:background="@drawable/btn_blue"
         android:text="Siguiente" />
 
-</LinearLayout>
+</RelativeLayout>

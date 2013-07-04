@@ -1,11 +1,7 @@
 package com.diphot.siu;
 
 import com.diphot.siu.R;
-import com.diphot.siu.R.layout;
-import com.diphot.siu.R.menu;
 import com.diphot.siu.views.MainScreen;
-import com.diphot.siu.views.SelectionController;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
