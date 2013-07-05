@@ -7,13 +7,12 @@ import com.diphot.siuweb.shared.dtos.TemaDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.LightingColorFilter;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 public class TemaSelection extends Activity {
 
@@ -29,7 +28,7 @@ public class TemaSelection extends Activity {
 
 	private void createTemasCombos(int tipoid){
 		LinearLayout ll = (LinearLayout) this.findViewById(R.id.temalinerLayout);	
-		RelativeLayout screen = (RelativeLayout)this.findViewById(R.id.temaScreen);
+		ScrollView screen = (ScrollView)this.findViewById(R.id.temaScreen);
 		screen.setBackgroundResource(Util.getColor(tipoid));
 		TemaDAO tdao = new TemaDAO(this);
 		OnClickListener o = new OnClickListener(){

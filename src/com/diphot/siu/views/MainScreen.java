@@ -3,10 +3,12 @@ package com.diphot.siu.views;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.inspecciones.InspeccionList;
@@ -66,6 +68,15 @@ public class MainScreen extends Activity {
 	public void verLista(View view){
 		Intent intent = new Intent(MainScreen.this, InspeccionList.class);
 		startActivity(intent);      
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	Intent intent = new Intent(MainScreen.this, Login.class);
+	    	startActivity(intent);
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 	
 	// Workaround for GAE servers to prevent chunk encoding

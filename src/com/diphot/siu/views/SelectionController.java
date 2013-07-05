@@ -24,15 +24,20 @@ public class SelectionController extends Activity {
 		startActivityForResult(areaIntent, SiuConstants.AREA_SELECT);
 	}
 
+	private int areaid;
+	private int tipoid;
+	private int temaid;
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// Aca me vuelven los resultados de las distintas activities y voy armando la Inspeccion.
+		Bundle b;
+		Intent intent;
+		
 		if (resultCode == RESULT_OK){
-			Bundle b;
-			Intent intent;
 			switch (requestCode){
 			case SiuConstants.AREA_SELECT:
-				int areaid = data.getIntExtra(SiuConstants.AREA_ID_PROPERTY,0);
+				areaid = data.getIntExtra(SiuConstants.AREA_ID_PROPERTY,0);
 				b = new Bundle();
 				b.putInt(SiuConstants.AREA_ID_PROPERTY,areaid );
 				intent = new Intent(SelectionController.this, TipoSelection.class);
@@ -40,7 +45,7 @@ public class SelectionController extends Activity {
 				startActivityForResult(intent, SiuConstants.TIPO_SELECT);
 				break;
 			case SiuConstants.TIPO_SELECT:
-				int tipoid = data.getIntExtra(SiuConstants.TIPO_ID_PROPERTY,0);
+				tipoid = data.getIntExtra(SiuConstants.TIPO_ID_PROPERTY,0);
 				b = new Bundle();
 				b.putInt(SiuConstants.TIPO_ID_PROPERTY,tipoid);
 				intent = new Intent(SelectionController.this, TemaSelection.class);
@@ -48,7 +53,7 @@ public class SelectionController extends Activity {
 				startActivityForResult(intent, SiuConstants.TEMA_SELECT);
 				break;
 			case SiuConstants.TEMA_SELECT:
-				int temaid = data.getIntExtra(SiuConstants.TEMA_ID_PROPERTY,0);
+				temaid = data.getIntExtra(SiuConstants.TEMA_ID_PROPERTY,0);
 				this.inspeccion.setTema(new TemaDTO(temaid));
 				intent = new Intent(SelectionController.this, FotoSelection.class);
 				startActivityForResult(intent, SiuConstants.FOTO_SELECT);
@@ -81,8 +86,42 @@ public class SelectionController extends Activity {
 				break;
 			}
 		} else {
-			// TODO aca se viene porque no hubo una seleccion exitosa
-			// o porque se apreto el boton retroceder.
+			switch (requestCode){
+			case SiuConstants.AREA_SELECT:
+				intent = new Intent(SelectionController.this, MainScreen.class);
+				startActivity(intent);
+				break;
+			case SiuConstants.TIPO_SELECT:
+				Intent areaIntent = new Intent(SelectionController.this, AreaSelection.class);
+				startActivityForResult(areaIntent, SiuConstants.AREA_SELECT);
+				break;
+			case SiuConstants.TEMA_SELECT:
+				b = new Bundle();
+				b.putInt(SiuConstants.AREA_ID_PROPERTY,areaid );
+				intent = new Intent(SelectionController.this, TipoSelection.class);
+				intent.putExtras(b);
+				startActivityForResult(intent, SiuConstants.TIPO_SELECT);
+				break;
+			case SiuConstants.FOTO_SELECT:
+				b = new Bundle();
+				b.putInt(SiuConstants.TIPO_ID_PROPERTY,tipoid);
+				intent = new Intent(SelectionController.this, TemaSelection.class);
+				intent.putExtras(b);
+				startActivityForResult(intent, SiuConstants.TEMA_SELECT);
+				break;
+			case SiuConstants.OBSERVACION_SELECT:
+				intent = new Intent(SelectionController.this, FotoSelection.class);
+				startActivityForResult(intent, SiuConstants.FOTO_SELECT);
+				break;
+			case SiuConstants.UBICACION_SELECT:
+				intent = new Intent(SelectionController.this, ObservacionSelect.class);
+				startActivityForResult(intent, SiuConstants.OBSERVACION_SELECT);
+				break;
+			default:
+				intent = new Intent(SelectionController.this, MainScreen.class);
+				startActivity(intent);
+				break;
+			}
 		}
 	}   
 
