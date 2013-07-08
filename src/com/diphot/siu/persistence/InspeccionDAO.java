@@ -1,7 +1,6 @@
 package com.diphot.siu.persistence;
 
 import java.util.ArrayList;
-import java.util.Date;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

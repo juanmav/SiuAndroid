@@ -11,8 +11,6 @@ import com.diphot.siuweb.shared.dtos.AreaDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.LightingColorFilter;
-import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TableLayout;

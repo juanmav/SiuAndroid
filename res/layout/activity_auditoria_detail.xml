@@ -36,8 +36,8 @@
             <LinearLayout
                 android:id="@+id/linearLayout1"
                 android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_weight="0.45"
+                android:layout_height="200dp"
+                android:layout_weight="0.3"
                 android:background="@drawable/btn_green"
                 android:orientation="vertical" >
 
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Resuelto?"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup1"
@@ -57,6 +57,7 @@
                         android:id="@+id/radio_si"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Si" />
 
                     <RadioButton
@@ -64,16 +65,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="No" />
                 </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_weight="0.55"
+                android:layout_height="200dp"
+                android:layout_weight="0.7"
                 android:background="@drawable/btn_pink"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:gravity="center" >
 
                 <ImageView
                     android:id="@+id/imageView1"
@@ -86,11 +89,12 @@
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="150dp"
             android:background="@drawable/btn_orange" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:orientation="vertical" >
 
                 <TextView

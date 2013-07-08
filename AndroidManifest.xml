@@ -96,6 +96,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.diphot.siu.views.AuditoriaDetail"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_auditoria_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        
     </application>
 
 </manifest>

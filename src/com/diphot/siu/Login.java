@@ -31,7 +31,6 @@ public class Login extends Activity {
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    this.finish();
 	    return super.onKeyDown(keyCode, event);
 	}
 }

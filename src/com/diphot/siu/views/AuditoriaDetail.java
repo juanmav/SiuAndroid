@@ -1,8 +1,6 @@
 package com.diphot.siu.views;
 
 import com.diphot.siu.R;
-import com.diphot.siu.R.layout;
-import com.diphot.siu.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
