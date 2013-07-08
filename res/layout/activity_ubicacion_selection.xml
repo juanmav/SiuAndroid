@@ -44,10 +44,10 @@
             android:textSize="20dip" />
          
          <TextView
-            android:id="@+id/TextView03"
+            android:id="@+id/dirSugerida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="unknown"
+            android:text="esperando gps..."
             android:textSize="20dip" />
         
          <View

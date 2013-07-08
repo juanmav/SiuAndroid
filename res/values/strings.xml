@@ -13,5 +13,6 @@
     <string name="title_activity_selection_controller">SelectionController</string>
     <string name="title_activity_inspeccion_list">InspeccionList</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_auditoria_detail">AuditoriaDetail</string>
 
 </resources>

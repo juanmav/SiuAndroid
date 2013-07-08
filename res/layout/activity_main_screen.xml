@@ -62,6 +62,7 @@
                 android:layout_weight=".50"
                 android:background="@drawable/btn_red"
                 android:text="Listado de Auditorias"
+                android:onClick="verAuLista"
                 android:textSize="20sp" />
 
             <View

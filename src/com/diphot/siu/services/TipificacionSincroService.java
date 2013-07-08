@@ -1,6 +1,7 @@
 package com.diphot.siu.services;
 
 import java.util.ArrayList;
+
 import org.restlet.resource.ClientResource;
 import android.content.Context;
 import com.diphot.siu.connection.LinkChecker;

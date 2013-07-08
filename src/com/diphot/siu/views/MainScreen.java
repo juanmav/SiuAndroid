@@ -24,7 +24,7 @@ public class MainScreen extends Activity {
 		//ll.addView(ConsoleOnScreen.getInstance(this));
 		
 		// TODO volver activar los servicios de sincronizacion
-		//this.startSincroServices();
+		this.startSincroServices();
 	}
 
 	private void startSincroServices(){
@@ -77,6 +77,12 @@ public class MainScreen extends Activity {
 	    	startActivity(intent);
 	    }
 	    return super.onKeyDown(keyCode, event);
+	}
+	
+	
+	public void verAuLista(View view){
+		Intent intent = new Intent (MainScreen.this, AuditoriaDetail.class);
+		startActivity(intent);
 	}
 	
 	// Workaround for GAE servers to prevent chunk encoding

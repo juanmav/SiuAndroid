@@ -29,6 +29,8 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	private TextView calle;
 	private TextView altura;
 	private String provider;
+	
+	private TextView dirSugerida;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class UbicacionSelection extends Activity implements LocationListener {
 		longitudeField = (TextView) findViewById(R.id.TextView02);
 		calle = (EditText) findViewById(R.id.calle);
 		altura = (EditText)findViewById(R.id.altura);
-
+		dirSugerida = (TextView) findViewById(R.id.dirSugerida);
 
 		// Get the location manager
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -105,6 +107,7 @@ public class UbicacionSelection extends Activity implements LocationListener {
 			Address bestMatch = (matches.isEmpty() ? null : matches.get(0));
 			if (bestMatch != null){
 				System.out.print("Direccion: " + bestMatch.getAddressLine(0));
+				this.dirSugerida.setText(bestMatch.getAddressLine(0));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

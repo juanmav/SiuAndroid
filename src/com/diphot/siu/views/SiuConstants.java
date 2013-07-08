@@ -25,7 +25,8 @@ public interface SiuConstants {
 	public static String URL_BACKEND = "http://192.168.0.225:8888/mobileendpointService";
 	public static String HostIP = "8.8.8.8";
 	
-	public static String REST_BACKEND = "http://192.168.0.132:8888/rest";
+	public static String REST_BACKEND = "http://192.168.0.135:8888/rest";
+	//public static String REST_BACKEND = "http://siuwebs.appspot.com/rest";
 	public static String REST_TIPIFICACION = "/tipificacion";
 	public static String REST_INSPECCION = "/inspecciones";
 	public static String REST_AUDITORIA = "/auditorias";

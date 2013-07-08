@@ -5,6 +5,7 @@ import com.diphot.siu.views.MainScreen;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 
@@ -26,5 +27,11 @@ public class Login extends Activity {
 	public void login (View view){
 		Intent intent = new Intent(Login.this, MainScreen.class);
 		startActivity(intent); 
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    this.finish();
+	    return super.onKeyDown(keyCode, event);
 	}
 }
