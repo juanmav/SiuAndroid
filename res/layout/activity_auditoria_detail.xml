@@ -11,8 +11,7 @@
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content" >
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -25,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Auditoria de Inspeccion n°: 8564"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="35dp" />
         </TableRow>
 
         <TableRow
@@ -36,17 +36,19 @@
             <LinearLayout
                 android:id="@+id/linearLayout1"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:layout_weight="0.3"
-                android:background="@drawable/btn_green"
                 android:orientation="vertical" >
+
+                <!-- android:background="@drawable/btn_green" -->
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Resuelto?"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="30dp" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup1"
@@ -57,44 +59,48 @@
                         android:id="@+id/radio_si"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Si"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Si" />
+                        android:textSize="30dp" />
 
                     <RadioButton
                         android:id="@+id/radio_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
+                        android:text="No"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="No" />
+                        android:textSize="30dp" />
                 </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:layout_weight="0.7"
-                android:background="@drawable/btn_pink"
-                android:orientation="vertical"
-                android:gravity="center" >
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <!-- android:background="@drawable/btn_pink" -->
 
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="290dp"
+                    android:layout_height="290dp"
                     android:src="@drawable/staticmap" />
             </LinearLayout>
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:background="@drawable/btn_orange" >
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- android:background="@drawable/btn_orange" -->
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="150dp"
                 android:orientation="vertical" >
 
                 <TextView
@@ -116,13 +122,14 @@
         <TableRow
             android:id="@+id/tableRow4"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_grey" >
+            android:layout_height="wrap_content" >
+
+            <!-- android:background="@drawable/btn_grey" -->
 
             <ImageView
                 android:id="@+id/au_img1"
                 android:layout_width="0dp"
-                android:layout_height="75dp"
+                android:layout_height="100dp"
                 android:layout_weight="0.33"
                 android:contentDescription="img1"
                 android:src="@drawable/ic_camera" />
@@ -130,7 +137,7 @@
             <ImageView
                 android:id="@+id/au_img2"
                 android:layout_width="0dp"
-                android:layout_height="75dp"
+                android:layout_height="100dp"
                 android:layout_weight="0.33"
                 android:contentDescription="img2"
                 android:src="@drawable/ic_camera" />
@@ -138,21 +145,22 @@
             <ImageView
                 android:id="@+id/au_img3"
                 android:layout_width="0dp"
-                android:layout_height="75dp"
+                android:layout_height="100dp"
                 android:layout_weight="0.33"
                 android:contentDescription="img3"
                 android:src="@drawable/ic_camera" />
         </TableRow>
     </TableLayout>
-     <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="25dp"
-            android:layout_marginRight="25dp"
-            android:background="@drawable/btn_blue"
-            android:text="Finalizar" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/btn_blue"
+        android:text="Finalizar" />
 
 </RelativeLayout>

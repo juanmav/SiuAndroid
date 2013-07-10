@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">SiuAndroid</string>
+    <string name="app_name">SMU</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_area_selection">AreaSelection</string>
-    <string name="title_activity_tipo_selection">TipoSelection</string>
-    <string name="title_activity_tema_selection">TemaSelection</string>
-    <string name="title_activity_observacion">Observacion</string>
-    <string name="title_activity_foto_selection">FotoSelection</string>
-    <string name="title_activity_ubicacion_selection">UbicacionSelection</string>
-    <string name="title_activity_selection_controller">SelectionController</string>
-    <string name="title_activity_inspeccion_list">InspeccionList</string>
+    <string name="title_activity_area_selection">Seleccione un Area</string>
+    <string name="title_activity_tipo_selection">Seleccione un Tipo de Relevamiento</string>
+    <string name="title_activity_tema_selection">Seleccione un Tema</string>
+    <string name="title_activity_mainscreen">Pantalla Principal</string>
+    <string name="title_activity_observacion">Indique una Observacion</string>
+    <string name="title_activity_foto_selection">Tome Imagenes</string>
+    <string name="title_activity_ubicacion_selection">Indiquela ubicacion</string>
+    <string name="title_activity_selection_controller"></string>
+    <string name="title_activity_inspeccion_list">Lista de Inspecciones</string>
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_auditoria_detail">AuditoriaDetail</string>
-
+    <string name="title_activity_auditoria_detail">Detalle de Auditoria</string>
 </resources>

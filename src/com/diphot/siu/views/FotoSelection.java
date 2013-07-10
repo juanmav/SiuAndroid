@@ -62,12 +62,22 @@ public class FotoSelection extends Activity {
 		bm1 = savedInstanceState.getParcelable(SiuConstants.IMG1_PROPERTY);
 		bm2 = savedInstanceState.getParcelable(SiuConstants.IMG2_PROPERTY);
 		bm3 = savedInstanceState.getParcelable(SiuConstants.IMG3_PROPERTY);
-		if (bm1 != null)
+		if (bm1 != null){
 			imageView1.setImageBitmap(bm1);
-		if (bm2 != null)
+			imageView1.getLayoutParams().height = 250;
+			imageView1.getLayoutParams().width = 250;
+		}
+		if (bm2 != null){
 			imageView2.setImageBitmap(bm2);
-		if (bm3 != null)
+			imageView2.getLayoutParams().height = 250;
+			imageView2.getLayoutParams().width = 250;
+		}
+		if (bm3 != null){
 			imageView3.setImageBitmap(bm3);
+			imageView3.getLayoutParams().height = 250;
+			imageView3.getLayoutParams().width = 250;
+		}
+
 	}
 
 	@Override
