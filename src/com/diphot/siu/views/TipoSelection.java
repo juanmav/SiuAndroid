@@ -8,6 +8,7 @@ import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,6 +51,9 @@ public class TipoSelection extends Activity {
 			button.setText(tipoDTO.getNombre());
 			button.setId(Integer.parseInt(tipoDTO.getId().toString()));
 			button.setBackgroundResource(Util.getColor(tipoDTO.getId()));
+			button.setTextSize(25);
+			button.setHeight(100);
+			button.setTypeface(null, Typeface.BOLD);
 			button.setOnClickListener(o);
 			ll.addView(button);
 		}	

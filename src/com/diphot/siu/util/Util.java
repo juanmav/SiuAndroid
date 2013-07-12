@@ -29,7 +29,7 @@ public class Util {
 		case 6:
 			return R.drawable.btn_orange;
 		case 7:
-			return R.drawable.btn_black;
+			return R.drawable.btn_ligth_blue;
 		case 8:
 			return R.drawable.btn_pink;
 		case 9: 

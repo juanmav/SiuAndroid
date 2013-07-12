@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="#C4161C">
 
     <Button
         android:id="@+id/button1"
@@ -39,7 +40,7 @@
         android:id="@+id/button5"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_black"
+        android:background="@drawable/btn_ligth_blue"
         android:text="Button" >
     </Button>
 
@@ -80,6 +81,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_cyan"
+        android:text="Button" >
+    </Button>
+    
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_black"
         android:text="Button" >
     </Button>
 

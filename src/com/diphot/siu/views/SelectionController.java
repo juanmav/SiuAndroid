@@ -71,6 +71,8 @@ public class SelectionController extends Activity {
 			case SiuConstants.OBSERVACION_SELECT:
 				String observacion = data.getStringExtra(SiuConstants.OBSERVACION_PROPERTY);
 				this.inspeccion.setObservacion(observacion);
+				int riesgo = data.getIntExtra(SiuConstants.RIESGO_PROPERTY, SiuConstants.ALTO);
+				this.inspeccion.setRiesgo(riesgo);
 				intent = new Intent(SelectionController.this, UbicacionSelection.class);
 				startActivityForResult(intent, SiuConstants.UBICACION_SELECT);
 				break;

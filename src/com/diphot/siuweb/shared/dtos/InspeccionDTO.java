@@ -16,6 +16,7 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 	private String img2;
 	private String img3;
 	private String observacion;
+	private int riesgo;
 	
 	public InspeccionDTO(){
 		
@@ -139,5 +140,13 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public int getRiesgo() {
+		return riesgo;
+	}
+
+	public void setRiesgo(int riesgo) {
+		this.riesgo = riesgo;
 	}
 }

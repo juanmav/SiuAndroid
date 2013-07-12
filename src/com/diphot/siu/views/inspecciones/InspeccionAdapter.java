@@ -48,14 +48,20 @@ public class InspeccionAdapter extends BaseAdapter{
 		TextView calle = (TextView) convertView.findViewById(R.id.calle);
 		TextView altura = (TextView) convertView.findViewById(R.id.altura);
 		TextView observacion = (TextView) convertView.findViewById(R.id.observacion);
+		TextView riesgo = (TextView) convertView.findViewById(R.id.riesgo);
 		Switch enviado = (Switch) convertView.findViewById(R.id.enviado);
 		
+		// todo el dto.
 		InspeccionDTO dto = this.list.get(position);
+		
+		
 		
 		id.setText(dto.getId().toString());
 		calle.setText(dto.getCalle());
 		altura.setText(dto.getAltura().toString());
 		observacion.setText(dto.getObservacion());
+		
+		riesgo.setText("Grado: " + dto.getRiesgo());
 		// TODO verificar esto
 		/*if (dto.getEnviado() == 0){
 			enviado.setChecked(false);

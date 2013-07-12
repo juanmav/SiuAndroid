@@ -7,6 +7,7 @@ import com.diphot.siuweb.shared.dtos.TemaDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,6 +48,9 @@ public class TemaSelection extends Activity {
 			button.setText(temaDTO.getNombre());
 			button.setId(Integer.parseInt(temaDTO.getId().toString()));
 			button.setBackgroundResource(Util.getColor(temaDTO.getId()));
+			button.setTextSize(25);
+			button.setHeight(65);
+			button.setTypeface(null, Typeface.BOLD);
 			button.setOnClickListener(o);
 			ll.addView(button);
 		}	

@@ -11,6 +11,7 @@ import com.diphot.siuweb.shared.dtos.AreaDTO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -53,17 +54,17 @@ public class AreaSelection extends Activity {
 				button = (Button) row.findViewById(R.id.rowbutton1);
 				button.setText(a.getNombre());
 				button.setId(Integer.parseInt(a.getId().toString()));
-				//Drawable img = this.getResources().getDrawable( R.drawable.btn_blue );
-				
-				//button.getBackground().setColorFilter(new LightingColorFilter(Util.getColor(a.getId()), Util.getColor(a.getId())));
 				button.setBackgroundResource(Util.getColor(a.getId()));
+				button.setTextSize(20);
+				button.setTypeface(null, Typeface.BOLD);
 				button.setOnClickListener(o);
 			} else if (count == 2){
 				button = (Button) row.findViewById(R.id.rowbutton2);
 				button.setText(a.getNombre());
 				button.setId(Integer.parseInt(a.getId().toString()));
-				//button.getBackground().setColorFilter(new LightingColorFilter(Util.getColor(a.getId()), Util.getColor(a.getId())));
 				button.setBackgroundResource(Util.getColor(a.getId()));
+				button.setTextSize(20);
+				button.setTypeface(null, Typeface.BOLD);
 				button.setOnClickListener(o);
 				count = 0;
 				table.addView(row);

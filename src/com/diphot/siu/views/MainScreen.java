@@ -24,7 +24,7 @@ public class MainScreen extends Activity {
 		//ll.addView(ConsoleOnScreen.getInstance(this));
 		
 		// TODO volver activar los servicios de sincronizacion
-		//this.startSincroServices();
+		this.startSincroServices();
 	}
 
 	private void startSincroServices(){

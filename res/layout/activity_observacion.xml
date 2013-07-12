@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fondo"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
     android:fillViewport="true"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:orientation="vertical" >
 
         <TextView
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Observaciones:"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="Seleccione el tipo de Riesgo" />
+
+        <Button
+            android:id="@+id/alto_btn"
+            style="@style/tipografiaRiesgo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_red"
+            android:onClick="onClick"
+            android:text="Alto" />
+
+        <Button
+            android:id="@+id/medio_btn"
+            style="@style/tipografiaRiesgo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_yellow"
+            android:onClick="onClick"
+            android:text="Medio" />
+
+        <Button
+            android:id="@+id/bajo_btn"
+            style="@style/tipografiaRiesgo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_green"
+            android:onClick="onClick"
+            android:text="Bajo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="104dp"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Observaciones:" />
 
         <EditText
             android:id="@+id/editText1"
@@ -26,22 +74,23 @@
             android:layout_marginRight="15dp"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:textAppearance="?android:attr/textAppearanceMedium" >
-
-            <requestFocus />
-        </EditText>
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/obs_next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="25dp"
-        android:background="@drawable/btn_blue"
+        android:background="@drawable/btn_yellow"
         android:onClick="next"
-        android:text="Siguiente" />
+        android:text="Siguiente"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

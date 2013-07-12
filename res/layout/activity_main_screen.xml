@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
+    style="@style/fondo"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -23,7 +23,7 @@
             <Button
                 android:id="@+id/btn_crearIns"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
@@ -31,20 +31,22 @@
                 android:background="@drawable/btn_green"
                 android:onClick="createIns"
                 android:text="Crear Inspeccion"
-                android:textSize="20sp" />
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_verListaIns"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight=".50"
                 android:background="@drawable/btn_grey"
                 android:onClick="verLista"
-                android:text="Ver Lista Inspecciones"
-                android:textSize="20sp" />
+                android:text="Inspecciones"
+                android:textSize="25sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,15 +57,16 @@
             <Button
                 android:id="@+id/btn_crearAu"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight=".50"
                 android:background="@drawable/btn_red"
-                android:text="Listado de Auditorias"
                 android:onClick="verAuLista"
-                android:textSize="20sp" />
+                android:text="Auditorias"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="0dp"

@@ -43,6 +43,17 @@
         android:textStyle="bold" 
         android:text="observacion"
         />
+    <TextView
+        android:id="@+id/riesgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/altura"
+        android:layout_toRightOf="@id/observacion"
+        android:textColor="#32cd32"
+        android:textSize="12sp"
+        android:textStyle="bold" 
+        android:text="riesgo"
+        />
 
     <Switch
         android:id="@+id/enviado"

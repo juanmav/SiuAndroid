@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
+    style="@style/fondo"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,52 +13,52 @@
         android:orientation="vertical" >
 
         <TextView
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubicacion en Coordenadas"
-            android:textSize="20dip" />
+            android:text="Ubicacion en Coordenadas" />
 
         <TextView
             android:id="@+id/TextView01"
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="unknown"
-            android:textSize="20dip" >
+            android:text="unknown" >
         </TextView>
 
         <TextView
             android:id="@+id/TextView02"
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="unknown"
-            android:textSize="20dip" />
+            android:text="unknown" />
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="40dp" />
-        
+
         <TextView
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Direccion Sugerida por el GPS"
-            android:textSize="20dip" />
-         
-         <TextView
+            android:text="Direccion Sugerida por GPS" />
+
+        <TextView
             android:id="@+id/dirSugerida"
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="esperando gps..."
-            android:textSize="20dip" />
-        
-         <View
-             android:layout_width="wrap_content"
-             android:layout_height="80dp" />
-         
+            android:text="esperando gps..." />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="80dp" />
+
         <TextView
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calle"
-            android:textSize="20dip" />
+            android:text="Calle" />
 
         <EditText
             android:id="@+id/calle"
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Altura"
-            android:textSize="20dip" />
+            style="@style/tipografia" />
 
         <EditText
             android:id="@+id/altura"
@@ -82,29 +82,29 @@
             android:inputType="number" />
     </LinearLayout>
 
-    
-    
     <Button
         android:id="@+id/enviar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="25dp"
-        android:background="@drawable/btn_blue"
+        android:background="@drawable/btn_yellow"
         android:onClick="salvar"
-        android:text="Salvar" />
+        android:text="Salvar"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="25dp"
-        android:src="@drawable/staticmap" 
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/staticmap" />
 
 </RelativeLayout>

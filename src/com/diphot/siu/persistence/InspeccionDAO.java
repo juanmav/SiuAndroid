@@ -15,7 +15,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	@Override
 	public void create(InspeccionDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
-		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, enviado) " +
+		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado) " +
 				"VALUES ("+ dto.getTema().getId().toString() + ",'" +
 				dto.getCalle() + "'," +
 				dto.getAltura() + "," +
@@ -26,6 +26,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				dto.getImg2() + "','" +
 				dto.getImg3()	+ "','" +
 				dto.getObservacion() + "'," +
+				dto.getRiesgo() + "," +
 				"0" +
 				")";
 		System.out.println(sqlString); 
@@ -71,7 +72,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		idto.setImg1(c.getString(8));
 		idto.setImg2(c.getString(9));
 		idto.setImg3(c.getString(10));
-		//idto.setEnviado(c.getInt(11));
+		idto.setRiesgo(c.getInt(11));
 		return idto;
 	}
 	

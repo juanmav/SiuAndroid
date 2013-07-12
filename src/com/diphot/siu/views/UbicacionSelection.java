@@ -56,8 +56,8 @@ public class UbicacionSelection extends Activity implements LocationListener {
 			System.out.println("Provider " + provider + " has been selected.");
 			onLocationChanged(location);
 		} else {
-			latituteField.setText("Latitude: Location not available");
-			longitudeField.setText("Longitude: Location not available");
+			latituteField.setText("0.0");
+			longitudeField.setText("0.0");
 		}
 	}
 
@@ -134,7 +134,7 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	}
 
 	public void salvar(View view){
-		// TODO agtregar la observacion al DTO
+		
 		Intent returnIntent = new Intent();
 		returnIntent.putExtra(SiuConstants.CALLE_PROPERTY,calle.getText().toString());
 		returnIntent.putExtra(SiuConstants.ALTURA_PROPERTY,altura.getText().toString());

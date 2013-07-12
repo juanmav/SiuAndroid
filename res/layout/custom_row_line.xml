@@ -6,23 +6,25 @@
     <Button
         android:id="@+id/rowbutton1"
         android:layout_weight="0.5"
-        android:height="80dp"
+        android:height="150dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:textStyle="bold"
         android:text="Button" />
 
     <Button
         android:id="@+id/rowbutton2"
         android:layout_weight="0.5"
-        android:height="80dp"
+        android:height="150dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:textStyle="bold"
         android:text="Button" />
 
 </TableRow>
