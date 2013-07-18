@@ -66,7 +66,7 @@ public class MainScreen extends Activity {
 	}
 	
 	public void verLista(View view){
-		Intent intent = new Intent(MainScreen.this, InspeccionList.class);
+		Intent intent = new Intent(MainScreen.this, InspeccionFilter.class);
 		startActivity(intent);      
 	}
 	

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">SMU</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_area_selection">Seleccione un Area</string>
@@ -13,4 +14,7 @@
     <string name="title_activity_inspeccion_list">Lista de Inspecciones</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_auditoria_detail">Detalle de Auditoria</string>
+    <string name="title_activity_inspeccion_filter">InspeccionFilter</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
