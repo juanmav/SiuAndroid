@@ -29,7 +29,7 @@ public class InspeccionList extends ListActivity {
 		//InspeccionDAO idao = new InspeccionDAO(this);
 		//ArrayList<InspeccionDTO> dtos = idao.getList();
 		
-		ArrayList<InspeccionDTO> dtos = getlist(estado, riesgo);
+		ArrayList<InspeccionDTO> dtos = getlist(estado, riesgo); 
 		InspeccionAdapter adapter = new InspeccionAdapter(this, dtos);
 		setListAdapter(adapter);
 	}
@@ -42,7 +42,7 @@ public class InspeccionList extends ListActivity {
 	}
 	
 	private ArrayList<InspeccionDTO> getlist(int estado, int riesgo){
-		ArrayList<InspeccionDTO> result;
+		ArrayList<InspeccionDTO> result = new ArrayList<InspeccionDTO>();
 		ClientResource cr = new ClientResource(InspeccionRestLetInterface.URL);
 		InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
 		InspeccionFilterDTO filter = new InspeccionFilterDTO();

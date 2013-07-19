@@ -36,15 +36,15 @@ public class InspeccionSenderService extends AbstractService implements Runnable
 			while(true){
 				if (linkChecker.linkOK()){
 					try {
-						ClientResource cr = new ClientResource(InspeccionRestLetInterface.URL);
-						InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
-						idto = idao.getNotSended();
+						idto = idao.getNotSent();
 						if ( idto != null){
+							ClientResource cr = new ClientResource(InspeccionRestLetInterface.URL);
+							InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
 							resource.create(idto);
-							idao.updateToSended(idto.getId());
+							idao.removeSent(idto.getId());
 						}
 					} finally{
-						pause(1);
+						pause(5);
 					}
 				}
 			}

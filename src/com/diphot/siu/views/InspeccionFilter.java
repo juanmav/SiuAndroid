@@ -76,7 +76,7 @@ public class InspeccionFilter extends Activity {
 	private void busqueda(int estado, int riesgo){
 		Intent intent = new Intent(InspeccionFilter.this, InspeccionList.class);
 		intent.putExtra(SiuConstants.RIESGO_PROPERTY, riesgo);
-		intent.putExtra(SiuConstants.ESTADO_PROPERTY, riesgo);
+		intent.putExtra(SiuConstants.ESTADO_PROPERTY, estado);
 		startActivity(intent);
 	}
 }

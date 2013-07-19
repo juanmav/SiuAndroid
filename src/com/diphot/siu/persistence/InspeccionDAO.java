@@ -82,7 +82,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		return null;
 	}
 
-	public InspeccionDTO getNotSended(){
+	public InspeccionDTO getNotSent(){
 		InspeccionDTO idto = null;
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
 		String[] args = new String[] {};
@@ -94,7 +94,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		return idto;
 	}
 
-	public void updateToSended(Long id){
+	public void removeSent(Long id){
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("UPDATE Inspeccion SET enviado = 1 where id=" +id);
 		db.execSQL("UPDATE Inspeccion SET enviado = 1 where id=" +id);
