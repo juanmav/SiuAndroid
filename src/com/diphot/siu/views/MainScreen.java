@@ -29,8 +29,8 @@ public class MainScreen extends Activity {
 	}
 
 	private void startSincroServices(){
-		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
-		new Thread(iss).start();
+		//InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
+		//new Thread(iss).start();
 		
 		//TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
 		//new Thread(tss).start();

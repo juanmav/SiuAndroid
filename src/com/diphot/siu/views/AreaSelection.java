@@ -2,6 +2,8 @@ package com.diphot.siu.views;
 
 
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;

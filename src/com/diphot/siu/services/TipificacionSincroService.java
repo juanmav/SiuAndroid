@@ -52,7 +52,6 @@ public class TipificacionSincroService  extends AbstractService implements Runna
 					temaDAO.massiveCreate(temas);
 				}catch (Exception e) {
 					e.printStackTrace();
-
 				}catch (Error e) {
 					localCreate();
 				} finally{

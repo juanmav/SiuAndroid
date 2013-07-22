@@ -48,6 +48,7 @@
             style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="esperando gps..." />
 
         <View
@@ -64,6 +65,7 @@
             android:id="@+id/calle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/tipografiaBlanco"
             android:ems="10" >
 
             <requestFocus />
@@ -79,6 +81,7 @@
             android:id="@+id/altura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/tipografiaBlanco"
             android:inputType="number" />
     </LinearLayout>
 

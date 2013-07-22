@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 
 import android.location.Address;
 import android.location.Criteria;

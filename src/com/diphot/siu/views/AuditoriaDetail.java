@@ -1,6 +1,7 @@
 package com.diphot.siu.views;
 
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class AuditoriaDetail extends Activity {
 
@@ -96,4 +98,9 @@ public class AuditoriaDetail extends Activity {
 			imageView3.setImageBitmap(bm3);
 	}
 
+	public void send(View v){
+		Toast.makeText(getBaseContext(),"Auditoria Generada con exito", Toast.LENGTH_LONG).show();
+		this.finish();
+	}
+	
 }

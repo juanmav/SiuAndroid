@@ -1,6 +1,7 @@
 package com.diphot.siu.views;
 
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.persistence.TipoRelevamientoDAO;
 import com.diphot.siu.util.Util;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;

@@ -2,6 +2,8 @@ package com.diphot.siu.views;
 
 import java.io.ByteArrayOutputStream;
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

@@ -75,7 +75,7 @@
             android:ems="10"
             android:inputType="textMultiLine"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/white" />
+            style="@style/tipografiaBlanco" />
     </LinearLayout>
 
     <Button

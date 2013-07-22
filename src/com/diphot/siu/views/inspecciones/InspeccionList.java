@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.restlet.resource.ClientResource;
 
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.TipificacionRestLetInterface;
-import com.diphot.siu.views.SiuConstants;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.filters.InspeccionFilterDTO;
 
@@ -25,10 +25,10 @@ public class InspeccionList extends ListActivity {
 		Bundle b = getIntent().getExtras();
 		int riesgo = b.getInt(SiuConstants.RIESGO_PROPERTY);
 		int estado = b.getInt(SiuConstants.ESTADO_PROPERTY);
-		
+
 		//InspeccionDAO idao = new InspeccionDAO(this);
 		//ArrayList<InspeccionDTO> dtos = idao.getList();
-		
+
 		ArrayList<InspeccionDTO> dtos = getlist(estado, riesgo); 
 		InspeccionAdapter adapter = new InspeccionAdapter(this, dtos);
 		setListAdapter(adapter);
@@ -40,15 +40,26 @@ public class InspeccionList extends ListActivity {
 		getMenuInflater().inflate(R.menu.inspeccion_list, menu);
 		return true;
 	}
-	
+
 	private ArrayList<InspeccionDTO> getlist(int estado, int riesgo){
-		ArrayList<InspeccionDTO> result = new ArrayList<InspeccionDTO>();
-		ClientResource cr = new ClientResource(InspeccionRestLetInterface.URL);
-		InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
-		InspeccionFilterDTO filter = new InspeccionFilterDTO();
-		filter.riesgo = riesgo;
-		filter.estadoID = estado;
-		result = resource.getDTOByQuery(filter);
+		ArrayList<InspeccionDTO> result = null;
+		try {
+			ClientResource cr = new ClientResource(InspeccionRestLetInterface.URL);
+			cr.setRequestEntityBuffering(true);
+			InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
+			
+			InspeccionFilterDTO filter = new InspeccionFilterDTO();
+			filter.riesgo = riesgo;
+			filter.estadoID = estado;
+			result = resource.getDTOByQuery(filter);
+		}catch (Exception e){
+			// TODO
+			e.printStackTrace();
+		} finally {
+			if (result == null){
+				result = new ArrayList<InspeccionDTO>();
+			}
+		}
 		return result;
 	}
 }

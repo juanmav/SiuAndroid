@@ -1,6 +1,7 @@
 package com.diphot.siu.views;
 
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.views.inspecciones.InspeccionList;
 
 import android.os.Bundle;

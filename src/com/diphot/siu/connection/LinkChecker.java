@@ -12,7 +12,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
-import com.diphot.siu.views.SiuConstants;
+import com.diphot.siu.SiuConstants;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -37,8 +37,8 @@ public class LinkChecker {
 		}
 	}
 	
-	public Boolean linkOK(){
-		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+	public static Boolean linkOK(){
+		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 		boolean result = false;		
 		if (SiuConstants.debug == true){
@@ -51,7 +51,7 @@ public class LinkChecker {
 					HttpConnectionParams.setSoTimeout(params, 15000);
 
 					DefaultHttpClient httpclient = new DefaultHttpClient(params);
-					HttpGet httpget = new HttpGet(URI.create(SiuConstants.URL_BACKEND));
+					HttpGet httpget = new HttpGet(URI.create(SiuConstants.HostIP));
 					httpclient.execute(httpget);
 					HttpResponse response = httpclient.execute(httpget);
 					String respuestaString = EntityUtils.toString(response.getEntity());

@@ -12,7 +12,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
-import com.diphot.siu.views.SiuConstants;
+import com.diphot.siu.SiuConstants;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

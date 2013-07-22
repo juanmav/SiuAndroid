@@ -39,7 +39,7 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 	}
 	
 	public InspeccionDTO(Long id, String calle, Integer altura, String observacion, TemaDTO tema,
-			 Double latitude, Double longitude, String fecha, String img1, String img2, String img3) {
+			 Double latitude, Double longitude, String fecha, String img1, String img2, String img3, int riesgo) {
 		super();
 		this.id = id;
 		this.calle = calle;
@@ -52,6 +52,7 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 		this.img2 = img2;
 		this.img3 = img3;
 		this.observacion = observacion;
+		this.riesgo = riesgo;
 	}
 
 	public Long getId() {

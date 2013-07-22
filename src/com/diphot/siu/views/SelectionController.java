@@ -2,6 +2,7 @@ package com.diphot.siu.views;
 
 import java.util.Date;
 
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.custom.ConsoleOnScreen;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;

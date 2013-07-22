@@ -1,4 +1,4 @@
-package com.diphot.siu.views;
+package com.diphot.siu;
 
 public interface SiuConstants {
 	public static final int AREA_SELECT = 1;
@@ -11,7 +11,6 @@ public interface SiuConstants {
 	public static final int ALTO = 3;
 	public static final int MEDIO = 2;
 	public static final int BAJO = 1;
-
 
 	final public static int OBSERVADO = 1;
 	final public static int CONFIRMADO = 2;
@@ -44,5 +43,5 @@ public interface SiuConstants {
 	public static final String REST_INSPECCION = "/inspecciones";
 	public static final String REST_AUDITORIA = "/auditorias";
 
-	public static final Boolean debug = true;
+	public static final Boolean debug = false;
 }
