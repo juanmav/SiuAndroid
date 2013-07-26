@@ -37,7 +37,7 @@ public class LinkChecker {
 		}
 	}
 	
-	public static Boolean linkOK(){
+	public Boolean linkOK(){
 		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 		boolean result = false;		

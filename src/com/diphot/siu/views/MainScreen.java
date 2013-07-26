@@ -1,5 +1,11 @@
 package com.diphot.siu.views;
 
+import java.util.ArrayList;
+
+import org.restlet.Client;
+import org.restlet.data.Protocol;
+import org.restlet.resource.ClientResource;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +16,13 @@ import android.widget.LinearLayout;
 
 import com.diphot.siu.Login;
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.services.InspeccionSenderService;
 import com.diphot.siu.services.TipificacionSincroService;
+import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.views.inspecciones.InspeccionList;
+import com.diphot.siuweb.shared.dtos.InspeccionDTO;
+import com.diphot.siuweb.shared.dtos.filters.InspeccionFilterDTO;
 
 public class MainScreen extends Activity {
 	
@@ -34,6 +44,19 @@ public class MainScreen extends Activity {
 		
 		//TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
 		//new Thread(tss).start();
+		
+		ClientResource cr = new ClientResource(SiuConstants.URL_INSPECCIONES);
+		Client client = new Client(Protocol.HTTP);
+		cr.setNext(client);
+		System.out.println(SiuConstants.URL_INSPECCIONES);
+		cr.setRequestEntityBuffering(true);
+		InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
+		InspeccionFilterDTO filter = new InspeccionFilterDTO();
+		filter.riesgo = 1;
+		filter.estadoID = 1;
+		
+		ArrayList<InspeccionDTO> dtos = resource.getList(filter);
+		
 	}
 		
 	@Override

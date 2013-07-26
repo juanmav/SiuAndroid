@@ -43,5 +43,8 @@ public interface SiuConstants {
 	public static final String REST_INSPECCION = "/inspecciones";
 	public static final String REST_AUDITORIA = "/auditorias";
 
-	public static final Boolean debug = false;
+	public static final String URL_INSPECCIONES = SiuConstants.REST_BACKEND + SiuConstants.REST_INSPECCION;
+	public static final String URL_TIPIFICACION = SiuConstants.REST_BACKEND + SiuConstants.REST_TIPIFICACION; 
+	
+	public static final Boolean debug = true;
 }

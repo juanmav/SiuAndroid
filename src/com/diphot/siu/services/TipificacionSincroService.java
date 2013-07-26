@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.restlet.resource.ClientResource;
 import android.content.Context;
+
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.TemaDAO;
@@ -35,7 +37,7 @@ public class TipificacionSincroService  extends AbstractService implements Runna
 		while(this.running){
 			if (linkChecker.linkOK()){
 				try {
-					ClientResource cr = new ClientResource(TipificacionRestLetInterface.URL);
+					ClientResource cr = new ClientResource(SiuConstants.URL_TIPIFICACION);
 					TipificacionRestLetInterface resource = cr.wrap(TipificacionRestLetInterface.class);
 					// Sincro Areas
 					ArrayList<AreaDTO> areas = resource.getAreas();
