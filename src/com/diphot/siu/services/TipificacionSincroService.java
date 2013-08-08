@@ -1,15 +1,13 @@
 package com.diphot.siu.services;
 
 import java.util.ArrayList;
-
-import org.restlet.resource.ClientResource;
 import android.content.Context;
-
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.TemaDAO;
 import com.diphot.siu.persistence.TipoRelevamientoDAO;
+import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.TipificacionRestLetInterface;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
@@ -37,8 +35,7 @@ public class TipificacionSincroService  extends AbstractService implements Runna
 		while(this.running){
 			if (linkChecker.linkOK()){
 				try {
-					ClientResource cr = new ClientResource(SiuConstants.URL_TIPIFICACION);
-					TipificacionRestLetInterface resource = cr.wrap(TipificacionRestLetInterface.class);
+					TipificacionRestLetInterface resource = WebServiceFactory.getTipificacionRestLetInterface();
 					// Sincro Areas
 					ArrayList<AreaDTO> areas = resource.getAreas();
 					AreaDAO areaDAO = new AreaDAO(context);

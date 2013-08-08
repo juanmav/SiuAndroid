@@ -71,7 +71,7 @@
     </TableLayout>
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/au_mapImg"
         android:layout_width="400dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"

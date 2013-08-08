@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <LinearLayout
+       <!--  <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -73,7 +73,7 @@
                 android:layout_height="70dp"
                 android:layout_weight=".50" >
             </View>
-        </LinearLayout>
+        </LinearLayout> -->
     </LinearLayout>
 
 </RelativeLayout>

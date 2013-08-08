@@ -1,10 +1,9 @@
 package com.diphot.siu.services;
 
-import org.restlet.resource.ClientResource;
-
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.InspeccionDAO;
+import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 
@@ -39,16 +38,14 @@ public class InspeccionSenderService extends AbstractService implements Runnable
 					try {
 						idto = idao.getNotSent();
 						if ( idto != null){
-							ClientResource cr = new ClientResource(SiuConstants.URL_INSPECCIONES);
-							cr.setRequestEntityBuffering(true);
-							InspeccionRestLetInterface resource = cr.wrap(InspeccionRestLetInterface.class);
+							InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
 							resource.create(idto);
 							idao.removeSent(idto.getId());
 						}
 					}catch (Exception e){
 						e.printStackTrace();
 					} finally{
-						pause(5);
+						pause(1);
 					}
 				}
 			}

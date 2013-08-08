@@ -24,6 +24,7 @@ public interface SiuConstants {
 	public static final String IMG1_PROPERTY = "IMG1";
 	public static final String IMG2_PROPERTY = "IMG2";
 	public static final String IMG3_PROPERTY = "IMG3";
+	public static final String INSPECCION_PROPERTY = "inspeccion";
 
 	public static final String CALLE_PROPERTY = "calle";
 	public static final String ALTURA_PROPERTY = "altura";
@@ -34,7 +35,7 @@ public interface SiuConstants {
 	public static final String ESTADO_PROPERTY = "estado";
 
 	//public static String URL_BACKED = "http://siuwebs.appspot.com/mobileendpointService";
-	public static final String URL_BACKEND = "http://192.168.0.225:8888/mobileendpointService";
+	public static final String URL_BACKEND = "http://192.168.0.116:8888/mobileendpointService";
 	public static final String HostIP = "8.8.8.8";
 
 	public static String REST_BACKEND = "http://192.168.0.116:8888/rest";
@@ -45,6 +46,7 @@ public interface SiuConstants {
 
 	public static final String URL_INSPECCIONES = SiuConstants.REST_BACKEND + SiuConstants.REST_INSPECCION;
 	public static final String URL_TIPIFICACION = SiuConstants.REST_BACKEND + SiuConstants.REST_TIPIFICACION; 
+	public static final String URL_AUDITORIAS = SiuConstants.REST_BACKEND + SiuConstants.REST_AUDITORIA;
 	
 	public static final Boolean debug = true;
 }

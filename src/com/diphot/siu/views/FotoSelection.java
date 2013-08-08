@@ -1,13 +1,12 @@
 package com.diphot.siu.views;
 
-import java.io.ByteArrayOutputStream;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.util.Util;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -106,26 +105,12 @@ public class FotoSelection extends Activity {
 		}  
 	}
 
-	public String getEncodedImage(Bitmap bm){
-		String encodedImage;
-		if (bm != null){
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-			bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
-			byte[] b = baos.toByteArray(); 
-			encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-		}else {
-			encodedImage = "";
-		}
-		return encodedImage;
-	}
-
-
 	public void next(View v){
 		Intent returnIntent = new Intent();
 		Bundle bundle = new Bundle();
-		bundle.putString(SiuConstants.IMG1_PROPERTY, getEncodedImage(bm1));
-		bundle.putString(SiuConstants.IMG2_PROPERTY, getEncodedImage(bm2));
-		bundle.putString(SiuConstants.IMG3_PROPERTY, getEncodedImage(bm3));
+		bundle.putString(SiuConstants.IMG1_PROPERTY, Util.getEncodedImage(bm1));
+		bundle.putString(SiuConstants.IMG2_PROPERTY, Util.getEncodedImage(bm2));
+		bundle.putString(SiuConstants.IMG3_PROPERTY, Util.getEncodedImage(bm3));
 		returnIntent.putExtras(bundle);
 		setResult(RESULT_OK,returnIntent);        
 		finish();

@@ -1,13 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/fondo"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AuditoriaDetail" >
+    tools:context=".AuditoriaCreate" >
 
     <TableLayout
         android:layout_width="fill_parent"
@@ -24,7 +24,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Auditoria de Inspeccion n°: 8564"
+                android:text="Auditoria de Inspeccion n°: "
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/au_ins_id"
+                style="@style/tipografia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="XXXX"
                 android:textSize="35sp" />
         </TableRow>
 
@@ -84,7 +93,7 @@
                 <!-- android:background="@drawable/btn_pink" -->
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/au_mapImg"
                     android:layout_width="290dp"
                     android:layout_height="290dp"
                     android:src="@drawable/staticmap" />
@@ -105,16 +114,18 @@
 
                 <TextView
                     android:id="@+id/textView3"
+                    style="@style/tipografia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Observaciones"
-                    style="@style/tipografia" />
+                    android:text="Observaciones" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/au_observacion_text"
+                    style="@style/tipografiaBlanco"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine" >
+                    android:inputType="textMultiLine"
+                    android:textAppearance="?android:attr/textAppearanceLarge" >
                 </EditText>
             </LinearLayout>
         </TableRow>

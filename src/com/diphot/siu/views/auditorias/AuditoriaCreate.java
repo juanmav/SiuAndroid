@@ -1,7 +1,12 @@
-package com.diphot.siu.views;
+package com.diphot.siu.views.auditorias;
 
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.services.WebServiceFactory;
+import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
+import com.diphot.siu.util.Util;
+import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
+import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,26 +15,55 @@ import android.graphics.Bitmap;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class AuditoriaDetail extends Activity {
+public class AuditoriaCreate extends Activity {
 
-	private ImageView imageView1;
-	private ImageView imageView2;
-	private ImageView imageView3;
+	private ImageView au_img1;
+	private ImageView au_img2;
+	private ImageView au_img3;
+	private ImageView au_mapImg;
+	private TextView au_ins_id;
+	private EditText au_observacion_text;
 	private Bitmap bm1;
 	private Bitmap bm2;
 	private Bitmap bm3;
+	private RadioButton radiosi;
+	
+	
 	private static final int CAMERA_REQUEST = 1888; 
+
+	private InspeccionDTO idto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_auditoria_detail);
-		this.imageView1 = (ImageView)this.findViewById(R.id.au_img1);
-		this.imageView2 = (ImageView)this.findViewById(R.id.au_img2);
-		this.imageView3 = (ImageView)this.findViewById(R.id.au_img3);
+		setContentView(R.layout.activity_auditoria_create);
+		Bundle b = getIntent().getExtras();
+		idto = (InspeccionDTO) b.getSerializable(SiuConstants.INSPECCION_PROPERTY);
+
+		this.au_img1 = (ImageView)this.findViewById(R.id.au_img1);
+		this.au_img2 = (ImageView)this.findViewById(R.id.au_img2);
+		this.au_img3 = (ImageView)this.findViewById(R.id.au_img3);
+		this.au_mapImg =  (ImageView)this.findViewById(R.id.au_mapImg);
+		this.radiosi  = (RadioButton) this.findViewById(R.id.radio_si);
+		this.au_observacion_text = (EditText) this.findViewById(R.id.au_observacion_text);
+		
+		this.au_mapImg.setImageBitmap(Util.getBitmap(this.idto.getImgMap()));
+		this.au_ins_id =  (TextView)this.findViewById(R.id.au_ins_id);
+		this.au_ins_id.setText(idto.getId().toString());
+		
+		addListeners();
+	}
+
+
+	private void addListeners (){
+
 		OnClickListener o = new OnClickListener(){
 			@Override
 			public void onClick(View view) {
@@ -37,11 +71,10 @@ public class AuditoriaDetail extends Activity {
 				startActivityForResult(cameraIntent, CAMERA_REQUEST + view.getId()); 
 			}
 		};
-		this.imageView1.setOnClickListener(o);
-		this.imageView2.setOnClickListener(o);
-		this.imageView3.setOnClickListener(o);
+		this.au_img1.setOnClickListener(o);
+		this.au_img2.setOnClickListener(o);
+		this.au_img3.setOnClickListener(o);
 	}
-
 
 
 	@Override
@@ -56,19 +89,19 @@ public class AuditoriaDetail extends Activity {
 		// TODO hacer tres fotos distintas.
 		if (resultCode == RESULT_OK) {
 			Bitmap bm = (Bitmap) data.getExtras().get("data"); 
-			if (requestCode == CAMERA_REQUEST + this.imageView1.getId()){
+			if (requestCode == CAMERA_REQUEST + this.au_img1.getId()){
 				bm1 = bm;
-				imageView1.setImageBitmap(bm1);
+				au_img1.setImageBitmap(bm1);
 				/*imageView1.getLayoutParams().height = 75;
 				imageView1.getLayoutParams().width = 75;*/
-			} else if (requestCode == CAMERA_REQUEST + this.imageView2.getId()){
+			} else if (requestCode == CAMERA_REQUEST + this.au_img2.getId()){
 				bm2 = bm;
-				imageView2.setImageBitmap(bm2);
+				au_img2.setImageBitmap(bm2);
 				/*imageView2.getLayoutParams().height = 75;
 				imageView2.getLayoutParams().width = 75;*/
-			} else if (requestCode == CAMERA_REQUEST + this.imageView3.getId()){
+			} else if (requestCode == CAMERA_REQUEST + this.au_img3.getId()){
 				bm3 = bm;
-				imageView3.setImageBitmap(bm3);
+				au_img3.setImageBitmap(bm3);
 				/*imageView3.getLayoutParams().height = 75;
 				imageView3.getLayoutParams().width = 75;*/
 			}
@@ -91,16 +124,29 @@ public class AuditoriaDetail extends Activity {
 		bm2 = savedInstanceState.getParcelable(SiuConstants.IMG2_PROPERTY);
 		bm3 = savedInstanceState.getParcelable(SiuConstants.IMG3_PROPERTY);
 		if (bm1 != null)
-			imageView1.setImageBitmap(bm1);
+			au_img1.setImageBitmap(bm1);
 		if (bm2 != null)
-			imageView2.setImageBitmap(bm2);
+			au_img2.setImageBitmap(bm2);
 		if (bm3 != null)
-			imageView3.setImageBitmap(bm3);
+			au_img3.setImageBitmap(bm3);
 	}
 
 	public void send(View v){
+		AuditoriaDTO audto = new AuditoriaDTO();
+		
+		audto.setInspeccionID(idto.getId());
+		audto.setResuelto(radiosi.isChecked());
+		audto.setObservaciones(au_observacion_text.getText().toString());
+		
+		audto.setImg1(Util.getEncodedImage(bm1));
+		audto.setImg2(Util.getEncodedImage(bm2));
+		audto.setImg3(Util.getEncodedImage(bm3));
+		
+		AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
+		resource.create(audto);
+		
 		Toast.makeText(getBaseContext(),"Auditoria Generada con exito", Toast.LENGTH_LONG).show();
 		this.finish();
 	}
-	
+
 }

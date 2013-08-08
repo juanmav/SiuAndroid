@@ -1,10 +1,8 @@
 package com.diphot.siu.views.inspecciones;
 
 import java.util.ArrayList;
-
 import com.diphot.siu.R;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
-public class InspeccionAdapter extends BaseAdapter{
+public class InspeccionAdapter extends BaseAdapter {
 
 	ArrayList<InspeccionDTO> list;
-	
 	Context context;
 	
 	public InspeccionAdapter(Context context, ArrayList<InspeccionDTO> list){
@@ -30,7 +27,7 @@ public class InspeccionAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public InspeccionDTO getItem(int position) {
 		return this.list.get(position);
 	}
 
@@ -68,8 +65,7 @@ public class InspeccionAdapter extends BaseAdapter{
 		} else {
 			enviado.setChecked(true);
 		}*/
-		
-		
+				
 		return convertView;
 	}
 }
