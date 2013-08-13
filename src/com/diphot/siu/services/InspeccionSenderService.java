@@ -1,12 +1,9 @@
 package com.diphot.siu.services;
 
-import com.diphot.siu.SiuConstants;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.InspeccionDAO;
-import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
-
 import android.content.Context;
 
 public class InspeccionSenderService extends AbstractService implements Runnable{
@@ -51,6 +48,4 @@ public class InspeccionSenderService extends AbstractService implements Runnable
 			}
 		}
 	}
-
-	
 }

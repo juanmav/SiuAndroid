@@ -36,7 +36,7 @@ public interface SiuConstants {
 
 	//public static String URL_BACKED = "http://siuwebs.appspot.com/mobileendpointService";
 	public static final String URL_BACKEND = "http://192.168.0.116:8888/mobileendpointService";
-	public static final String HostIP = "8.8.8.8";
+	public static final String HostIP = "http://siuwebs.appspot.com/";
 
 	public static String REST_BACKEND = "http://192.168.0.116:8888/rest";
 	//public static final String REST_BACKEND = "http://siuwebs.appspot.com/rest";
@@ -47,6 +47,12 @@ public interface SiuConstants {
 	public static final String URL_INSPECCIONES = SiuConstants.REST_BACKEND + SiuConstants.REST_INSPECCION;
 	public static final String URL_TIPIFICACION = SiuConstants.REST_BACKEND + SiuConstants.REST_TIPIFICACION; 
 	public static final String URL_AUDITORIAS = SiuConstants.REST_BACKEND + SiuConstants.REST_AUDITORIA;
-	
-	public static final Boolean debug = true;
+
+	public static final Boolean debug = false;
+
+	// Roles
+	public static final String ADMIN = "ADMIN";
+	public static final String SUPERVISOR = "SUPERVISOR";
+	public static final String SECRETARIA = "SECRETARIA";
+	public static final String INSPECTOR = "INSPECTOR";
 }

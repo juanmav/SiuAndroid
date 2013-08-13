@@ -1,14 +1,12 @@
 package com.diphot.siu.views.inspecciones;
 
 import java.util.ArrayList;
-
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.util.Util;
-import com.diphot.siu.views.MainScreen;
 import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
@@ -16,18 +14,12 @@ import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
-import com.diphot.siuweb.shared.dtos.filters.InspeccionFilterDTO;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,11 +28,12 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class InspeccionDetail extends Activity {
@@ -201,15 +194,17 @@ public class InspeccionDetail extends Activity {
 		TextView leyenda = (TextView) layout.findViewById(R.id.leyenda_popup);
 		
 		leyenda.setText("Auditoria n°: "+ audto.getId() +" de Inspeccion: " + this.idto.getId());
-		TextView observacion = (TextView) layout.findViewById(R.id.observaciones_popup);
+		EditText observacion = (EditText) layout.findViewById(R.id.observaciones_popup);
 		observacion.setText(audto.getObservaciones());
-		CheckBox resuelto = (CheckBox) layout.findViewById(R.id.checkBox1);
+		RadioButton resuelto = (RadioButton) layout.findViewById(R.id.radio0);
 		resuelto.setChecked(audto.getResuelto());
-						
+		TextView fecha = (TextView) layout.findViewById(R.id.fecha_popup);
+		fecha.setText("Fecha: " + audto.getFecha());
+		
 		final PopupWindow popup = new PopupWindow(InspeccionDetail.this);
 		popup.setContentView(layout);
-		popup.setWidth(300);
-		popup.setHeight(300);
+		popup.setWidth(500);
+		popup.setHeight(700);
 		popup.setFocusable(true);
 
 		popup.showAtLocation(layout, Gravity.CENTER, 0, 0);

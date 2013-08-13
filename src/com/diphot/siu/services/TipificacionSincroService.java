@@ -2,12 +2,10 @@ package com.diphot.siu.services;
 
 import java.util.ArrayList;
 import android.content.Context;
-import com.diphot.siu.SiuConstants;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.TemaDAO;
 import com.diphot.siu.persistence.TipoRelevamientoDAO;
-import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.TipificacionRestLetInterface;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
@@ -57,6 +55,7 @@ public class TipificacionSincroService  extends AbstractService implements Runna
 					this.running = false;
 				}
 			}
+			this.running = false;
 		}
 	}
 
