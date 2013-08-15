@@ -74,6 +74,11 @@ public class AreaSelection extends Activity {
 			}
 			count++;
 		}
+		if (count == 2){// Numero impar de botones.
+			table.addView(row);
+			button = (Button) row.findViewById(R.id.rowbutton2);
+			button.setVisibility(View.INVISIBLE);
+		}
 	}
 
 }
