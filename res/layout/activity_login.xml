@@ -20,34 +20,38 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E-Mail"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/userText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:text="juanma"
+                style="@style/tipografiaBlanco"
                 android:inputType="textEmailAddress" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/TextView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Password"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/passwordText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:text="asdf69"
+                style="@style/tipografiaBlanco"
                 android:inputType="textPassword" />
         </TableRow>
 

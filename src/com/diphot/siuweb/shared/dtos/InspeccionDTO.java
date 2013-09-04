@@ -19,6 +19,7 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 	private String observacion;
 	private int riesgo;
 	private int lastStateIdentifier;
+	public String token;
 	
 	public InspeccionDTO(){
 		

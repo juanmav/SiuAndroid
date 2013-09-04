@@ -7,12 +7,13 @@ import org.restlet.resource.Put;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
+import com.diphot.siuweb.shared.dtos.UserDTO;
 
 public interface TipificacionRestLetInterface {
 	@Get
-	public ArrayList<AreaDTO> getAreas();
+	public ArrayList<AreaDTO> getAreas(UserDTO userdto);
 	@Put
-	public ArrayList<TipoRelevamientoDTO> getTiposRelevamiento();
+	public ArrayList<TipoRelevamientoDTO> getTiposRelevamiento(UserDTO userdto);
 	@Post
-	public ArrayList<TemaDTO> getTemas();
+	public ArrayList<TemaDTO> getTemas(UserDTO userdto);
 }

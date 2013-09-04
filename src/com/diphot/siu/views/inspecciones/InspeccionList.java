@@ -3,20 +3,16 @@ package com.diphot.siu.views.inspecciones;
 import java.util.ArrayList;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
-import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
-import com.diphot.siu.views.SelectionController;
-import com.diphot.siu.views.TipoSelection;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
+import com.diphot.siuweb.shared.dtos.UserDTO;
 import com.diphot.siuweb.shared.dtos.filters.InspeccionFilterDTO;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -73,8 +69,10 @@ public class InspeccionList extends ListActivity {
 		try {
 			InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
 			InspeccionFilterDTO filter = new InspeccionFilterDTO();
+			UserDTO u = UserContainer.getUserDTO();
 			filter.riesgo = riesgo;
 			filter.estadoID = estado;
+			filter.token = u.getToken();
 			result = (ArrayList<InspeccionDTO>)(resource.getList(filter));
 		}catch (Exception e){
 			// TODO

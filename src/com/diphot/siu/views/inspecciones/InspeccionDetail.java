@@ -3,6 +3,7 @@ package com.diphot.siu.views.inspecciones;
 import java.util.ArrayList;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
@@ -14,6 +15,8 @@ import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
+import com.diphot.siuweb.shared.dtos.filters.AuditoriaFilterDTO;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -144,7 +147,10 @@ public class InspeccionDetail extends Activity {
 		ArrayList<AuditoriaDTO> result = null;
 		try {
 			AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
-			result = (ArrayList<AuditoriaDTO>)(resource.getByID(idto.getId()));
+			AuditoriaFilterDTO filter = new AuditoriaFilterDTO();
+			filter.inspeccionID = idto.getId();
+			filter.token = UserContainer.getUserDTO().getToken();
+			result = (ArrayList<AuditoriaDTO>)(resource.getByID(filter));
 		}catch (Exception e){
 			// TODO
 			e.printStackTrace();
@@ -166,7 +172,8 @@ public class InspeccionDetail extends Activity {
 
 	public void confirmar(View view){
 		InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
-		resource.confirmar(this.idto.getId());
+		// Solo envio el id de la inspeccion y el token.
+		resource.confirmar(getSimpleDTO());
 		this.finish();
 	}
 
@@ -178,9 +185,16 @@ public class InspeccionDetail extends Activity {
 		startActivity(intent);
 	}
 
+	public InspeccionDTO getSimpleDTO(){
+		InspeccionDTO simpleIDTO = new InspeccionDTO();
+		simpleIDTO.setId(this.idto.getId());
+		simpleIDTO.token = UserContainer.getUserDTO().getToken();
+		return simpleIDTO;
+	}
+	
 	public void ejecutada(View view){
 		InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
-		resource.ejecutadaAuditable(this.idto.getId());
+		resource.ejecutadaAuditable(getSimpleDTO());
 		this.finish();
 	}
 

@@ -2,6 +2,8 @@ package com.diphot.siu.services;
 
 import java.util.ArrayList;
 import android.content.Context;
+
+import com.diphot.siu.UserContainer;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.AreaDAO;
 import com.diphot.siu.persistence.TemaDAO;
@@ -35,13 +37,13 @@ public class TipificacionSincroService  extends AbstractService implements Runna
 				try {
 					TipificacionRestLetInterface resource = WebServiceFactory.getTipificacionRestLetInterface();
 					// Sincro Areas
-					ArrayList<AreaDTO> areas = resource.getAreas();
+					ArrayList<AreaDTO> areas = resource.getAreas(UserContainer.getUserDTO());
 					AreaDAO areaDAO = new AreaDAO(context);
 					// Sincro Tipos
-					ArrayList<TipoRelevamientoDTO> tipos = resource.getTiposRelevamiento();
+					ArrayList<TipoRelevamientoDTO> tipos = resource.getTiposRelevamiento(UserContainer.getUserDTO());
 					TipoRelevamientoDAO tipoDAO = new TipoRelevamientoDAO(context);
 					// Sincro Temas
-					ArrayList<TemaDTO> temas = resource.getTemas();
+					ArrayList<TemaDTO> temas = resource.getTemas(UserContainer.getUserDTO());
 					TemaDAO temaDAO = new TemaDAO(context);
 					// Persisto.
 					areaDAO.massiveCreate(areas);

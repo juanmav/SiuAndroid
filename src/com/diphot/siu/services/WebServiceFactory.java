@@ -5,6 +5,7 @@ import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.TipificacionRestLetInterface;
+import com.diphot.siu.services.restlet.UserRestLetInterface;
 
 public class WebServiceFactory {
 
@@ -25,5 +26,12 @@ public class WebServiceFactory {
 		AuditoriaRestLetInterface resource = cr.wrap(AuditoriaRestLetInterface.class);
 		return resource;
 	}
+
+	public static UserRestLetInterface getUserRestLetInterface(){
+		ClientResource cr = new ClientResource(SiuConstants.URL_USER);
+		UserRestLetInterface resource = cr.wrap(UserRestLetInterface.class);
+		return resource;
+	}
+
 
 }

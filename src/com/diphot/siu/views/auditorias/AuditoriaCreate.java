@@ -2,6 +2,7 @@ package com.diphot.siu.views.auditorias;
 
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.util.Util;
@@ -15,7 +16,6 @@ import android.graphics.Bitmap;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -143,6 +143,7 @@ public class AuditoriaCreate extends Activity {
 		audto.setImg3(Util.getEncodedImage(bm3));
 		
 		AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
+		audto.token = UserContainer.getUserDTO().getToken();
 		resource.create(audto);
 		
 		Toast.makeText(getBaseContext(),"Auditoria Generada con exito", Toast.LENGTH_LONG).show();

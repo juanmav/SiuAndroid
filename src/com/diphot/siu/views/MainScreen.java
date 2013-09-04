@@ -1,6 +1,8 @@
 package com.diphot.siu.views;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -28,8 +30,9 @@ public class MainScreen extends Activity {
 	}
 
 	private void startSincroServices(){
-		TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
-		new Thread(tss).start();
+		// TODO Descomentar
+		//TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
+		//new Thread(tss).start();
 		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
 		new Thread(iss).start();
 	}
@@ -71,39 +74,26 @@ public class MainScreen extends Activity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			Intent intent = new Intent(getApplicationContext(), Login.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("Salir")
+			.setMessage("Realmente desea salir?")
+			.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(getApplicationContext(), Login.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent); 
+				}
+			}).setNegativeButton("No", null).show();
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
 		}
-		return super.onKeyDown(keyCode, event);
 	}
-
 
 	public void verAuLista(View view){
 		Intent intent = new Intent (MainScreen.this, AuditoriaCreate.class);
 		startActivity(intent);
 	}
-
-	// Workaround for GAE servers to prevent chunk encoding
-	//cr.setRequestEntityBuffering(true);
-	/*public void testRest(View view){
-		try {
-			ClientResource cr2 = new ClientResource(TipificacionRestLetInterface.URL);
-			TipificacionRestLetInterface resource2 = cr2.wrap(TipificacionRestLetInterface.class);
-			ArrayList<AreaDTO> a = resource2.getAreas();
-			ArrayList<TipoRelevamientoDTO> t = resource2.getTiposRelevamiento();
-			ArrayList<TemaDTO> tt = resource2.getTemas();
-			System.out.println(a);
-			System.out.println(t);
-			System.out.println(tt);
-		}catch (Exception e){	
-
-		} finally {
-
-		}
-	}*/
-
-	/*public void testRPC (View view){
-
-	}*/
 }
