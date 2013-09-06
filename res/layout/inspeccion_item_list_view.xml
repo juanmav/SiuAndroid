@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fondo"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="75dp" 
+    android:background="@drawable/bottomborder"
+    >
 
     <TextView
         android:id="@+id/inspeccionid"
@@ -10,16 +13,22 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:paddingRight="15dp"
+        android:paddingLeft="15dp"
         android:paddingTop="10dp"
         android:text="id"
         android:textSize="19sp"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+    
+    
     <TextView
         android:id="@+id/calle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/inspeccionid"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="calle"
@@ -31,48 +40,54 @@
         android:id="@+id/altura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/calle"
-        android:layout_toRightOf="@id/inspeccionid"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="altura" />
+        android:text="456"
+        android:textColor="#32cd32"
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/observacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/altura"
-        android:layout_toRightOf="@id/inspeccionid"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="observacion"
         android:textColor="#32cd32"
-        android:textSize="12sp"
+        android:textSize="19sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/riesgo"
+	</LinearLayout>
+	
+	<TextView
+        android:id="@+id/fecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/altura"
-        android:layout_toRightOf="@id/observacion"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="riesgo"
+        android:text="XX/XX/XX"
         android:textColor="#32cd32"
-        android:textSize="12sp"
+        android:textSize="19sp"
         android:textStyle="bold" />
-
-    <Switch
-        android:id="@+id/enviado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/altura"
-        android:layout_alignBottom="@+id/altura"
-        android:layout_alignParentRight="true"
+    
+   
+    
+    <ImageView
+        android:id="@+id/riesgoIcon"
+        android:layout_width="71dp"
+        android:layout_height="65dp"
         android:enabled="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="Enviado" />
+        android:src="@drawable/ic_camera"
+        />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/estadoIcon"
+        android:layout_width="71dp"
+        android:layout_height="65dp"
+        android:enabled="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:src="@drawable/ic_camera" />
+    
+</LinearLayout>

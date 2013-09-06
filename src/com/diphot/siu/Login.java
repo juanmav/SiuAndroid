@@ -51,6 +51,7 @@ public class Login extends Activity {
 				startActivity(intent);
 			}
 		} catch (Exception e){
+			e.printStackTrace();
 			new AlertDialog.Builder(this)
 			.setIcon(android.R.drawable.ic_dialog_alert)
 			.setTitle("ERROR")

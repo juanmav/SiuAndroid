@@ -34,11 +34,14 @@ public interface SiuConstants {
 	public static final String RIESGO_PROPERTY = "riesgo";
 	public static final String ESTADO_PROPERTY = "estado";
 
-	//public static String URL_BACKED = "http://siuwebs.appspot.com/mobileendpointService";
-	public static final String URL_BACKEND = "http://192.168.0.116:8888/mobileendpointService";
+	//public static final String URL_BACKED = "http://siuwebs.appspot.com/mobileendpointService";
+	public static final String URL_BACKEND = "http://192.168.0.120:8888/mobileendpointService";
 	public static final String HostIP = "http://siuwebs.appspot.com/";
 
-	public static String REST_BACKEND = "http://192.168.0.116:8888/rest";
+
+
+	//public static String REST_BACKEND = "http://190.177.194.74:8888/rest";
+	public static String REST_BACKEND = "http://192.168.0.120:8888/rest";
 	//public static final String REST_BACKEND = "http://siuwebs.appspot.com/rest";
 	public static final String REST_TIPIFICACION = "/tipificacion";
 	public static final String REST_INSPECCION = "/inspecciones";
@@ -52,9 +55,12 @@ public interface SiuConstants {
 
 	public static final Boolean debug = true;
 
-	// Roles
-	public static final String ADMIN = "ADMIN";
-	public static final String SUPERVISOR = "SUPERVISOR";
-	public static final String SECRETARIA = "SECRETARIA";
-	public static final String INSPECTOR = "INSPECTOR";
+	public interface ROLES {
+		// Roles
+		public static final String ADMIN = "ADMIN";
+		public static final String SUPERVISOR = "SUPERVISOR";
+		public static final String SECRETARIA = "SECRETARIA";
+		public static final String INSPECTOR = "INSPECTOR";
+		
+	}
 }
