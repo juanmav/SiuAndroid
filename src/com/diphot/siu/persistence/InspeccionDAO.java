@@ -1,6 +1,8 @@
 package com.diphot.siu.persistence;
 
 import java.util.ArrayList;
+import java.util.UUID;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,7 +17,8 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	@Override
 	public void create(InspeccionDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
-		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado) " +
+		dto.UUID = UUID.randomUUID().toString().replaceAll("-", "");
+		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado, uuid) " +
 				"VALUES ("+ dto.getTema().getId().toString() + ",'" +
 				dto.getCalle() + "'," +
 				dto.getAltura() + "," +
@@ -27,8 +30,8 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				dto.getImg3()	+ "','" +
 				dto.getObservacion() + "'," +
 				dto.getRiesgo() + "," +
-				"0" +
-				")";
+				"0" + ",'" +
+				dto.UUID + "')";
 		System.out.println(sqlString); 
 		db.execSQL(sqlString);
 		db.close();
@@ -73,6 +76,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		idto.setImg2(c.getString(9));
 		idto.setImg3(c.getString(10));
 		idto.setRiesgo(c.getInt(11));
+		idto.UUID = c.getString(13);
 		return idto;
 	}
 	

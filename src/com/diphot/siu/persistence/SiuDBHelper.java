@@ -25,7 +25,8 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 															"img2 TEXT, " +
 															"img3 TEXT, " +
 															"riesgo INTEGER, " +
-															"enviado INTEGER)";
+															"enviado INTEGER," +
+															"uuid TEXT)";
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(sqlAreaCreate);

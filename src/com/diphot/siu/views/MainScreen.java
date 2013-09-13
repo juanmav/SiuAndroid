@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.services.InspeccionSenderService;
+import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
 
 public class MainScreen extends Activity {
@@ -30,10 +31,13 @@ public class MainScreen extends Activity {
 
 	private void startSincroServices(){
 		// TODO Descomentar
-		//TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
-		//new Thread(tss).start();
+		// TODO isAlkive para ver que solo este un hilo de ejecuccion.
+		TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
+		new Thread(tss).start();
 		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
 		new Thread(iss).start();
+		
+		
 	}
 
 	@Override
