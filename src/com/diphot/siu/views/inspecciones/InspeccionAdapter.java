@@ -4,12 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +42,7 @@ public class InspeccionAdapter extends BaseAdapter {
 		return this.list.get(positiion).getId();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,13 +67,13 @@ public class InspeccionAdapter extends BaseAdapter {
 		observacion.setText(dto.getObservacion());
 		Date date = null;
 		try {
-			date = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(dto.getFecha());
-			fecha.setText(date.getDate() + "/" + date.getMonth() + "/" + (date.getYear() + 1900));
+			date = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy",Locale.US).parse(dto.getFecha());
+			fecha.setText((date.getDay() +1 )+ "/" + (date.getMonth() +1 ) + "/"+ (date.getYear()+ 1900));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 
 		switch (dto.getLastStateIdentifier()) {
 		case SiuConstants.OBSERVADO:
@@ -91,6 +92,20 @@ public class InspeccionAdapter extends BaseAdapter {
 			break;
 		}
 
+
+		switch (dto.getRiesgo()) {
+		case SiuConstants.ALTO:
+			riesgoIcon.setImageResource(R.drawable.btn_red);
+			break;
+		case SiuConstants.MEDIO:
+			riesgoIcon.setImageResource(R.drawable.btn_yellow);
+			break;
+		case SiuConstants.BAJO:
+			riesgoIcon.setImageResource(R.drawable.btn_green);
+			break;
+		default:
+			break;
+		}
 
 		return convertView;
 	}

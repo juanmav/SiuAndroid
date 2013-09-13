@@ -7,6 +7,7 @@ import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
+import com.diphot.siu.services.restlet.InspeccionRestLetInterfaceTwo;
 import com.diphot.siu.util.Util;
 import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
@@ -171,7 +172,7 @@ public class InspeccionDetail extends Activity {
 
 
 	public void confirmar(View view){
-		InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
+		InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
 		// Solo envio el id de la inspeccion y el token.
 		resource.confirmar(getSimpleDTO());
 		this.finish();
@@ -193,7 +194,7 @@ public class InspeccionDetail extends Activity {
 	}
 	
 	public void ejecutada(View view){
-		InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
+		InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
 		resource.ejecutadaAuditable(getSimpleDTO());
 		this.finish();
 	}

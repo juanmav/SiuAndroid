@@ -12,13 +12,37 @@
         android:layout_height="wrap_content"
         android:text="Auditoria n° XXX de Inspeccion XXX"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-     <TextView
+
+    <TextView
         android:id="@+id/fecha_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fecha:"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_camera" />
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_camera" />
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_camera" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/TextView02"
@@ -33,11 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Texto Simulado Texto Simulado Texto Simulado Texto Simulado Texto Simulado Texto Simulado "
         android:enabled="false"
+        android:text="Texto Simulado Texto Simulado Texto Simulado Texto Simulado Texto Simulado Texto Simulado "
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    
+
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
@@ -45,19 +68,18 @@
         android:layout_marginTop="5dp"
         android:text="Resuelto"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+
     <RadioGroup
         android:id="@+id/radioGroup1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content" >
 
         <RadioButton
             android:id="@+id/radio0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Si"
             android:enabled="false"
+            android:text="Si"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <RadioButton
@@ -65,9 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="No" 
             android:enabled="false"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:text="No"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </RadioGroup>
 
     <Button

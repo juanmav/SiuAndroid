@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.services.InspeccionSenderService;
-import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
 
 public class MainScreen extends Activity {

@@ -12,6 +12,7 @@ import com.diphot.siuweb.shared.dtos.filters.InspeccionFilterDTO;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -42,16 +43,29 @@ public class InspeccionList extends ListActivity {
 
 	private void asyntask(InspeccionFilterDTO filter){
 		AsyncTask<InspeccionFilterDTO, String, ArrayList<InspeccionDTO>> t = new AsyncTask<InspeccionFilterDTO, String, ArrayList<InspeccionDTO>>(){
+			private ProgressDialog pd;
+			@Override
+			protected void onPreExecute() {
+				pd = new ProgressDialog(InspeccionList.this);
+				pd.setTitle("Processing...");
+				pd.setMessage("Please wait.");
+				pd.setCancelable(false);
+				pd.setIndeterminate(true);
+				pd.show();
+			}
+			
 			@Override
 			protected ArrayList<InspeccionDTO> doInBackground(InspeccionFilterDTO... params) {
 				InspeccionFilterDTO filter = params[0];
 				ArrayList<InspeccionDTO> dtos = getlist(filter.estadoID, filter.riesgo);
+				
 				return dtos;
 			}
 			@Override
 			protected void onPostExecute(ArrayList<InspeccionDTO> result){
 				InspeccionList.this.adapter = new InspeccionAdapter(InspeccionList.this, result);
 				InspeccionList.this.setListAdapter(adapter);
+				pd.dismiss();
 			}
 		};
 		t.execute(filter);
