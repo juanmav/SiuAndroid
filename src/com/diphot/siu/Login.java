@@ -55,7 +55,6 @@ public class Login extends Activity {
 			@Override
 			protected Integer doInBackground(String... params) {
 				Integer result = 0;
-				Intent intent = new Intent(Login.this, MainScreen.class);
 				UserRestLetInterface resource = WebServiceFactory.getUserRestLetInterface();
 				String username = userText.getText().toString();
 				String password = passwordText.getText().toString();
@@ -63,15 +62,21 @@ public class Login extends Activity {
 				try {
 					u = resource.login(u);
 					if (u !=null){
-						UserContainer.setUserDTO(u);
-						startActivity(intent);
+						// Seteo de nuevo el password porque el servidor lo devuelve en null
+						// por seguridad.
+						u.setPassword(password);
+						UserContainer.setUserDTO(u, Login.this);
 					} else {
 						result = 1;
 					}
 				} catch (Exception e){
 					e.printStackTrace();
-					result = 1;
-
+					// Si la conexion falla intento setear el ultimo usuario.
+					if (UserContainer.setLastUserDTO(u, Login.this)){
+						result = 0;
+					} else {
+						result = 1;
+					}
 				}
 				return result;
 			}
@@ -79,12 +84,14 @@ public class Login extends Activity {
 			protected void onPostExecute(Integer result){
 				if (result == 0){
 					pd.dismiss();
+					Intent intent = new Intent(Login.this, MainScreen.class);
+					startActivity(intent);
 				} else {
 					pd.dismiss();
 					new AlertDialog.Builder(Login.this)
 					.setIcon(android.R.drawable.ic_dialog_alert)
 					.setTitle("ERROR")
-					.setMessage("No se puede contactar al servidor en este momento, intente en unos minutos.")
+					.setMessage("No se puede contactar al servidor en este momento o su Usuario y/o password son incorrectos.")
 					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import com.diphot.siu.Login;
 import com.diphot.siu.R;
+import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.InspeccionSenderService;
 import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
@@ -25,19 +27,27 @@ public class MainScreen extends Activity {
 		//LinearLayout ll = (LinearLayout) this.findViewById(R.id.mainscreenLinerLayout);
 		//ll.addView(ConsoleOnScreen.getInstance(this));
 
-		// TODO volver activar los servicios de sincronizacion
-		this.startSincroServices();
+		
+		if (UserContainer.isUserOnline()){
+			// TODO volver activar los servicios de sincronizacion
+			this.startSincroServices();
+		} else {
+			// Apago el Boton de Inspecciones y solo dejo Crear.
+			Button inspeccionesbtn = (Button) this.findViewById(R.id.btn_verListaIns);
+			inspeccionesbtn.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	private void startSincroServices(){
 		// TODO Descomentar
 		// TODO isAlkive para ver que solo este un hilo de ejecuccion.
+
 		TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
-		new Thread(tss).start();
+		Thread ttsThread = new Thread(tss);
+		ttsThread.start();
 		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
-		new Thread(iss).start();
-		
-		
+		Thread issThread =new Thread(iss); 
+		issThread.start();
 	}
 
 	@Override
