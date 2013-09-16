@@ -3,6 +3,7 @@ package com.diphot.siu.views;
 import java.io.IOException;
 import java.util.List;
 
+import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 
@@ -15,7 +16,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -135,14 +138,33 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	}
 
 	public void salvar(View view){
-		
-		Intent returnIntent = new Intent();
-		returnIntent.putExtra(SiuConstants.CALLE_PROPERTY,calle.getText().toString());
-		returnIntent.putExtra(SiuConstants.ALTURA_PROPERTY,altura.getText().toString());
-		returnIntent.putExtra(SiuConstants.LATITUDE_PROPERTY,latituteField.getText().toString());
-		returnIntent.putExtra(SiuConstants.LONGITUDE_PROPERTY,longitudeField.getText().toString());
-		setResult(RESULT_OK,returnIntent);        
-		finish();
-
+		if (validateForm()){
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(SiuConstants.CALLE_PROPERTY,calle.getText().toString());
+			returnIntent.putExtra(SiuConstants.ALTURA_PROPERTY,altura.getText().toString());
+			returnIntent.putExtra(SiuConstants.LATITUDE_PROPERTY,latituteField.getText().toString());
+			returnIntent.putExtra(SiuConstants.LONGITUDE_PROPERTY,longitudeField.getText().toString());
+			setResult(RESULT_OK,returnIntent);        
+			finish();
+		}
 	}
+	
+	private Boolean validateForm(){
+		Boolean result = true;
+		if ( "".equalsIgnoreCase(calle.getText().toString())){
+			new AlertDialog.Builder(UbicacionSelection.this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("ERROR")
+			.setMessage("Debe Completar el campo Calle")
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			}).show();
+			result = false;
+		}
+		return result;
+	}
+	
 }

@@ -79,7 +79,11 @@ public class SelectionController extends Activity {
 				break;
 			case SiuConstants.UBICACION_SELECT:
 				this.inspeccion.setCalle(data.getStringExtra(SiuConstants.CALLE_PROPERTY));
-				this.inspeccion.setAltura(Integer.parseInt(data.getStringExtra(SiuConstants.ALTURA_PROPERTY)));
+				if (data.getStringExtra(SiuConstants.ALTURA_PROPERTY).equalsIgnoreCase("")){
+					this.inspeccion.setAltura(0);
+				} else {
+					this.inspeccion.setAltura(Integer.parseInt(data.getStringExtra(SiuConstants.ALTURA_PROPERTY)));
+				}
 				this.inspeccion.setLatitude(Double.parseDouble(data.getStringExtra(SiuConstants.LATITUDE_PROPERTY)));
 				this.inspeccion.setLongitude(Double.parseDouble(data.getStringExtra(SiuConstants.LONGITUDE_PROPERTY)));
 				creacionTerminada();
