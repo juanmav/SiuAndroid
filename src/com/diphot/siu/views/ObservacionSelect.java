@@ -5,6 +5,8 @@ import com.diphot.siu.SiuConstants;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -17,6 +19,7 @@ public class ObservacionSelect extends Activity {
 	private Button alto;
 	private Button medio;
 	private Button bajo;
+	private Boolean riesgoSelected = false;
 
 	private int riesgo = SiuConstants.ALTO;
 
@@ -39,15 +42,17 @@ public class ObservacionSelect extends Activity {
 	}
 
 	public void next(View v) {
-		// TODO agtregar la observacion al DTO
-		Intent returnIntent = new Intent();
-		returnIntent.putExtra(SiuConstants.OBSERVACION_PROPERTY,this.edittext1.getText().toString());
-		returnIntent.putExtra(SiuConstants.RIESGO_PROPERTY, this.riesgo);
-		setResult(RESULT_OK,returnIntent);        
-		finish();
+		if (validateForm()){
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(SiuConstants.OBSERVACION_PROPERTY,this.edittext1.getText().toString());
+			returnIntent.putExtra(SiuConstants.RIESGO_PROPERTY, this.riesgo);
+			setResult(RESULT_OK,returnIntent);        
+			finish();
+		}
 	}
 
 	public void onClick(View view){
+		this.riesgoSelected = true;
 		this.alto.setText("Alto");
 		this.medio.setText("Medio");
 		this.bajo.setText("Bajo");
@@ -72,4 +77,23 @@ public class ObservacionSelect extends Activity {
 		}
 
 	}
+	
+	private Boolean validateForm(){
+		Boolean result = true;
+		if (!riesgoSelected){
+			new AlertDialog.Builder(ObservacionSelect.this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("ERROR")
+			.setMessage("Debe Seleccionar un grado de Riesgo")
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			}).show();
+			result = false;
+		}
+		return result;
+	}
+	
 }
