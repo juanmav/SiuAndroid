@@ -5,12 +5,16 @@ import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
+import com.diphot.siu.util.AsyncFunctionWrapper;
 import com.diphot.siu.util.Util;
+import com.diphot.siu.util.AsyncFunctionWrapper.Callable;
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.Menu;
@@ -34,8 +38,8 @@ public class AuditoriaCreate extends Activity {
 	private Bitmap bm2;
 	private Bitmap bm3;
 	private RadioButton radiosi;
-	
-	
+	private Boolean picturetaken = false;
+
 	private static final int CAMERA_REQUEST = 1888; 
 
 	private InspeccionDTO idto;
@@ -53,11 +57,11 @@ public class AuditoriaCreate extends Activity {
 		this.au_mapImg =  (ImageView)this.findViewById(R.id.au_mapImg);
 		this.radiosi  = (RadioButton) this.findViewById(R.id.radio_si);
 		this.au_observacion_text = (EditText) this.findViewById(R.id.au_observacion_text);
-		
+
 		this.au_mapImg.setImageBitmap(Util.getBitmap(this.idto.getImgMap()));
 		this.au_ins_id =  (TextView)this.findViewById(R.id.au_ins_id);
 		this.au_ins_id.setText(idto.getId().toString());
-		
+
 		addListeners();
 	}
 
@@ -88,6 +92,7 @@ public class AuditoriaCreate extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
 		// TODO hacer tres fotos distintas.
 		if (resultCode == RESULT_OK) {
+			this.picturetaken = true;
 			Bitmap bm = (Bitmap) data.getExtras().get("data"); 
 			if (requestCode == CAMERA_REQUEST + this.au_img1.getId()){
 				bm1 = bm;
@@ -123,31 +128,75 @@ public class AuditoriaCreate extends Activity {
 		bm1 = savedInstanceState.getParcelable(SiuConstants.IMG1_PROPERTY);
 		bm2 = savedInstanceState.getParcelable(SiuConstants.IMG2_PROPERTY);
 		bm3 = savedInstanceState.getParcelable(SiuConstants.IMG3_PROPERTY);
-		if (bm1 != null)
+		if (bm1 != null){
+			this.picturetaken = true;
 			au_img1.setImageBitmap(bm1);
-		if (bm2 != null)
+		}
+		if (bm2 != null){
+			this.picturetaken = true;
 			au_img2.setImageBitmap(bm2);
-		if (bm3 != null)
+		}
+		if (bm3 != null){
+			this.picturetaken = true;
 			au_img3.setImageBitmap(bm3);
+		}
+
 	}
 
 	public void send(View v){
-		AuditoriaDTO audto = new AuditoriaDTO();
-		
-		audto.setInspeccionID(idto.getId());
-		audto.setResuelto(radiosi.isChecked());
-		audto.setObservaciones(au_observacion_text.getText().toString());
-		
-		audto.setImg1(Util.getEncodedImage(bm1));
-		audto.setImg2(Util.getEncodedImage(bm2));
-		audto.setImg3(Util.getEncodedImage(bm3));
-		
-		AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
-		audto.token = UserContainer.getUserDTO().getToken();
-		resource.create(audto);
-		
-		Toast.makeText(getBaseContext(),"Auditoria Generada con exito", Toast.LENGTH_LONG).show();
-		this.finish();
+		if (validateForm()){
+			final AuditoriaDTO audto = new AuditoriaDTO();
+
+			audto.setInspeccionID(idto.getId());
+			audto.setResuelto(radiosi.isChecked());
+			audto.setObservaciones(au_observacion_text.getText().toString());
+
+			audto.setImg1(Util.getEncodedImage(bm1));
+			audto.setImg2(Util.getEncodedImage(bm2));
+			audto.setImg3(Util.getEncodedImage(bm3));
+
+			new AsyncFunctionWrapper(this).execute("Creando Auditoria", "Procesando...", new Callable() {
+				@Override
+				public Integer call() {
+					Integer result = Callable.NOTOK;
+					try {
+						AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
+						audto.token = UserContainer.getUserDTO().getToken();
+						// Bloqueante
+						resource.create(audto);
+						// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
+						result = Callable.OK;
+					} catch (Exception e){
+						result = Callable.NOTOK;
+					}
+					return result;
+				}
+			}, new Callable(){
+				@Override
+				public Integer call() {
+					Toast.makeText(getBaseContext(),"Auditoria Generada con exito", Toast.LENGTH_LONG).show();
+					AuditoriaCreate.this.finish();
+					return Callable.OK;
+				}
+
+			});
+		}
+	}
+
+	private Boolean validateForm(){
+		if (!picturetaken){ // No se tomo foto.
+			new AlertDialog.Builder(AuditoriaCreate.this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("ERROR")
+			.setMessage("Por lo menos debe tomar una imagen")
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			}).show();
+		}
+		return picturetaken;
 	}
 
 }
