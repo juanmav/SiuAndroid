@@ -6,6 +6,8 @@ import com.diphot.siu.util.Util;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +24,7 @@ public class FotoSelection extends Activity {
 	private Bitmap bm1;
 	private Bitmap bm2;
 	private Bitmap bm3;
+	private Boolean picturetaken = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,16 +67,19 @@ public class FotoSelection extends Activity {
 		bm2 = savedInstanceState.getParcelable(SiuConstants.IMG2_PROPERTY);
 		bm3 = savedInstanceState.getParcelable(SiuConstants.IMG3_PROPERTY);
 		if (bm1 != null){
+			this.picturetaken = true;
 			imageView1.setImageBitmap(bm1);
 			imageView1.getLayoutParams().height = 250;
 			imageView1.getLayoutParams().width = 250;
 		}
 		if (bm2 != null){
+			this.picturetaken = true;
 			imageView2.setImageBitmap(bm2);
 			imageView2.getLayoutParams().height = 250;
 			imageView2.getLayoutParams().width = 250;
 		}
 		if (bm3 != null){
+			this.picturetaken = true;
 			imageView3.setImageBitmap(bm3);
 			imageView3.getLayoutParams().height = 250;
 			imageView3.getLayoutParams().width = 250;
@@ -85,6 +91,7 @@ public class FotoSelection extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
 		// TODO hacer tres fotos distintas.
 		if (resultCode == RESULT_OK) {
+			this.picturetaken = true;
 			Bitmap bm = (Bitmap) data.getExtras().get("data"); 
 			if (requestCode == CAMERA_REQUEST + this.imageView1.getId()){
 				bm1 = bm;
@@ -106,13 +113,32 @@ public class FotoSelection extends Activity {
 	}
 
 	public void next(View v){
-		Intent returnIntent = new Intent();
-		Bundle bundle = new Bundle();
-		bundle.putString(SiuConstants.IMG1_PROPERTY, Util.getEncodedImage(bm1));
-		bundle.putString(SiuConstants.IMG2_PROPERTY, Util.getEncodedImage(bm2));
-		bundle.putString(SiuConstants.IMG3_PROPERTY, Util.getEncodedImage(bm3));
-		returnIntent.putExtras(bundle);
-		setResult(RESULT_OK,returnIntent);        
-		finish();
+		if (validateForm()){
+			Intent returnIntent = new Intent();
+			Bundle bundle = new Bundle();
+			bundle.putString(SiuConstants.IMG1_PROPERTY, Util.getEncodedImage(bm1));
+			bundle.putString(SiuConstants.IMG2_PROPERTY, Util.getEncodedImage(bm2));
+			bundle.putString(SiuConstants.IMG3_PROPERTY, Util.getEncodedImage(bm3));
+			returnIntent.putExtras(bundle);
+			setResult(RESULT_OK,returnIntent);        
+			finish();
+		}
 	}
+	
+	private Boolean validateForm(){
+		if (!picturetaken){ // No se tomo foto.
+			new AlertDialog.Builder(FotoSelection.this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("ERROR")
+			.setMessage("Por lo menos debe tomar una imagen")
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			}).show();
+		}
+		return picturetaken;
+	}
+	
 }
