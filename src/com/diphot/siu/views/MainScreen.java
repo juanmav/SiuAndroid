@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import com.diphot.siu.Login;
 import com.diphot.siu.R;
+import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.InspeccionSenderService;
 import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
+import com.diphot.siuweb.shared.dtos.RoleDTO;
 
 public class MainScreen extends Activity {
 
@@ -36,8 +38,28 @@ public class MainScreen extends Activity {
 			Button inspeccionesbtn = (Button) this.findViewById(R.id.btn_verListaIns);
 			inspeccionesbtn.setVisibility(View.INVISIBLE);
 		}
+		
+		restricRole();
+		
 	}
 
+	private void restricRole(){
+		RoleDTO role = UserContainer.getUserDTO().getRolesDTO().get(0);
+		if (role.equals(new RoleDTO(SiuConstants.ROLES.ADMIN))){
+			// Dejo todos los botones.
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
+			// Dejo todos los botones.
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SUPERVISOR))) {
+			// Oculto el boton de creación.
+			Button btn_crearIns = (Button) findViewById(R.id.btn_crearIns);
+			btn_crearIns.setVisibility(View.INVISIBLE);
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SECRETARIA))) {
+			// Oculto el boton de creación.
+			Button btn_crearIns = (Button) findViewById(R.id.btn_crearIns);
+			btn_crearIns.setVisibility(View.INVISIBLE);
+		}
+	}
+	
 	private void startSincroServices(){
 		// TODO Descomentar
 		// TODO isAlkive para ver que solo este un hilo de ejecuccion.

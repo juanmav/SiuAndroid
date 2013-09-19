@@ -2,13 +2,16 @@ package com.diphot.siu.views;
 
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.UserContainer;
 import com.diphot.siu.views.inspecciones.InspeccionList;
+import com.diphot.siuweb.shared.dtos.RoleDTO;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class InspeccionFilter extends Activity {
@@ -17,6 +20,8 @@ public class InspeccionFilter extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inspeccion_filter);
+		//Restriccion por roles.
+		restricRole();
 	}
 
 	@Override
@@ -74,6 +79,22 @@ public class InspeccionFilter extends Activity {
 			// TODO debe seleccionar valores.
 		}
 	}
+	
+	private void restricRole(){
+		RoleDTO role = UserContainer.getUserDTO().getRolesDTO().get(0);
+		if (role.equals(new RoleDTO(SiuConstants.ROLES.ADMIN))){
+			// Dejo todos los botones.
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
+			// Dejo todos los botones.
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SUPERVISOR))) {
+			// Dejo todos los botones.
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SECRETARIA))) {
+			// Oculto el boton de Oculto el RadioButton de Observado.
+			RadioButton obs = (RadioButton) findViewById(R.id.obs_rad);
+			obs.setVisibility(View.INVISIBLE);
+		}
+	}
+	
 	private void busqueda(int estado, int riesgo){
 		Intent intent = new Intent(InspeccionFilter.this, InspeccionList.class);
 		intent.putExtra(SiuConstants.RIESGO_PROPERTY, riesgo);

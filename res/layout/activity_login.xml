@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="juanma"
+                android:text="tsecretaria"
                 style="@style/tipografiaBlanco"
                 android:inputType="textEmailAddress" />
         </TableRow>
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="asdf69"
+                android:text="s3cr3tar1a"
                 style="@style/tipografiaBlanco"
                 android:inputType="textPassword" />
         </TableRow>

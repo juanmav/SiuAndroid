@@ -13,6 +13,10 @@ public class RoleDTO implements InterfaceDTO, Serializable{
 		this.setId(id);
 		this.setName(name);
 	}
+	
+	public RoleDTO(String name){
+		this.name = name;
+	}
 	@Override
 	public Long getId() {
 		return id;

@@ -8,12 +8,15 @@ import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterfaceTwo;
+import com.diphot.siu.util.AsyncFunctionWrapper;
+import com.diphot.siu.util.AsyncFunctionWrapper.Callable;
 import com.diphot.siu.util.Util;
 import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
+import com.diphot.siuweb.shared.dtos.RoleDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
 import com.diphot.siuweb.shared.dtos.filters.AuditoriaFilterDTO;
@@ -39,6 +42,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class InspeccionDetail extends Activity {
 
@@ -67,6 +71,7 @@ public class InspeccionDetail extends Activity {
 		Bundle b = getIntent().getExtras();
 		idto = (InspeccionDTO) b.getSerializable(SiuConstants.INSPECCION_PROPERTY);
 		populateData();
+		restricRole();
 	}
 
 	@Override
@@ -74,6 +79,39 @@ public class InspeccionDetail extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.inspeccion_detail, menu);
 		return true;
+	}
+	
+	private void restricRole(){
+		RoleDTO role = UserContainer.getUserDTO().getRolesDTO().get(0);
+		/*confirmar_btn
+		ejecutada_btn
+		auditar_btn*/
+		
+		Button confirmar = (Button) this.findViewById(R.id.confirmar_btn);
+		Button ejecutada = (Button) this.findViewById(R.id.ejecutada_btn);
+		Button auditar = (Button) this.findViewById(R.id.auditar_btn);
+		
+		if (role.equals(new RoleDTO(SiuConstants.ROLES.ADMIN))){
+			// Dejo todos los botones.
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
+			// Oculto boton de confirmar
+			// Oculto boton de Ejecutada
+			// Queda boton de Auditar.
+			confirmar.setVisibility(View.INVISIBLE);
+			ejecutada.setVisibility(View.INVISIBLE);
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SUPERVISOR))) {
+			// Oculto boton de Ejecutada
+			// Oculto boton de Auditar
+			// Queda boton de Confirmar
+			auditar.setVisibility(View.INVISIBLE);
+			ejecutada.setVisibility(View.INVISIBLE);
+		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SECRETARIA))) {
+			// Oculto boton de Confirmar
+			// Oculto boton de Auditar
+			// Queda boton de Ejecutada
+			confirmar.setVisibility(View.INVISIBLE);
+			auditar.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	private void populateData(){
@@ -132,19 +170,22 @@ public class InspeccionDetail extends Activity {
 			@Override
 			protected ArrayList<AuditoriaDTO> doInBackground(Long... params) {
 				Long filter = params[0];
-				ArrayList<AuditoriaDTO> dtos = getlist(filter);
+				ArrayList<AuditoriaDTO> dtos = getAuditoriaList(filter);
 				return dtos;
 			}
 			@Override
 			protected void onPostExecute(ArrayList<AuditoriaDTO> result){
 				InspeccionDetail.this.adapter = new AuditoriaAdapter(InspeccionDetail.this, result);
 				InspeccionDetail.this.auditoriasList.setAdapter(adapter);
+				TextView text = (TextView) InspeccionDetail.this.findViewById(R.id.textView5);
+				// Se saca el "Auditorias: Procesando...."
+				text.setText("Auditorias:");
 			}
 		};
 		t.execute(inspeccionID);
 	}
 
-	private ArrayList<AuditoriaDTO> getlist(Long inspeccionID){
+	private ArrayList<AuditoriaDTO> getAuditoriaList(Long inspeccionID){
 		ArrayList<AuditoriaDTO> result = null;
 		try {
 			AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
@@ -170,14 +211,6 @@ public class InspeccionDetail extends Activity {
 		return result;
 	}
 
-
-	public void confirmar(View view){
-		InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
-		// Solo envio el id de la inspeccion y el token.
-		resource.confirmar(getSimpleDTO());
-		this.finish();
-	}
-
 	public void auditar(View view){
 		Intent intent = new Intent (InspeccionDetail.this, AuditoriaCreate.class);
 		Bundle b = new Bundle();
@@ -186,17 +219,67 @@ public class InspeccionDetail extends Activity {
 		startActivity(intent);
 	}
 
+	// Solo envio el id de la inspeccion y el token.
 	public InspeccionDTO getSimpleDTO(){
 		InspeccionDTO simpleIDTO = new InspeccionDTO();
 		simpleIDTO.setId(this.idto.getId());
 		simpleIDTO.token = UserContainer.getUserDTO().getToken();
 		return simpleIDTO;
 	}
+
+	public void confirmar(View view){
+		new AsyncFunctionWrapper(this).execute("Confirmando", "Procesando...", new Callable() {
+			@Override
+			public Integer call() {
+				Integer result = Callable.NOTOK;
+				try {
+					InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
+					// Bloqueante
+					resource.confirmar(getSimpleDTO());
+					// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
+					result = Callable.OK;
+				} catch (Exception e){
+					result = Callable.NOTOK;
+				}
+				return result;
+			}
+		}, new Callable(){
+
+			@Override
+			public Integer call() {
+				Toast.makeText(getBaseContext(),"Inspeccion Confirmada con exito", Toast.LENGTH_LONG).show();
+				InspeccionDetail.this.finish();
+				return Callable.OK;
+			}
+			
+		});
+	}
 	
 	public void ejecutada(View view){
-		InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
-		resource.ejecutadaAuditable(getSimpleDTO());
-		this.finish();
+		new AsyncFunctionWrapper(this).execute("Ejecutando", "Procesando...", new Callable() {
+			@Override
+			public Integer call() {
+				Integer result = Callable.NOTOK;
+				try {
+					InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
+					// Bloqueante
+					resource.ejecutadaAuditable(getSimpleDTO());
+					// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
+					result = Callable.OK;
+				} catch (Exception e){
+					result = Callable.NOTOK;
+				}
+				return result;
+			}
+		}, new Callable(){
+			@Override
+			public Integer call() {
+				Toast.makeText(getBaseContext(),"Inspeccion marcada como Ejecutada con exito", Toast.LENGTH_LONG).show();
+				InspeccionDetail.this.finish();
+				return Callable.OK;
+			}
+			
+		});
 	}
 
 	private void auditoriaPopup(AuditoriaDTO audto){
