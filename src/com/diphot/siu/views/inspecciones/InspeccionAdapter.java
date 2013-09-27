@@ -65,14 +65,8 @@ public class InspeccionAdapter extends BaseAdapter {
 		calle.setText(dto.getCalle());
 		altura.setText(dto.getAltura().toString());
 		observacion.setText(dto.getObservacion());
-		Date date = null;
-		try {
-			date = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy",Locale.US).parse(dto.getFecha());
-			fecha.setText((date.getDay() +1 )+ "/" + (date.getMonth() +1 ) + "/"+ (date.getYear()+ 1900));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		fecha.setText(dto.getFecha());
 
 
 		switch (dto.getLastStateIdentifier()) {
@@ -91,7 +85,6 @@ public class InspeccionAdapter extends BaseAdapter {
 		default:
 			break;
 		}
-
 
 		switch (dto.getRiesgo()) {
 		case SiuConstants.ALTO:

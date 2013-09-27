@@ -43,8 +43,8 @@ public interface SiuConstants {
 	//public static String REST_BACKEND = "http://192.168.0.200:8888/rest";
 	//public static String REST_BACKEND = "http://www.diphot.com.ar:8888/rest";
 	
-	//public static String REST_BACKEND = "http://192.168.0.200:8888/rest";
-	public static final String REST_BACKEND = "http://siuwebs.appspot.com/rest";
+	public static String REST_BACKEND = "http://192.168.0.200:8888/rest";
+	//public static final String REST_BACKEND = "http://siuwebs.appspot.com/rest";
 	public static final String REST_TIPIFICACION = "/tipificacion";
 	public static final String REST_INSPECCION = "/inspecciones";
 	public static final String REST_INSPECCION_DOS = "/inspeccionesdos";
