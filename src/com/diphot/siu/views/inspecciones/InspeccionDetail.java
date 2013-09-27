@@ -332,10 +332,19 @@ public class InspeccionDetail extends Activity {
 		TextView fecha = (TextView) layout.findViewById(R.id.fecha_popup);
 		fecha.setText("Fecha: " + audto.getFecha());
 
+		// Imagenes
+		
+		ImageView img1 = (ImageView) layout.findViewById(R.id.au_img1);
+		img1.setImageBitmap(Util.getBitmap(audto.getImg1()));
+		ImageView img2 = (ImageView) layout.findViewById(R.id.au_img2);
+		img2.setImageBitmap(Util.getBitmap(audto.getImg2()));
+		ImageView img3 = (ImageView) layout.findViewById(R.id.au_img3);
+		img3.setImageBitmap(Util.getBitmap(audto.getImg3()));
+		
 		final PopupWindow popup = new PopupWindow(InspeccionDetail.this);
 		popup.setContentView(layout);
 		popup.setWidth(500);
-		popup.setHeight(700);
+		popup.setHeight(950);
 		popup.setFocusable(true);
 
 		popup.showAtLocation(layout, Gravity.CENTER, 0, 0);
