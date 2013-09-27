@@ -13,6 +13,7 @@ import com.diphot.siu.util.AsyncFunctionWrapper.Callable;
 import com.diphot.siu.util.Util;
 import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
+import com.diphot.siu.views.popup.ImagePopup;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
@@ -80,17 +81,17 @@ public class InspeccionDetail extends Activity {
 		getMenuInflater().inflate(R.menu.inspeccion_detail, menu);
 		return true;
 	}
-	
+
 	private void restricRole(){
 		RoleDTO role = UserContainer.getUserDTO().getRolesDTO().get(0);
 		/*confirmar_btn
 		ejecutada_btn
 		auditar_btn*/
-		
+
 		Button confirmar = (Button) this.findViewById(R.id.confirmar_btn);
 		Button ejecutada = (Button) this.findViewById(R.id.ejecutada_btn);
 		Button auditar = (Button) this.findViewById(R.id.auditar_btn);
-		
+
 		if (role.equals(new RoleDTO(SiuConstants.ROLES.ADMIN))){
 			// Dejo todos los botones.
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
@@ -127,9 +128,41 @@ public class InspeccionDetail extends Activity {
 		this.entreCallesText = (TextView) this.findViewById(R.id.entreCallesText);
 
 		this.img1 = (ImageView) this.findViewById(R.id.img1);
+		this.img1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImg1()));
+
+			}
+		});
 		this.img2 = (ImageView) this.findViewById(R.id.img2);
+		this.img2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImg2()));
+
+			}
+		});
 		this.img3 = (ImageView) this.findViewById(R.id.img3);
+		this.img3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImg3()));
+
+			}
+		});
 		this.mapImg = (ImageView) this.findViewById(R.id.mapImg);
+		this.mapImg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImgMap()));
+
+			}
+		});
 
 		this.observacionText = (TextView) this.findViewById(R.id.observacionText);	
 		this.auditoriasList = (ListView) this.findViewById(R.id.auditoriasList);
@@ -140,7 +173,7 @@ public class InspeccionDetail extends Activity {
 				System.out.println("Seleccione Auditoria id: "  + id);
 				AuditoriaDTO audto = (AuditoriaDTO)adap.getItemAtPosition(position);
 				auditoriaPopup(audto);
-				
+
 			}
 		});
 
@@ -251,10 +284,10 @@ public class InspeccionDetail extends Activity {
 				InspeccionDetail.this.finish();
 				return Callable.OK;
 			}
-			
+
 		});
 	}
-	
+
 	public void ejecutada(View view){
 		new AsyncFunctionWrapper(this).execute("Ejecutando", "Procesando...", new Callable() {
 			@Override
@@ -278,7 +311,7 @@ public class InspeccionDetail extends Activity {
 				InspeccionDetail.this.finish();
 				return Callable.OK;
 			}
-			
+
 		});
 	}
 
@@ -288,9 +321,9 @@ public class InspeccionDetail extends Activity {
 		LayoutInflater layoutInflater = (LayoutInflater) InspeccionDetail.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View layout = layoutInflater.inflate(R.layout.auditoria_detail_popup, viewGroup);
 
-		
+
 		TextView leyenda = (TextView) layout.findViewById(R.id.leyenda_popup);
-		
+
 		leyenda.setText("Auditoria n°: "+ audto.getId() +" de Inspeccion: " + this.idto.getId());
 		EditText observacion = (EditText) layout.findViewById(R.id.observaciones_popup);
 		observacion.setText(audto.getObservaciones());
@@ -298,7 +331,7 @@ public class InspeccionDetail extends Activity {
 		resuelto.setChecked(audto.getResuelto());
 		TextView fecha = (TextView) layout.findViewById(R.id.fecha_popup);
 		fecha.setText("Fecha: " + audto.getFecha());
-		
+
 		final PopupWindow popup = new PopupWindow(InspeccionDetail.this);
 		popup.setContentView(layout);
 		popup.setWidth(500);
@@ -320,5 +353,5 @@ public class InspeccionDetail extends Activity {
 		});
 
 	}
-	
+
 }
