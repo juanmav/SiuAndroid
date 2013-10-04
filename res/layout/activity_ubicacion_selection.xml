@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/fondo"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -48,8 +48,8 @@
             style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="esperando gps..." />
+            android:text="esperando gps..."
+            android:textSize="20sp" />
 
         <View
             android:layout_width="wrap_content"
@@ -63,26 +63,41 @@
 
         <EditText
             android:id="@+id/calle"
+            style="@style/tipografiaBlanco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/tipografiaBlanco"
             android:ems="10" >
 
             <requestFocus />
         </EditText>
 
         <TextView
+            style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Altura"
-            style="@style/tipografia" />
+            android:text="Altura" />
 
         <EditText
             android:id="@+id/altura"
+            style="@style/tipografiaBlanco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/tipografiaBlanco"
             android:inputType="number" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <TextView
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Localidad" />
+
+        <Spinner
+            android:id="@+id/localidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <Button
@@ -108,7 +123,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:visibility="invisible"
-        android:src="@drawable/staticmap" />
+        android:src="@drawable/staticmap"
+        android:visibility="invisible" />
 
 </RelativeLayout>

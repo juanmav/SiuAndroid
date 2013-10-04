@@ -6,6 +6,8 @@ import java.util.List;
 import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
+import com.diphot.siu.persistence.LocalidadDAO;
+import com.diphot.siu.views.adapters.LocalidadAdapter;
 
 import android.location.Address;
 import android.location.Criteria;
@@ -23,6 +25,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +36,8 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	private TextView calle;
 	private TextView altura;
 	private String provider;
-	
+	private Spinner localidades;
+	private LocalidadAdapter ladapter;
 	private TextView dirSugerida;
 
 	@Override
@@ -47,6 +51,10 @@ public class UbicacionSelection extends Activity implements LocationListener {
 		altura = (EditText)findViewById(R.id.altura);
 		dirSugerida = (TextView) findViewById(R.id.dirSugerida);
 
+		localidades = (Spinner) findViewById(R.id.localidades);
+		ladapter = new LocalidadAdapter(this, new LocalidadDAO(this).getList());
+		localidades.setAdapter(ladapter);
+		
 		// Get the location manager
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		// Define the criteria how to select the locatioin provider -> use
@@ -144,6 +152,7 @@ public class UbicacionSelection extends Activity implements LocationListener {
 			returnIntent.putExtra(SiuConstants.ALTURA_PROPERTY,altura.getText().toString());
 			returnIntent.putExtra(SiuConstants.LATITUDE_PROPERTY,latituteField.getText().toString());
 			returnIntent.putExtra(SiuConstants.LONGITUDE_PROPERTY,longitudeField.getText().toString());
+			returnIntent.putExtra(SiuConstants.LOCALIDAD_PROPERTY, this.ladapter.getItem(localidades.getSelectedItemPosition()).getId());
 			setResult(RESULT_OK,returnIntent);        
 			finish();
 		}

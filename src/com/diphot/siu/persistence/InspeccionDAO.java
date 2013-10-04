@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
+import com.diphot.siuweb.shared.dtos.LocalidadDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 
 public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
@@ -18,7 +19,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	public void create(InspeccionDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		dto.UUID = UUID.randomUUID().toString().replaceAll("-", "");
-		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado, uuid) " +
+		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado, uuid, localidadid) " +
 				"VALUES ("+ dto.getTema().getId().toString() + ",'" +
 				dto.getCalle() + "'," +
 				dto.getAltura() + "," +
@@ -31,7 +32,9 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				dto.getObservacion() + "'," +
 				dto.getRiesgo() + "," +
 				"0" + ",'" +
-				dto.UUID + "')";
+				dto.UUID + "'," +
+				"" +")";
+				//dto.getLocalidad().getId().toString() +")";
 		System.out.println(sqlString); 
 		db.execSQL(sqlString);
 		db.close();
@@ -77,6 +80,8 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		idto.setImg3(c.getString(10));
 		idto.setRiesgo(c.getInt(11));
 		idto.UUID = c.getString(13);
+		LocalidadDTO localidadDTO = new LocalidadDTO(c.getLong(14), "");
+		idto.setLocalidad(localidadDTO);
 		return idto;
 	}
 	

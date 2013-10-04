@@ -30,6 +30,7 @@ public interface SiuConstants {
 	public static final String ALTURA_PROPERTY = "altura";
 	public static final String LATITUDE_PROPERTY = "latitude";
 	public static final String LONGITUDE_PROPERTY = "longitude";
+	public static final String LOCALIDAD_PROPERTY = "localidad";
 
 	public static final String RIESGO_PROPERTY = "riesgo";
 	public static final String ESTADO_PROPERTY = "estado";
@@ -43,8 +44,8 @@ public interface SiuConstants {
 	//public static String REST_BACKEND = "http://192.168.0.200:8888/rest";
 	//public static String REST_BACKEND = "http://www.diphot.com.ar:8888/rest";
 	
-	public static String REST_BACKEND = "http://192.168.0.200:8888/rest";
-	//public static final String REST_BACKEND = "http://siuwebs.appspot.com/rest";
+	//public static String REST_BACKEND = "http://192.168.0.200:8888/rest";
+	public static final String REST_BACKEND = "http://siuwebstest.appspot.com/rest";
 	public static final String REST_TIPIFICACION = "/tipificacion";
 	public static final String REST_INSPECCION = "/inspecciones";
 	public static final String REST_INSPECCION_DOS = "/inspeccionesdos";

@@ -21,6 +21,7 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 	private int lastStateIdentifier;
 	public String token;
 	public String UUID;
+	private LocalidadDTO localidad;
 	
 	public InspeccionDTO(){
 		
@@ -169,5 +170,13 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 
 	public void setImgMap(String imgMap) {
 		this.imgMap = imgMap;
+	}
+
+	public LocalidadDTO getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(LocalidadDTO localidad) {
+		this.localidad = localidad;
 	}
 }
