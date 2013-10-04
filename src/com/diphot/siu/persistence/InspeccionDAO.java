@@ -33,8 +33,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				dto.getRiesgo() + "," +
 				"0" + ",'" +
 				dto.UUID + "'," +
-				"" +")";
-				//dto.getLocalidad().getId().toString() +")";
+				dto.getLocalidad().getId().toString() +")";
 		System.out.println(sqlString); 
 		db.execSQL(sqlString);
 		db.close();

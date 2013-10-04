@@ -62,6 +62,7 @@ public class InspeccionDetail extends Activity {
 	ImageView mapImg;
 	TextView observacionText;
 	ListView auditoriasList;
+	TextView localidadText;
 
 	AuditoriaAdapter adapter;
 
@@ -177,6 +178,8 @@ public class InspeccionDetail extends Activity {
 			}
 		});
 
+		this.localidadText = (TextView) this.findViewById(R.id.localidadText);
+		
 		// Escribiendo Datos Inspeccion
 		inspeccionID.setText(idto.getId().toString());
 		riesgoID.setText(Util.riesgoIDtoString(idto.getRiesgo()));
@@ -194,6 +197,9 @@ public class InspeccionDetail extends Activity {
 		calleText.setText(idto.getCalle());
 		alturaText.setText(idto.getAltura().toString());
 
+		this.localidadText.setText(idto.getLocalidad().getNombre());
+		
+		// Busca auditorias.
 		auditAsynkTask(idto.getId());
 
 	}
