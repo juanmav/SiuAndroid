@@ -27,7 +27,9 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 															"riesgo INTEGER, " +
 															"enviado INTEGER," +
 															"uuid TEXT," +
-															"localidadid INTEGER)";
+															"localidadid INTEGER," +
+															"calle1 TEXT," + 
+															"calle2 TEXT" + ")";
 	String sqlLocalidadCreate ="CREATE TABLE Localidad (id INTEGER PRIMARY KEY, nombre TEXT)";
 	@Override
 	public void onCreate(SQLiteDatabase db) {

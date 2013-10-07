@@ -6,7 +6,6 @@ import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
-import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterfaceTwo;
 import com.diphot.siu.util.AsyncFunctionWrapper;
 import com.diphot.siu.util.AsyncFunctionWrapper.Callable;
@@ -198,6 +197,16 @@ public class InspeccionDetail extends Activity {
 		alturaText.setText(idto.getAltura().toString());
 
 		this.localidadText.setText(idto.getLocalidad().getNombre());
+		
+		String entrecalles = "----";
+		
+		if (idto.getEntreCalleUno() != null ){
+			entrecalles = idto.getEntreCalleUno();
+		}
+		if (idto.getEntreCalleDos() != null){
+			entrecalles = entrecalles + " y " + idto.getEntreCalleDos();
+		}
+		this.entreCallesText.setText(entrecalles);
 		
 		// Busca auditorias.
 		auditAsynkTask(idto.getId());

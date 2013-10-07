@@ -88,6 +88,8 @@ public class SelectionController extends Activity {
 				this.inspeccion.setLatitude(Double.parseDouble(data.getStringExtra(SiuConstants.LATITUDE_PROPERTY)));
 				this.inspeccion.setLongitude(Double.parseDouble(data.getStringExtra(SiuConstants.LONGITUDE_PROPERTY)));
 				this.inspeccion.setLocalidad(new LocalidadDTO(data.getLongExtra(SiuConstants.LOCALIDAD_PROPERTY, 0L), ""));
+				this.inspeccion.setEntreCalleUno(data.getStringExtra(SiuConstants.ENTRE_CALLE_UNO));
+				this.inspeccion.setEntreCalleDos(data.getStringExtra(SiuConstants.ENTRE_CALLE_DOS));
 				creacionTerminada();
 				break;
 			default:

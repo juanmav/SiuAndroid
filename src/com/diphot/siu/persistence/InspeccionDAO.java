@@ -19,7 +19,7 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	public void create(InspeccionDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		dto.UUID = UUID.randomUUID().toString().replaceAll("-", "");
-		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado, uuid, localidadid) " +
+		String sqlString = "INSERT INTO Inspeccion (temaid, calle, altura, latitude, longitude, fecha, img1, img2, img3, observacion, riesgo,  enviado, uuid, localidadid, calle1, calle2) " +
 				"VALUES ("+ dto.getTema().getId().toString() + ",'" +
 				dto.getCalle() + "'," +
 				dto.getAltura() + "," +
@@ -33,7 +33,9 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 				dto.getRiesgo() + "," +
 				"0" + ",'" +
 				dto.UUID + "'," +
-				dto.getLocalidad().getId().toString() +")";
+				dto.getLocalidad().getId().toString() + ",'" +
+				dto.getEntreCalleUno() + "','" + 
+				dto.getEntreCalleDos() + "')";
 		System.out.println(sqlString); 
 		db.execSQL(sqlString);
 		db.close();
@@ -81,6 +83,8 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		idto.UUID = c.getString(13);
 		LocalidadDTO localidadDTO = new LocalidadDTO(c.getLong(14), "");
 		idto.setLocalidad(localidadDTO);
+		idto.setEntreCalleUno(c.getString(15));
+		idto.setEntreCalleDos(c.getString(16));
 		return idto;
 	}
 	

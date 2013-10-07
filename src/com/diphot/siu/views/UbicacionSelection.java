@@ -33,12 +33,14 @@ public class UbicacionSelection extends Activity implements LocationListener {
 	private TextView latituteField;
 	private TextView longitudeField;
 	private LocationManager locationManager;
-	private TextView calle;
-	private TextView altura;
+	private EditText calle;
+	private EditText altura;
 	private String provider;
 	private Spinner localidades;
 	private LocalidadAdapter ladapter;
 	private TextView dirSugerida;
+	private TextView calle1;
+	private TextView calle2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,9 @@ public class UbicacionSelection extends Activity implements LocationListener {
 		localidades = (Spinner) findViewById(R.id.localidades);
 		ladapter = new LocalidadAdapter(this, new LocalidadDAO(this).getList());
 		localidades.setAdapter(ladapter);
+		
+		calle1 = (EditText) findViewById(R.id.calle1); 
+		calle2 = (EditText) findViewById(R.id.calle2);
 		
 		// Get the location manager
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -153,6 +158,8 @@ public class UbicacionSelection extends Activity implements LocationListener {
 			returnIntent.putExtra(SiuConstants.LATITUDE_PROPERTY,latituteField.getText().toString());
 			returnIntent.putExtra(SiuConstants.LONGITUDE_PROPERTY,longitudeField.getText().toString());
 			returnIntent.putExtra(SiuConstants.LOCALIDAD_PROPERTY, this.ladapter.getItem(localidades.getSelectedItemPosition()).getId());
+			returnIntent.putExtra(SiuConstants.ENTRE_CALLE_UNO, calle1.getText().toString());
+			returnIntent.putExtra(SiuConstants.ENTRE_CALLE_DOS, calle2.getText().toString());
 			setResult(RESULT_OK,returnIntent);        
 			finish();
 		}

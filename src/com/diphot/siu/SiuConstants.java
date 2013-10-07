@@ -27,6 +27,8 @@ public interface SiuConstants {
 	public static final String INSPECCION_PROPERTY = "inspeccion";
 
 	public static final String CALLE_PROPERTY = "calle";
+	public static final String ENTRE_CALLE_UNO = "calle1";
+	public static final String ENTRE_CALLE_DOS = "calle2";
 	public static final String ALTURA_PROPERTY = "altura";
 	public static final String LATITUDE_PROPERTY = "latitude";
 	public static final String LONGITUDE_PROPERTY = "longitude";

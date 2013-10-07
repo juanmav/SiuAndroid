@@ -92,10 +92,40 @@
             style="@style/tipografia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Entre Calles:" />
+
+         <TextView
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Localidad" />
 
         <Spinner
             android:id="@+id/localidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        
+        <TextView
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calle 1:" />
+
+        <EditText
+            android:id="@+id/calle1"
+            style="@style/tipografiaBlanco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calle 2:" />
+
+        <EditText
+            android:id="@+id/calle2"
+            style="@style/tipografiaBlanco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
