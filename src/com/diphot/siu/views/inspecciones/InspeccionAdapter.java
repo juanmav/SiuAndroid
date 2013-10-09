@@ -37,7 +37,6 @@ public class InspeccionAdapter extends BaseAdapter {
 		return this.list.get(positiion).getId();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -94,7 +93,7 @@ public class InspeccionAdapter extends BaseAdapter {
 		default:
 			break;
 		}
-
+		
 		return convertView;
 	}
 }

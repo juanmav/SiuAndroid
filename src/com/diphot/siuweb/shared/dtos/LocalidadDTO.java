@@ -8,6 +8,10 @@ public class LocalidadDTO implements Serializable, InterfaceDTO{
 	private Long id;
 	private String nombre;
 	
+	public LocalidadDTO(){
+		
+	}
+	
 	public LocalidadDTO(Long id, String nombre){
 		this.id = id;
 		this.nombre = nombre;
