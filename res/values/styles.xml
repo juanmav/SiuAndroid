@@ -20,9 +20,16 @@
     <style name="tipografia">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">25sp</item>
-        <item name="android:textColor">#FFD400</item>
+        <item name="android:textColor">#FFD400</item> 
     </style>
 
+    <style name="tipografiaSpinner">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#FFD400</item>
+        <item name="android:background">@android:color/black</item> 
+    </style>
+    
     <style name="tipografiaBlanco">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">22sp</item>

@@ -1,11 +1,6 @@
 package com.diphot.siu.views.inspecciones;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
@@ -42,7 +37,6 @@ public class InspeccionAdapter extends BaseAdapter {
 		return this.list.get(positiion).getId();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,7 +45,7 @@ public class InspeccionAdapter extends BaseAdapter {
 		TextView id = (TextView) convertView.findViewById(R.id.inspeccionid);
 		TextView calle = (TextView) convertView.findViewById(R.id.calle);
 		TextView altura = (TextView) convertView.findViewById(R.id.altura);
-		TextView observacion = (TextView) convertView.findViewById(R.id.observacion);
+		//TextView observacion = (TextView) convertView.findViewById(R.id.observacion);
 		ImageView riesgoIcon = (ImageView) convertView.findViewById(R.id.riesgoIcon);
 		ImageView estadoIcon = (ImageView) convertView.findViewById(R.id.estadoIcon);
 		TextView fecha = (TextView) convertView.findViewById(R.id.fecha);
@@ -64,15 +58,9 @@ public class InspeccionAdapter extends BaseAdapter {
 		id.setText(dto.getId().toString());
 		calle.setText(dto.getCalle());
 		altura.setText(dto.getAltura().toString());
-		observacion.setText(dto.getObservacion());
-		Date date = null;
-		try {
-			date = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy",Locale.US).parse(dto.getFecha());
-			fecha.setText((date.getDay() +1 )+ "/" + (date.getMonth() +1 ) + "/"+ (date.getYear()+ 1900));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//observacion.setText(dto.getObservacion());
+
+		fecha.setText(dto.getFecha());
 
 
 		switch (dto.getLastStateIdentifier()) {
@@ -92,7 +80,6 @@ public class InspeccionAdapter extends BaseAdapter {
 			break;
 		}
 
-
 		switch (dto.getRiesgo()) {
 		case SiuConstants.ALTO:
 			riesgoIcon.setImageResource(R.drawable.btn_red);
@@ -106,7 +93,7 @@ public class InspeccionAdapter extends BaseAdapter {
 		default:
 			break;
 		}
-
+		
 		return convertView;
 	}
 }

@@ -6,6 +6,7 @@ import com.diphot.siu.SiuConstants;
 import com.diphot.siu.custom.ConsoleOnScreen;
 import com.diphot.siu.persistence.InspeccionDAO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
+import com.diphot.siuweb.shared.dtos.LocalidadDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 
 import android.os.Bundle;
@@ -86,6 +87,9 @@ public class SelectionController extends Activity {
 				}
 				this.inspeccion.setLatitude(Double.parseDouble(data.getStringExtra(SiuConstants.LATITUDE_PROPERTY)));
 				this.inspeccion.setLongitude(Double.parseDouble(data.getStringExtra(SiuConstants.LONGITUDE_PROPERTY)));
+				this.inspeccion.setLocalidad(new LocalidadDTO(data.getLongExtra(SiuConstants.LOCALIDAD_PROPERTY, 0L), ""));
+				this.inspeccion.setEntreCalleUno(data.getStringExtra(SiuConstants.ENTRE_CALLE_UNO));
+				this.inspeccion.setEntreCalleDos(data.getStringExtra(SiuConstants.ENTRE_CALLE_DOS));
 				creacionTerminada();
 				break;
 			default:

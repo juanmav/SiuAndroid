@@ -6,13 +6,13 @@ import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
-import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterfaceTwo;
 import com.diphot.siu.util.AsyncFunctionWrapper;
 import com.diphot.siu.util.AsyncFunctionWrapper.Callable;
 import com.diphot.siu.util.Util;
 import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
+import com.diphot.siu.views.popup.ImagePopup;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
@@ -61,6 +61,7 @@ public class InspeccionDetail extends Activity {
 	ImageView mapImg;
 	TextView observacionText;
 	ListView auditoriasList;
+	TextView localidadText;
 
 	AuditoriaAdapter adapter;
 
@@ -80,17 +81,17 @@ public class InspeccionDetail extends Activity {
 		getMenuInflater().inflate(R.menu.inspeccion_detail, menu);
 		return true;
 	}
-	
+
 	private void restricRole(){
 		RoleDTO role = UserContainer.getUserDTO().getRolesDTO().get(0);
 		/*confirmar_btn
 		ejecutada_btn
 		auditar_btn*/
-		
+
 		Button confirmar = (Button) this.findViewById(R.id.confirmar_btn);
 		Button ejecutada = (Button) this.findViewById(R.id.ejecutada_btn);
 		Button auditar = (Button) this.findViewById(R.id.auditar_btn);
-		
+
 		if (role.equals(new RoleDTO(SiuConstants.ROLES.ADMIN))){
 			// Dejo todos los botones.
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
@@ -127,9 +128,41 @@ public class InspeccionDetail extends Activity {
 		this.entreCallesText = (TextView) this.findViewById(R.id.entreCallesText);
 
 		this.img1 = (ImageView) this.findViewById(R.id.img1);
+		this.img1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImg1()));
+
+			}
+		});
 		this.img2 = (ImageView) this.findViewById(R.id.img2);
+		this.img2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImg2()));
+
+			}
+		});
 		this.img3 = (ImageView) this.findViewById(R.id.img3);
+		this.img3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImg3()));
+
+			}
+		});
 		this.mapImg = (ImageView) this.findViewById(R.id.mapImg);
+		this.mapImg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ImagePopup(InspeccionDetail.this,Util.getBitmap(idto.getImgMap()));
+
+			}
+		});
 
 		this.observacionText = (TextView) this.findViewById(R.id.observacionText);	
 		this.auditoriasList = (ListView) this.findViewById(R.id.auditoriasList);
@@ -140,10 +173,12 @@ public class InspeccionDetail extends Activity {
 				System.out.println("Seleccione Auditoria id: "  + id);
 				AuditoriaDTO audto = (AuditoriaDTO)adap.getItemAtPosition(position);
 				auditoriaPopup(audto);
-				
+
 			}
 		});
 
+		this.localidadText = (TextView) this.findViewById(R.id.localidadText);
+		
 		// Escribiendo Datos Inspeccion
 		inspeccionID.setText(idto.getId().toString());
 		riesgoID.setText(Util.riesgoIDtoString(idto.getRiesgo()));
@@ -161,6 +196,19 @@ public class InspeccionDetail extends Activity {
 		calleText.setText(idto.getCalle());
 		alturaText.setText(idto.getAltura().toString());
 
+		this.localidadText.setText(idto.getLocalidad().getNombre());
+		
+		String entrecalles = "----";
+		
+		if (idto.getEntreCalleUno() != null ){
+			entrecalles = idto.getEntreCalleUno();
+		}
+		if (idto.getEntreCalleDos() != null){
+			entrecalles = entrecalles + " y " + idto.getEntreCalleDos();
+		}
+		this.entreCallesText.setText(entrecalles);
+		
+		// Busca auditorias.
 		auditAsynkTask(idto.getId());
 
 	}
@@ -251,10 +299,10 @@ public class InspeccionDetail extends Activity {
 				InspeccionDetail.this.finish();
 				return Callable.OK;
 			}
-			
+
 		});
 	}
-	
+
 	public void ejecutada(View view){
 		new AsyncFunctionWrapper(this).execute("Ejecutando", "Procesando...", new Callable() {
 			@Override
@@ -278,7 +326,7 @@ public class InspeccionDetail extends Activity {
 				InspeccionDetail.this.finish();
 				return Callable.OK;
 			}
-			
+
 		});
 	}
 
@@ -288,9 +336,9 @@ public class InspeccionDetail extends Activity {
 		LayoutInflater layoutInflater = (LayoutInflater) InspeccionDetail.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View layout = layoutInflater.inflate(R.layout.auditoria_detail_popup, viewGroup);
 
-		
+
 		TextView leyenda = (TextView) layout.findViewById(R.id.leyenda_popup);
-		
+
 		leyenda.setText("Auditoria n°: "+ audto.getId() +" de Inspeccion: " + this.idto.getId());
 		EditText observacion = (EditText) layout.findViewById(R.id.observaciones_popup);
 		observacion.setText(audto.getObservaciones());
@@ -298,11 +346,20 @@ public class InspeccionDetail extends Activity {
 		resuelto.setChecked(audto.getResuelto());
 		TextView fecha = (TextView) layout.findViewById(R.id.fecha_popup);
 		fecha.setText("Fecha: " + audto.getFecha());
+
+		// Imagenes
+		
+		ImageView img1 = (ImageView) layout.findViewById(R.id.au_img1);
+		img1.setImageBitmap(Util.getBitmap(audto.getImg1()));
+		ImageView img2 = (ImageView) layout.findViewById(R.id.au_img2);
+		img2.setImageBitmap(Util.getBitmap(audto.getImg2()));
+		ImageView img3 = (ImageView) layout.findViewById(R.id.au_img3);
+		img3.setImageBitmap(Util.getBitmap(audto.getImg3()));
 		
 		final PopupWindow popup = new PopupWindow(InspeccionDetail.this);
 		popup.setContentView(layout);
 		popup.setWidth(500);
-		popup.setHeight(700);
+		popup.setHeight(950);
 		popup.setFocusable(true);
 
 		popup.showAtLocation(layout, Gravity.CENTER, 0, 0);
@@ -320,5 +377,5 @@ public class InspeccionDetail extends Activity {
 		});
 
 	}
-	
+
 }

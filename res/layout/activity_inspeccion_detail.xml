@@ -196,6 +196,21 @@
                 android:layout_height="wrap_content"
                 android:text="----"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
+                style="@style/tipografia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Localidad:"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
+                android:id="@+id/localidadText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="----"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
         </LinearLayout>
 
         <LinearLayout

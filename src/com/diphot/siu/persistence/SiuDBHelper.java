@@ -12,7 +12,7 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 	}
 	String sqlAreaCreate = "CREATE TABLE Area (id INTEGER PRIMARY KEY, nombre TEXT)";
 	String sqlTipoRelevamientoCreate = "CREATE TABLE TipoRelevamiento (id INTEGER PRIMARY KEY, nombre TEXT, areaid INTEGER)";
-	String sqlTemaCreate = "CREATE TABLE Tema (id INTEGER PRIMARY KEY, nombre TEXT, tiporelevamientoid)";
+	String sqlTemaCreate = "CREATE TABLE Tema (id INTEGER PRIMARY KEY, nombre TEXT, tiporelevamientoid INTEGER)";
 	String sqlInspeccionCreate = "CREATE TABLE Inspeccion (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 															"temaid INTEGER, " +
 															"calle TEXT, " +
@@ -26,13 +26,18 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 															"img3 TEXT, " +
 															"riesgo INTEGER, " +
 															"enviado INTEGER," +
-															"uuid TEXT)";
+															"uuid TEXT," +
+															"localidadid INTEGER," +
+															"calle1 TEXT," + 
+															"calle2 TEXT" + ")";
+	String sqlLocalidadCreate ="CREATE TABLE Localidad (id INTEGER PRIMARY KEY, nombre TEXT)";
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(sqlAreaCreate);
 		db.execSQL(sqlTipoRelevamientoCreate);
 		db.execSQL(sqlTemaCreate);
 		db.execSQL(sqlInspeccionCreate);
+		db.execSQL(sqlLocalidadCreate);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {

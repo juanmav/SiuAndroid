@@ -47,7 +47,7 @@ public class InspeccionSenderService extends AbstractService implements Runnable
 							e.printStackTrace();
 						}
 					} finally{
-						pause(1);
+						pause(5);
 					}
 				}
 			}

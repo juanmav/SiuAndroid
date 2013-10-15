@@ -6,10 +6,12 @@ import android.content.Context;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.connection.LinkChecker;
 import com.diphot.siu.persistence.AreaDAO;
+import com.diphot.siu.persistence.LocalidadDAO;
 import com.diphot.siu.persistence.TemaDAO;
 import com.diphot.siu.persistence.TipoRelevamientoDAO;
 import com.diphot.siu.services.restlet.TipificacionRestLetInterface;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
+import com.diphot.siuweb.shared.dtos.LocalidadDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
 
@@ -49,6 +51,21 @@ public class TipificacionSincroService  extends AbstractService implements Runna
 					areaDAO.massiveCreate(areas);
 					tipoDAO.massiveCreate(tipos);
 					temaDAO.massiveCreate(temas);
+					// TODO Conectar a servicio
+					
+					LocalidadDAO ldao = new LocalidadDAO(context);
+					ldao.create(new LocalidadDTO(1L, "Benavídez"));
+					ldao.create(new LocalidadDTO(2L, "Delta de Tigre"));
+					ldao.create(new LocalidadDTO(3L, "Dique Luján"));
+					ldao.create(new LocalidadDTO(4L, "Don Torcuato"));
+					ldao.create(new LocalidadDTO(5L, "El Talar"));
+					ldao.create(new LocalidadDTO(6L, "General Pacheco"));
+					ldao.create(new LocalidadDTO(7L, "Nordelta"));
+					ldao.create(new LocalidadDTO(8L, "Ricardo Rojas"));
+					ldao.create(new LocalidadDTO(9L, "Rincón de Milberg"));
+					ldao.create(new LocalidadDTO(10L, "Tigre"));
+					ldao.create(new LocalidadDTO(11L, "Troncos del Talar"));
+					
 				}catch (Exception e) {
 					e.printStackTrace();
 				}catch (Error e) {
