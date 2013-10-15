@@ -45,7 +45,7 @@ public class InspeccionAdapter extends BaseAdapter {
 		TextView id = (TextView) convertView.findViewById(R.id.inspeccionid);
 		TextView calle = (TextView) convertView.findViewById(R.id.calle);
 		TextView altura = (TextView) convertView.findViewById(R.id.altura);
-		TextView observacion = (TextView) convertView.findViewById(R.id.observacion);
+		//TextView observacion = (TextView) convertView.findViewById(R.id.observacion);
 		ImageView riesgoIcon = (ImageView) convertView.findViewById(R.id.riesgoIcon);
 		ImageView estadoIcon = (ImageView) convertView.findViewById(R.id.estadoIcon);
 		TextView fecha = (TextView) convertView.findViewById(R.id.fecha);
@@ -58,7 +58,7 @@ public class InspeccionAdapter extends BaseAdapter {
 		id.setText(dto.getId().toString());
 		calle.setText(dto.getCalle());
 		altura.setText(dto.getAltura().toString());
-		observacion.setText(dto.getObservacion());
+		//observacion.setText(dto.getObservacion());
 
 		fecha.setText(dto.getFecha());
 
