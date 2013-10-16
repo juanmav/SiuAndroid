@@ -6,7 +6,6 @@ import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
-import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterfaceTwo;
 import com.diphot.siu.util.AsyncFunctionWrapper;
 import com.diphot.siu.util.AsyncFunctionWrapper.Callable;
@@ -240,7 +239,14 @@ public class InspeccionDetail extends Activity {
 		this.entreCallesText.setText(entrecalles);
 		
 		// Busca auditorias.
-		auditAsynkTask(idto.getId());
+		if (idto.getAuditoriaCant() > 0){
+			auditAsynkTask(idto.getId());
+		} else {
+			// Se saca el "Auditorias: Procesando...."
+			TextView text = (TextView) InspeccionDetail.this.findViewById(R.id.textView5);
+			text.setText("Auditorias:");
+		}
+		
 
 	}
 

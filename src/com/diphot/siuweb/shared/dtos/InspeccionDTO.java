@@ -22,9 +22,9 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 	public String token;
 	public String UUID;
 	private LocalidadDTO localidad;
-	
 	private String entreCalleUno;
 	private String entreCalleDos;
+	private int auditoriaCant;
 	
 	public InspeccionDTO(){
 		
@@ -197,5 +197,13 @@ public class InspeccionDTO implements Serializable, InterfaceDTO {
 	
 	public void setEntreCalleDos(String entreCalleDos) {
 		this.entreCalleDos = entreCalleDos;
+	}
+
+	public int getAuditoriaCant() {
+		return auditoriaCant;
+	}
+
+	public void setAuditoriaCant(int auditoriaCant) {
+		this.auditoriaCant = auditoriaCant;
 	}
 }
