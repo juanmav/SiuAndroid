@@ -11,7 +11,8 @@ public interface SiuConstants {
 	public static final int ALTO = 3;
 	public static final int MEDIO = 2;
 	public static final int BAJO = 1;
-
+	public static final int TODOS = 0;
+	
 	final public static int OBSERVADO = 1;
 	final public static int CONFIRMADO = 2;
 	final public static int EJECUTADO = 3;

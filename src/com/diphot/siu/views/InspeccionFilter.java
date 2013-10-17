@@ -57,7 +57,7 @@ public class InspeccionFilter extends Activity {
 
 		}
 		
-		int riesgo = 0;
+		int riesgo = -1;
 		switch (riesgosGroup.getCheckedRadioButtonId()) {
 		case R.id.alto_rad:
 			riesgo = SiuConstants.ALTO;
@@ -69,11 +69,13 @@ public class InspeccionFilter extends Activity {
 		case R.id.bajo_rad:
 			riesgo = SiuConstants.BAJO;
 			break;
+		case R.id.todos_rad:
+			riesgo = SiuConstants.TODOS;
 		default:
 			break;
 		}
 
-		if (estado != 0 && riesgo != 0){
+		if (estado != 0 && riesgo != -1){
 			busqueda(estado, riesgo);
 		} else {
 			// TODO debe seleccionar valores.

@@ -138,6 +138,16 @@
                 android:button="@null"
                 android:text="BAJO" 
                 style="@style/btn_text_style"/>
+            
+            <RadioButton
+                android:id="@+id/todos_rad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:background="@drawable/custom_radio_btn"
+                android:button="@null"
+                android:text="TODOS" 
+                style="@style/btn_text_style"/>
         </RadioGroup>
     </LinearLayout>
 
