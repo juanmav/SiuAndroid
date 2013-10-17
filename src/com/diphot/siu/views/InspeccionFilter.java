@@ -1,5 +1,6 @@
 package com.diphot.siu.views;
 
+import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
@@ -8,6 +9,8 @@ import com.diphot.siuweb.shared.dtos.RoleDTO;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -78,7 +81,16 @@ public class InspeccionFilter extends Activity {
 		if (estado != 0 && riesgo != -1){
 			busqueda(estado, riesgo);
 		} else {
-			// TODO debe seleccionar valores.
+			new AlertDialog.Builder(InspeccionFilter.this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("Validación")
+			.setMessage("Porfavor seleccione un estado de inspeccion y un grado de riesgo para la busqueda.")
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			}).show();
 		}
 	}
 	
