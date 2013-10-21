@@ -29,7 +29,10 @@ public class InspeccionList extends ListActivity {
 		Bundle b = getIntent().getExtras();
 		int riesgo = b.getInt(SiuConstants.RIESGO_PROPERTY);
 		int estado = b.getInt(SiuConstants.ESTADO_PROPERTY);
-
+		Long localidadid = b.getLong(SiuConstants.LOCALIDAD_PROPERTY);
+		String desde = b.getString(SiuConstants.FECHA_DESDE);
+		String hasta = b.getString(SiuConstants.FECHA_HASTA);
+		
 		//InspeccionDAO idao = new InspeccionDAO(this);
 		//ArrayList<InspeccionDTO> dtos = idao.getList();
 		//ArrayList<InspeccionDTO> dtos = getlist(estado, riesgo); 
@@ -38,6 +41,9 @@ public class InspeccionList extends ListActivity {
 		InspeccionFilterDTO filtro = new InspeccionFilterDTO();
 		filtro.riesgo = riesgo;
 		filtro.estadoID = estado;
+		filtro.localidadID = localidadid;
+		filtro.desde = desde;
+		filtro.hasta = hasta;
 		asyntask(filtro);
 	}
 
@@ -57,8 +63,7 @@ public class InspeccionList extends ListActivity {
 			@Override
 			protected ArrayList<InspeccionDTO> doInBackground(InspeccionFilterDTO... params) {
 				InspeccionFilterDTO filter = params[0];
-				ArrayList<InspeccionDTO> dtos = getlist(filter.estadoID, filter.riesgo);
-				
+				ArrayList<InspeccionDTO> dtos = getlist(filter);
 				return dtos;
 			}
 			@Override
@@ -78,14 +83,11 @@ public class InspeccionList extends ListActivity {
 		return true;
 	}
 
-	private ArrayList<InspeccionDTO> getlist(int estado, int riesgo){
+	private ArrayList<InspeccionDTO> getlist(InspeccionFilterDTO filter){
 		ArrayList<InspeccionDTO> result = null;
 		try {
 			InspeccionRestLetInterface resource = WebServiceFactory.getInspeccionRestLetInterface();
-			InspeccionFilterDTO filter = new InspeccionFilterDTO();
 			UserDTO u = UserContainer.getUserDTO();
-			filter.riesgo = riesgo;
-			filter.estadoID = estado;
 			filter.token = u.getToken();
 			result = (ArrayList<InspeccionDTO>)(resource.getList(filter));
 		}catch (Exception e){

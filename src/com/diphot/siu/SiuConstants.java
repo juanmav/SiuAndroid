@@ -63,6 +63,9 @@ public interface SiuConstants {
 
 	public static final Boolean debug = true;
 
+	public static final String FECHA_DESDE = "desde";
+	public static final String FECHA_HASTA = "hasta";
+	
 	public interface ROLES {
 		// Roles
 		public static final String ADMIN = "ADMIN";
