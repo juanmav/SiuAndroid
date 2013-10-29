@@ -44,49 +44,49 @@
 
             <RadioButton
                 android:id="@+id/obs_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
                 android:checked="true"
-                android:text="Observado"
-                style="@style/btn_text_style" 
-                />
+                android:text="Observado" />
 
             <RadioButton
                 android:id="@+id/con_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
-                android:text="Confirmado" 
-                style="@style/btn_text_style"/>
+                android:text="Confirmado" />
 
             <RadioButton
                 android:id="@+id/ejec_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
-                android:text="Ejecutado" 
-                style="@style/btn_text_style"/>
+                android:text="Ejecutado" />
 
             <RadioButton
                 android:id="@+id/res_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
-                android:text="Resuelto" 
-                style="@style/btn_text_style"/>
+                android:text="Resuelto" />
         </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
@@ -110,39 +110,140 @@
 
             <RadioButton
                 android:id="@+id/alto_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.33"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
                 android:checked="true"
-                android:text="ALTO" 
-                style="@style/btn_text_style"/>
+                android:text="ALTO" />
 
             <RadioButton
                 android:id="@+id/medio_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.33"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
-                android:text="MEDIO" 
-                style="@style/btn_text_style"/>
+                android:text="MEDIO" />
 
             <RadioButton
                 android:id="@+id/bajo_rad"
+                style="@style/btn_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.33"
                 android:background="@drawable/custom_radio_btn"
                 android:button="@null"
-                android:text="BAJO" 
-                style="@style/btn_text_style"/>
+                android:text="BAJO" />
+
+            <RadioButton
+                android:id="@+id/todos_rad"
+                style="@style/btn_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:background="@drawable/custom_radio_btn"
+                android:button="@null"
+                android:text="TODOS" />
         </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccione rango de fechas" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/customborder"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    style="@style/tipografia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desde: " />
+
+                <DatePicker
+                    android:id="@+id/desde"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:calendarViewShown="false" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/customborder"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    style="@style/tipografia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hasta: " />
+
+                <DatePicker
+                    android:id="@+id/hasta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:calendarViewShown="false" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:orientation="vertical" android:gravity="center" >
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/tipografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Localidad: " />
+
+        <Spinner
+            android:id="@+id/localidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <Button
         android:id="@+id/filter_btn"
+        style="@style/btn_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -154,7 +255,6 @@
         android:text="Siguiente"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
-        android:textStyle="bold" 
-        style="@style/btn_text_style"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

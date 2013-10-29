@@ -7,4 +7,8 @@ public class InspeccionFilterDTO implements FilterInterfaceDTO, Serializable {
 	public String token;
 	public int riesgo;
 	public int estadoID;
+	public Long inspeccionID;
+	public Long localidadID;
+	public String desde;
+	public String hasta;
 }

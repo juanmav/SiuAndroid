@@ -20,6 +20,7 @@ import com.diphot.siuweb.shared.dtos.RoleDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
 import com.diphot.siuweb.shared.dtos.filters.AuditoriaFilterDTO;
+import com.diphot.siuweb.shared.dtos.filters.InspeccionFilterDTO;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -184,10 +185,39 @@ public class InspeccionDetail extends Activity {
 		riesgoID.setText(Util.riesgoIDtoString(idto.getRiesgo()));
 		observacionText.setText(idto.getObservacion());
 
-		img1.setImageBitmap(Util.getBitmap(idto.getImg1()));
-		img2.setImageBitmap(Util.getBitmap(idto.getImg2()));
-		img3.setImageBitmap(Util.getBitmap(idto.getImg3()));
-		mapImg.setImageBitmap(Util.getBitmap(idto.getImgMap()));
+		// TODO Async aca
+		
+		new AsyncFunctionWrapper(this).execute("Buscando Imagenes!", "Procesando...", new Callable() {
+			@Override
+			public Integer call() {
+				Integer result = Callable.NOTOK;
+				try {
+					InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
+					InspeccionFilterDTO filter = new InspeccionFilterDTO();
+					filter.inspeccionID = idto.getId();
+					filter.token = UserContainer.getUserDTO().getToken();
+					idto = resource.getDTOWithImage(filter);
+					// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
+					result = Callable.OK;
+				} catch (Exception e){
+					e.printStackTrace();
+					result = Callable.NOTOK;
+				}
+				return result;
+			}
+		}, new Callable(){
+			@Override
+			public Integer call() {
+				img1.setImageBitmap(Util.getBitmap(idto.getImg1()));
+				img2.setImageBitmap(Util.getBitmap(idto.getImg2()));
+				img3.setImageBitmap(Util.getBitmap(idto.getImg3()));
+				mapImg.setImageBitmap(Util.getBitmap(idto.getImgMap()));
+				return Callable.OK;
+			}
+
+		});
+		
+		
 
 		estadoText.setText(Util.stateIDToString(idto.getLastStateIdentifier()));
 
@@ -209,7 +239,14 @@ public class InspeccionDetail extends Activity {
 		this.entreCallesText.setText(entrecalles);
 		
 		// Busca auditorias.
-		auditAsynkTask(idto.getId());
+		if (idto.getAuditoriaCant() > 0){
+			auditAsynkTask(idto.getId());
+		} else {
+			// Se saca el "Auditorias: Procesando...."
+			TextView text = (TextView) InspeccionDetail.this.findViewById(R.id.textView5);
+			text.setText("Auditorias:");
+		}
+		
 
 	}
 
