@@ -5,6 +5,7 @@ import java.util.Date;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.custom.ConsoleOnScreen;
 import com.diphot.siu.persistence.InspeccionDAO;
+import com.diphot.siu.util.ConversionUtil;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.LocalidadDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
@@ -138,8 +139,7 @@ public class SelectionController extends Activity {
 
 	// Creo La inspeccion y salgo
 	private void creacionTerminada(){
-		// TODO ver fecha
-		this.inspeccion.setFecha(new Date().toString());
+		this.inspeccion.setFecha(ConversionUtil.getSimpleDate(new Date().toString()));
 		new InspeccionDAO(this).create(this.inspeccion);
 		Toast.makeText(getBaseContext(),"Inspeccion Generada con exito", Toast.LENGTH_LONG).show();
 		ConsoleOnScreen.addText("Inspeccion Generada con exito");
