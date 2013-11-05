@@ -93,6 +93,31 @@ public class InspeccionDetail extends Activity {
 		Button ejecutada = (Button) this.findViewById(R.id.ejecutada_btn);
 		Button auditar = (Button) this.findViewById(R.id.auditar_btn);
 
+		switch (idto.getLastStateIdentifier()) {
+		case SiuConstants.OBSERVADO:
+			confirmar.setEnabled(true);
+			ejecutada.setEnabled(false);
+			auditar.setEnabled(false);
+			break;
+		case SiuConstants.CONFIRMADO:
+			confirmar.setEnabled(false);
+			ejecutada.setEnabled(true);
+			auditar.setEnabled(true);
+			break;
+		case SiuConstants.EJECUTADO:
+			confirmar.setEnabled(false);
+			ejecutada.setEnabled(false);
+			auditar.setEnabled(true);
+			break;
+		case SiuConstants.RESUELTO:
+			confirmar.setEnabled(false);
+			ejecutada.setEnabled(false);
+			auditar.setEnabled(true);
+			break;
+		default:
+			break;
+		}
+
 		if (role.equals(new RoleDTO(SiuConstants.ROLES.ADMIN))){
 			// Dejo todos los botones.
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
@@ -179,14 +204,14 @@ public class InspeccionDetail extends Activity {
 		});
 
 		this.localidadText = (TextView) this.findViewById(R.id.localidadText);
-		
+
 		// Escribiendo Datos Inspeccion
 		inspeccionID.setText(idto.getId().toString());
 		riesgoID.setText(Util.riesgoIDtoString(idto.getRiesgo()));
 		observacionText.setText(idto.getObservacion());
 
 		// TODO Async aca
-		
+
 		new AsyncFunctionWrapper(this).execute("Buscando Imagenes!", "Procesando...", new Callable() {
 			@Override
 			public Integer call() {
@@ -216,8 +241,8 @@ public class InspeccionDetail extends Activity {
 			}
 
 		});
-		
-		
+
+
 
 		estadoText.setText(Util.stateIDToString(idto.getLastStateIdentifier()));
 
@@ -227,9 +252,9 @@ public class InspeccionDetail extends Activity {
 		alturaText.setText(idto.getAltura().toString());
 
 		this.localidadText.setText(idto.getLocalidad().getNombre());
-		
+
 		String entrecalles = "----";
-		
+
 		if (idto.getEntreCalleUno() != null ){
 			entrecalles = idto.getEntreCalleUno();
 		}
@@ -237,7 +262,7 @@ public class InspeccionDetail extends Activity {
 			entrecalles = entrecalles + " y " + idto.getEntreCalleDos();
 		}
 		this.entreCallesText.setText(entrecalles);
-		
+
 		// Busca auditorias.
 		if (idto.getAuditoriaCant() > 0){
 			auditAsynkTask(idto.getId());
@@ -246,7 +271,7 @@ public class InspeccionDetail extends Activity {
 			TextView text = (TextView) InspeccionDetail.this.findViewById(R.id.textView5);
 			text.setText("Auditorias:");
 		}
-		
+
 
 	}
 
@@ -385,14 +410,14 @@ public class InspeccionDetail extends Activity {
 		fecha.setText("Fecha: " + audto.getFecha());
 
 		// Imagenes
-		
+
 		ImageView img1 = (ImageView) layout.findViewById(R.id.au_img1);
 		img1.setImageBitmap(Util.getBitmap(audto.getImg1()));
 		ImageView img2 = (ImageView) layout.findViewById(R.id.au_img2);
 		img2.setImageBitmap(Util.getBitmap(audto.getImg2()));
 		ImageView img3 = (ImageView) layout.findViewById(R.id.au_img3);
 		img3.setImageBitmap(Util.getBitmap(audto.getImg3()));
-		
+
 		final PopupWindow popup = new PopupWindow(InspeccionDetail.this);
 		popup.setContentView(layout);
 		popup.setWidth(500);
