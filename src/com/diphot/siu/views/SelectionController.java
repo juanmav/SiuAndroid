@@ -58,16 +58,6 @@ public class SelectionController extends Activity {
 			case SiuConstants.TEMA_SELECT:
 				temaid = data.getIntExtra(SiuConstants.TEMA_ID_PROPERTY,0);
 				this.inspeccion.setTema(new TemaDTO(temaid));
-				intent = new Intent(SelectionController.this, FotoSelection.class);
-				startActivityForResult(intent, SiuConstants.FOTO_SELECT);
-				break;
-			case SiuConstants.FOTO_SELECT:
-				String img1 = data.getStringExtra(SiuConstants.IMG1_PROPERTY);
-				String img2 = data.getStringExtra(SiuConstants.IMG2_PROPERTY);
-				String img3 = data.getStringExtra(SiuConstants.IMG3_PROPERTY);
-				this.inspeccion.setImg1(img1);
-				this.inspeccion.setImg2(img2);
-				this.inspeccion.setImg3(img3);
 				intent = new Intent(SelectionController.this, ObservacionSelect.class);
 				startActivityForResult(intent, SiuConstants.OBSERVACION_SELECT);
 				break;
@@ -91,6 +81,16 @@ public class SelectionController extends Activity {
 				this.inspeccion.setLocalidad(new LocalidadDTO(data.getLongExtra(SiuConstants.LOCALIDAD_PROPERTY, 0L), ""));
 				this.inspeccion.setEntreCalleUno(data.getStringExtra(SiuConstants.ENTRE_CALLE_UNO));
 				this.inspeccion.setEntreCalleDos(data.getStringExtra(SiuConstants.ENTRE_CALLE_DOS));
+				intent = new Intent(SelectionController.this, FotoSelection.class);
+				startActivityForResult(intent, SiuConstants.FOTO_SELECT);
+				break;
+			case SiuConstants.FOTO_SELECT:
+				String img1 = data.getStringExtra(SiuConstants.IMG1_PROPERTY);
+				String img2 = data.getStringExtra(SiuConstants.IMG2_PROPERTY);
+				String img3 = data.getStringExtra(SiuConstants.IMG3_PROPERTY);
+				this.inspeccion.setImg1(img1);
+				this.inspeccion.setImg2(img2);
+				this.inspeccion.setImg3(img3);
 				creacionTerminada();
 				break;
 			default:
@@ -114,20 +114,20 @@ public class SelectionController extends Activity {
 				intent.putExtras(b);
 				startActivityForResult(intent, SiuConstants.TIPO_SELECT);
 				break;
-			case SiuConstants.FOTO_SELECT:
+			case SiuConstants.OBSERVACION_SELECT:
 				b = new Bundle();
 				b.putInt(SiuConstants.TIPO_ID_PROPERTY,tipoid);
 				intent = new Intent(SelectionController.this, TemaSelection.class);
 				intent.putExtras(b);
 				startActivityForResult(intent, SiuConstants.TEMA_SELECT);
 				break;
-			case SiuConstants.OBSERVACION_SELECT:
-				intent = new Intent(SelectionController.this, FotoSelection.class);
-				startActivityForResult(intent, SiuConstants.FOTO_SELECT);
-				break;
 			case SiuConstants.UBICACION_SELECT:
 				intent = new Intent(SelectionController.this, ObservacionSelect.class);
 				startActivityForResult(intent, SiuConstants.OBSERVACION_SELECT);
+				break;
+			case SiuConstants.FOTO_SELECT:
+				intent = new Intent(SelectionController.this, UbicacionSelection.class);
+				startActivityForResult(intent, SiuConstants.UBICACION_SELECT);
 				break;
 			default:
 				intent = new Intent(SelectionController.this, MainScreen.class);
