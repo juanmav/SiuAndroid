@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.diphot.siu.R;
 import com.diphot.siuweb.shared.dtos.LocalidadDTO;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -42,9 +43,7 @@ public class LocalidadAdapter extends BaseAdapter{
 		TextView leyenda =new TextView(context); 
 		leyenda.setText(dto.getNombre());
 		leyenda.setTextAppearance(context, R.style.tipografiaSpinner);
+		leyenda.setBackgroundColor(Color.parseColor("#C4161C"));
 		return leyenda;
 	}
-
-	
-
 }
