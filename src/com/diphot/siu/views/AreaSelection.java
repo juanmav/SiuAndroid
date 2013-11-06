@@ -28,12 +28,12 @@ public class AreaSelection extends Activity {
 		createAreaCombos();
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.area_selection, menu);
 		return true;
-	}
+	}*/
 
 	private void createAreaCombos(){
 		TableLayout table = (TableLayout) this.findViewById(R.id.arealinerLayout);	

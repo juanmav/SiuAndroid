@@ -44,12 +44,13 @@ public class FotoSelection extends Activity {
 		this.imageView3.setOnClickListener(o);
 		// Inicializo el bundle para poner las fotos.
 	}
-	@Override
+	
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.foto_selection, menu);
 		return true;
-	}
+	}*/
 
 	// Guarda las imagenes si por algun motivo se destruye y se vuelve a crear
 	// la Activity. Es suele suceder en las rotaciones de pantalla.

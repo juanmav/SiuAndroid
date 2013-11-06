@@ -31,12 +31,12 @@ public class Login extends Activity {
 		this.passwordText = (EditText) this.findViewById(R.id.passwordText);
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
-	}
+	}*/
 
 	// TODO Async Task.
 	public void login (View view){

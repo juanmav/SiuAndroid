@@ -37,12 +37,12 @@ public class ObservacionSelect extends Activity {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.observacion, menu);
 		return true;
-	}
+	}*/
 
 	public void next(View v) {
 		if (validateForm()){

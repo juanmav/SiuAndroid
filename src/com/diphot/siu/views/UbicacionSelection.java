@@ -78,12 +78,12 @@ public class UbicacionSelection extends Activity implements LocationListener {
 		}
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.ubicacion_selection, menu);
 		return true;
-	}
+	}*/
 
 	private void activeGPS(){
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);

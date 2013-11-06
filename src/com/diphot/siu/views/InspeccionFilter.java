@@ -56,12 +56,12 @@ public class InspeccionFilter extends Activity {
 
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.inspeccion_filter, menu);
 		return true;
-	}
+	}*/
 
 	public void find(View v){
 

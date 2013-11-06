@@ -76,12 +76,12 @@ public class InspeccionList extends ListActivity {
 		t.execute(filter);
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.inspeccion_list, menu);
 		return true;
-	}
+	}*/
 
 	private ArrayList<InspeccionDTO> getlist(InspeccionFilterDTO filter){
 		ArrayList<InspeccionDTO> result = null;
