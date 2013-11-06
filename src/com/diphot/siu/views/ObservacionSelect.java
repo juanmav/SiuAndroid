@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -32,6 +33,8 @@ public class ObservacionSelect extends Activity {
 		this.alto = (Button) this.findViewById(R.id.alto_btn);
 		this.medio = (Button) this.findViewById(R.id.medio_btn);
 		this.bajo = (Button) this.findViewById(R.id.bajo_btn);
+		
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 	}
 
 	@Override
