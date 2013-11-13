@@ -50,7 +50,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/btn_yellow"
             android:onClick="next"
-            android:text="Siguiente"
+            android:text="Finalizar"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25sp"
             android:textStyle="bold" />

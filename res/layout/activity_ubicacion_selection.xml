@@ -140,7 +140,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/btn_yellow"
         android:onClick="salvar"
-        android:text="Salvar"
+        android:text="Siguiente"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:textStyle="bold" />
