@@ -269,6 +269,17 @@
             android:onClick="confirmar"
             android:text="Confirmar"
             android:textSize="25sp" />
+        
+        <Button
+            android:id="@+id/toAudit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_yellow"
+            android:onClick="toAudit"
+            android:text="Para Auditar"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/ejecutada_btn"

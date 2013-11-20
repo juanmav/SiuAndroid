@@ -14,6 +14,7 @@ import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
 import com.diphot.siu.views.popup.ImagePopup;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
+import com.diphot.siuweb.shared.dtos.AuditTaskDTO;
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.RoleDTO;
@@ -73,7 +74,7 @@ public class InspeccionDetail extends Activity {
 		Bundle b = getIntent().getExtras();
 		idto = (InspeccionDTO) b.getSerializable(SiuConstants.INSPECCION_PROPERTY);
 		populateData();
-		restricRole();
+		restricRoleAndStatus();
 	}
 
 	/*@Override
@@ -83,7 +84,7 @@ public class InspeccionDetail extends Activity {
 		return true;
 	}*/
 
-	private void restricRole(){
+	private void restricRoleAndStatus(){
 		RoleDTO role = UserContainer.getUserDTO().getRolesDTO().get(0);
 		/*confirmar_btn
 		ejecutada_btn
@@ -92,27 +93,32 @@ public class InspeccionDetail extends Activity {
 		Button confirmar = (Button) this.findViewById(R.id.confirmar_btn);
 		Button ejecutada = (Button) this.findViewById(R.id.ejecutada_btn);
 		Button auditar = (Button) this.findViewById(R.id.auditar_btn);
-
+		Button toAudit = (Button) this.findViewById(R.id.toAudit_btn);
+		
 		switch (idto.getLastStateIdentifier()) {
 		case SiuConstants.OBSERVADO:
 			confirmar.setEnabled(true);
 			ejecutada.setEnabled(false);
 			auditar.setEnabled(false);
+			toAudit.setEnabled(false);
 			break;
 		case SiuConstants.CONFIRMADO:
 			confirmar.setEnabled(false);
 			ejecutada.setEnabled(true);
 			auditar.setEnabled(true);
+			toAudit.setEnabled(true);
 			break;
 		case SiuConstants.EJECUTADO:
 			confirmar.setEnabled(false);
 			ejecutada.setEnabled(false);
 			auditar.setEnabled(true);
+			toAudit.setEnabled(true);
 			break;
 		case SiuConstants.RESUELTO:
 			confirmar.setEnabled(false);
 			ejecutada.setEnabled(false);
 			auditar.setEnabled(true);
+			toAudit.setEnabled(true);
 			break;
 		default:
 			break;
@@ -124,20 +130,25 @@ public class InspeccionDetail extends Activity {
 			// Oculto boton de confirmar
 			// Oculto boton de Ejecutada
 			// Queda boton de Auditar.
+			// Oculto boton "para Auditar".
 			confirmar.setVisibility(View.INVISIBLE);
 			ejecutada.setVisibility(View.INVISIBLE);
+			toAudit.setVisibility(View.INVISIBLE);
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SUPERVISOR))) {
 			// Oculto boton de Ejecutada
 			// Oculto boton de Auditar
 			// Queda boton de Confirmar
+			// Queda Boton "para Auditar"
 			auditar.setVisibility(View.INVISIBLE);
 			ejecutada.setVisibility(View.INVISIBLE);
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SECRETARIA))) {
 			// Oculto boton de Confirmar
 			// Oculto boton de Auditar
 			// Queda boton de Ejecutada
+			// Oculto boton "para Auditar".
 			confirmar.setVisibility(View.INVISIBLE);
 			auditar.setVisibility(View.INVISIBLE);
+			toAudit.setVisibility(View.INVISIBLE);
 		}
 	}
 
@@ -438,6 +449,33 @@ public class InspeccionDetail extends Activity {
 			}
 		});
 
+	}
+	
+	public void toAudit(View view){
+		new AsyncFunctionWrapper(this).execute("Para Auditar", "Procesando...", new Callable() {
+			@Override
+			public Integer call() {
+				Integer result = Callable.NOTOK;
+				try {
+					AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
+					// Bloqueante
+					resource.createAuditTask(getSimpleDTO());
+					// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
+					result = Callable.OK;
+				} catch (Exception e){
+					result = Callable.NOTOK;
+				}
+				return result;
+			}
+		}, new Callable(){
+
+			@Override
+			public Integer call() {
+				Toast.makeText(getBaseContext(),"Inspeccion Marcada para Auditar con exito", Toast.LENGTH_LONG).show();
+				InspeccionDetail.this.finish();
+				return Callable.OK;
+			}
+		});
 	}
 
 }
