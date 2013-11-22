@@ -3,6 +3,7 @@ package com.diphot.siu.views.auditorias;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
+import com.diphot.siu.persistence.AuditoriaDAO;
 import com.diphot.siu.services.WebServiceFactory;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
 import com.diphot.siu.util.AsyncFunctionWrapper;
@@ -17,7 +18,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -155,7 +155,12 @@ public class AuditoriaCreate extends Activity {
 			audto.setImg2(Util.getEncodedImage(bm2));
 			audto.setImg3(Util.getEncodedImage(bm3));
 
-			new AsyncFunctionWrapper(this).execute("Creando Auditoria", "Procesando...", new Callable() {
+			AuditoriaDAO adao = new AuditoriaDAO(this);
+			adao.create(audto);
+			Toast.makeText(getBaseContext(),"Auditoria Generada con exito", Toast.LENGTH_LONG).show();
+			this.finish();
+			
+			/*new AsyncFunctionWrapper(this).execute("Creando Auditoria", "Procesando...", new Callable() {
 				@Override
 				public Integer call() {
 					Integer result = Callable.NOTOK;
@@ -179,7 +184,7 @@ public class AuditoriaCreate extends Activity {
 					return Callable.OK;
 				}
 
-			});
+			});*/
 		}
 	}
 
