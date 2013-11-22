@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/fondo"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -49,13 +49,13 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-       <!--  <LinearLayout
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/btn_crearAu"
+                android:id="@+id/auTODO_btn"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginLeft="5dp"
@@ -63,8 +63,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight=".50"
                 android:background="@drawable/btn_red"
-                android:onClick="verAuLista"
-                android:text="Auditorias"
+                android:onClick="auditTODO"
+                android:text="Auditorias a Realizar"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:layout_height="70dp"
                 android:layout_weight=".50" >
             </View>
-        </LinearLayout> -->
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

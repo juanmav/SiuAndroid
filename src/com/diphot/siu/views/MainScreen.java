@@ -14,9 +14,11 @@ import com.diphot.siu.Login;
 import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
+import com.diphot.siu.services.AuditTaskSincroService;
 import com.diphot.siu.services.InspeccionSenderService;
 import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
+import com.diphot.siu.views.auditorias.InspeccionToAuditarList;
 import com.diphot.siuweb.shared.dtos.RoleDTO;
 
 public class MainScreen extends Activity {
@@ -70,6 +72,10 @@ public class MainScreen extends Activity {
 		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
 		Thread issThread =new Thread(iss); 
 		issThread.start();
+		
+		AuditTaskSincroService atss = AuditTaskSincroService.getInstance(this);
+		Thread atssThread = new Thread(atss);
+		atssThread.start();
 	}
 
 	@Override
@@ -127,8 +133,13 @@ public class MainScreen extends Activity {
 		}
 	}
 
-	public void verAuLista(View view){
+	/*public void verAuLista(View view){
 		Intent intent = new Intent (MainScreen.this, AuditoriaCreate.class);
+		startActivity(intent);
+	}*/
+	
+	public void auditTODO(View view){
+		Intent intent = new Intent (MainScreen.this, InspeccionToAuditarList.class);
 		startActivity(intent);
 	}
 }

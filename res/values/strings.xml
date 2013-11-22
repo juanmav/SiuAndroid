@@ -17,5 +17,6 @@
     <string name="title_activity_inspeccion_filter">InspeccionFilter</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_inspeccion_detail">InspeccionDetail</string>
+    <string name="title_activity_inspeccion_to_auditar_list">InspeccionToAuditarList</string>
 
 </resources>

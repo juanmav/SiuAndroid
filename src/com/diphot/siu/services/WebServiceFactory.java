@@ -2,6 +2,7 @@ package com.diphot.siu.services;
 
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
+import com.diphot.siu.services.restlet.AuditoriaRestLetInterfaceTwo;
 import com.diphot.siu.services.restlet.ClientResource;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterface;
 import com.diphot.siu.services.restlet.InspeccionRestLetInterfaceTwo;
@@ -31,6 +32,12 @@ public class WebServiceFactory {
 	public static AuditoriaRestLetInterface getAuditoriaRestLetInterface(){
 		ClientResource cr = new ClientResource(SiuConstants.URL_AUDITORIAS);
 		AuditoriaRestLetInterface resource = cr.wrap(AuditoriaRestLetInterface.class);
+		return resource;
+	}
+	
+	public static AuditoriaRestLetInterfaceTwo getAuditoriaRestLetInterfaceTwo(){
+		ClientResource cr = new ClientResource(SiuConstants.URL_AUDITORIAS_DOS);
+		AuditoriaRestLetInterfaceTwo resource = cr.wrap(AuditoriaRestLetInterfaceTwo.class);
 		return resource;
 	}
 
