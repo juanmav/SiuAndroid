@@ -35,6 +35,17 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 															"auditar INTEGER," + 
 															"lastStateIdentifier INTEGER"+ ")";
 	String sqlLocalidadCreate ="CREATE TABLE Localidad (id INTEGER PRIMARY KEY, nombre TEXT)";
+	
+	String sqlAuditoriaCreate = "CREATE TABLE Auditoria(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+															"inspeccionID LONG," +
+															"img1 TEXT, " +
+															"img2 TEXT, " +
+															"img3 TEXT, " +
+															"resuelto INTEGER," +
+															"observaciones TEXT," +
+															"fecha TEXT," +
+															"enviado INTEGER"+")";
+		
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(sqlAreaCreate);
@@ -42,7 +53,9 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 		db.execSQL(sqlTemaCreate);
 		db.execSQL(sqlInspeccionCreate);
 		db.execSQL(sqlLocalidadCreate);
+		db.execSQL(sqlAuditoriaCreate);
 	}
+	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 		// TODO Auto-generated method stub
