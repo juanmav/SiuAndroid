@@ -17,6 +17,6 @@ public interface AuditoriaRestLetInterface {
 	@Post
 	public ArrayList<AuditoriaDTO> getByID(AuditoriaFilterDTO filter);
 	@Options
-	public void createAuditTask(InspeccionDTO AuditTaskDTO);
+	public void createAuditTask(InspeccionDTO inspeccionDTO);
 
 }
