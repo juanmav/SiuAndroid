@@ -14,7 +14,6 @@ import com.diphot.siu.views.auditorias.AuditoriaAdapter;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
 import com.diphot.siu.views.popup.ImagePopup;
 import com.diphot.siuweb.shared.dtos.AreaDTO;
-import com.diphot.siuweb.shared.dtos.AuditTaskDTO;
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import com.diphot.siuweb.shared.dtos.InspeccionDTO;
 import com.diphot.siuweb.shared.dtos.RoleDTO;
@@ -31,7 +30,6 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -94,7 +92,7 @@ public class InspeccionDetail extends Activity {
 		Button ejecutada = (Button) this.findViewById(R.id.ejecutada_btn);
 		Button auditar = (Button) this.findViewById(R.id.auditar_btn);
 		Button toAudit = (Button) this.findViewById(R.id.toAudit_btn);
-		
+
 		switch (idto.getLastStateIdentifier()) {
 		case SiuConstants.OBSERVADO:
 			confirmar.setEnabled(true);
@@ -221,39 +219,43 @@ public class InspeccionDetail extends Activity {
 		riesgoID.setText(Util.riesgoIDtoString(idto.getRiesgo()));
 		observacionText.setText(idto.getObservacion());
 
-		// TODO Async aca
-
-		new AsyncFunctionWrapper(this).execute("Buscando Imagenes!", "Procesando...", new Callable() {
-			@Override
-			public Integer call() {
-				Integer result = Callable.NOTOK;
-				try {
-					InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
-					InspeccionFilterDTO filter = new InspeccionFilterDTO();
-					filter.inspeccionID = idto.getId();
-					filter.token = UserContainer.getUserDTO().getToken();
-					idto = resource.getDTOWithImage(filter);
-					// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
-					result = Callable.OK;
-				} catch (Exception e){
-					e.printStackTrace();
-					result = Callable.NOTOK;
+		if (idto.getImg1().isEmpty() && idto.getImg2().isEmpty() && idto.getImg3().isEmpty()) {
+			// Es una busqueda Online.
+			new AsyncFunctionWrapper(this).execute("Buscando Imagenes!", "Procesando...", new Callable() {
+				@Override
+				public Integer call() {
+					Integer result = Callable.NOTOK;
+					try {
+						InspeccionRestLetInterfaceTwo resource = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
+						InspeccionFilterDTO filter = new InspeccionFilterDTO();
+						filter.inspeccionID = idto.getId();
+						filter.token = UserContainer.getUserDTO().getToken();
+						idto = resource.getDTOWithImage(filter);
+						// Poner el resultado depues de la funcion bloqueante por si arroja una excepcion.
+						result = Callable.OK;
+					} catch (Exception e){
+						e.printStackTrace();
+						result = Callable.NOTOK;
+					}
+					return result;
 				}
-				return result;
-			}
-		}, new Callable(){
-			@Override
-			public Integer call() {
-				img1.setImageBitmap(Util.getBitmap(idto.getImg1()));
-				img2.setImageBitmap(Util.getBitmap(idto.getImg2()));
-				img3.setImageBitmap(Util.getBitmap(idto.getImg3()));
-				mapImg.setImageBitmap(Util.getBitmap(idto.getImgMap()));
-				return Callable.OK;
-			}
+			}, new Callable(){
+				@Override
+				public Integer call() {
+					img1.setImageBitmap(Util.getBitmap(idto.getImg1()));
+					img2.setImageBitmap(Util.getBitmap(idto.getImg2()));
+					img3.setImageBitmap(Util.getBitmap(idto.getImg3()));
+					mapImg.setImageBitmap(Util.getBitmap(idto.getImgMap()));
+					return Callable.OK;
+				}
 
-		});
+			});
 
-
+		} else { // Viene de una busqueda offline.
+			img1.setImageBitmap(Util.getBitmap(idto.getImg1()));
+			img2.setImageBitmap(Util.getBitmap(idto.getImg2()));
+			img3.setImageBitmap(Util.getBitmap(idto.getImg3()));
+		}
 
 		estadoText.setText(Util.stateIDToString(idto.getLastStateIdentifier()));
 
@@ -450,7 +452,7 @@ public class InspeccionDetail extends Activity {
 		});
 
 	}
-	
+
 	public void toAudit(View view){
 		new AsyncFunctionWrapper(this).execute("Para Auditar", "Procesando...", new Callable() {
 			@Override
