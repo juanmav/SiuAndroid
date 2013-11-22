@@ -15,11 +15,12 @@ public class LocalidadDAO  implements DAOInterface<LocalidadDTO>{
 	}
 	
 	@Override
-	public void create(LocalidadDTO dto) {
+	public Long create(LocalidadDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("INSERT INTO Localidad (id,nombre) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "')" );
 		db.execSQL("INSERT OR REPLACE INTO Localidad (id,nombre) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "')" );
 		db.close();
+		return null;
 	}
 
 	@Override

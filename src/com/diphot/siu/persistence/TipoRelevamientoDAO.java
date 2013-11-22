@@ -9,29 +9,34 @@ import com.diphot.siuweb.shared.dtos.TipoRelevamientoDTO;
 
 public class TipoRelevamientoDAO implements DAOInterface<TipoRelevamientoDTO>{
 	SiuDBHelper dbhelper;
+	private Context context;
+	
 	
 	public TipoRelevamientoDAO(Context context){
 		this.dbhelper = new SiuDBHelper(context, "siudb", null, 1);
+		this.context = context;
 	}
 	
 	@Override
-	public void create(TipoRelevamientoDTO dto) {
+	public Long create(TipoRelevamientoDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("INSERT INTO TipoRelevamiento (id,nombre,areaid) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "'," + dto.getAreadto().getId() + ")" );
 		db.execSQL("INSERT OR REPLACE INTO TipoRelevamiento (id,nombre,areaid) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "'," + dto.getAreadto().getId() + ")" );
 		db.close();
+		return null;
 	}
 	@Override
 	public TipoRelevamientoDTO findbyId(Long id) {
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
 		String[] args = new String[] {id.toString()};
-		Cursor c = db.rawQuery("SELECT id, nombre FROM TipoRelevamiento WHERE id=?",args);
+		Cursor c = db.rawQuery("SELECT id, nombre, areaid FROM TipoRelevamiento WHERE id=?",args);
 		TipoRelevamientoDTO dto = null;
 		if (c.moveToFirst()){
-			// TODO meter el Tema
+			// TODO meter el Area
 			dto = new TipoRelevamientoDTO();
 			dto.setId(c.getLong(0));
 			dto.setNombre(c.getString(1));
+			dto.setAreadto(new AreaDAO(context).findbyId(Long.valueOf(c.getInt(2))));
 		}
 		db.close();
 		return dto;

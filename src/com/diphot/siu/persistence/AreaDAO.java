@@ -17,11 +17,12 @@ public class AreaDAO implements DAOInterface<AreaDTO>{
 	}
 
 	@Override
-	public void create(AreaDTO dto) {
+	public Long create(AreaDTO dto) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
 		System.out.println("INSERT INTO area (id,nombre) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "')" );
 		db.execSQL("INSERT OR REPLACE INTO area (id,nombre) VALUES (" + dto.getId().toString() + ", '" + dto.getNombre() + "')" );
 		db.close();
+		return null;
 	}
 
 	@Override

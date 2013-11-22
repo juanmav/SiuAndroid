@@ -26,10 +26,14 @@ public class SiuDBHelper extends SQLiteOpenHelper{
 															"img3 TEXT, " +
 															"riesgo INTEGER, " +
 															"enviado INTEGER," +
-															"uuid TEXT," +
+															// Para que no se repitan los valores
+															// Por si viene de AuditTask, no deberia pasar.
+															"uuid TEXT UNIQUE," +
 															"localidadid INTEGER," +
 															"calle1 TEXT," + 
-															"calle2 TEXT" + ")";
+															"calle2 TEXT," + 
+															"auditar INTEGER," + 
+															"lastStateIdentifier INTEGER"+ ")";
 	String sqlLocalidadCreate ="CREATE TABLE Localidad (id INTEGER PRIMARY KEY, nombre TEXT)";
 	@Override
 	public void onCreate(SQLiteDatabase db) {
