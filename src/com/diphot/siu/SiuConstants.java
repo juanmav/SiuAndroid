@@ -54,12 +54,14 @@ public interface SiuConstants {
 	public static final String REST_INSPECCION = "/inspecciones";
 	public static final String REST_INSPECCION_DOS = "/inspeccionesdos";
 	public static final String REST_AUDITORIA = "/auditorias";
+	public static final String REST_AUDITORIA_DOS = "/auditoriasdos";
 	public static final String REST_USER = "/user";
 
 	public static final String URL_INSPECCIONES = SiuConstants.REST_BACKEND + SiuConstants.REST_INSPECCION;
 	public static final String URL_INSPECCIONES_DOS = SiuConstants.REST_BACKEND + SiuConstants.REST_INSPECCION_DOS;
 	public static final String URL_TIPIFICACION = SiuConstants.REST_BACKEND + SiuConstants.REST_TIPIFICACION; 
 	public static final String URL_AUDITORIAS = SiuConstants.REST_BACKEND + SiuConstants.REST_AUDITORIA;
+	public static final String URL_AUDITORIAS_DOS = SiuConstants.REST_BACKEND + SiuConstants.REST_AUDITORIA_DOS  ;
 	public static final String URL_USER = SiuConstants.REST_BACKEND + SiuConstants.REST_USER; 
 
 	public static final Boolean debug = true;
