@@ -1,5 +1,10 @@
 package com.diphot.siu.services;
 
+import com.diphot.siu.UserContainer;
+import com.diphot.siu.connection.LinkChecker;
+import com.diphot.siu.persistence.AuditoriaDAO;
+import com.diphot.siu.services.restlet.AuditoriaRestLetInterface;
+import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
 import android.content.Context;
 
 public class AuditoriaSenderService  extends AbstractService implements Runnable{
@@ -20,9 +25,30 @@ public class AuditoriaSenderService  extends AbstractService implements Runnable
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		LinkChecker linkChecker = LinkChecker.getInstance(context);
+		AuditoriaDAO idao = new AuditoriaDAO(context);
+		AuditoriaDTO idto;
+		while(this.running){
+			while(true){
+				if (linkChecker.linkOK()){
+					try {
+						idto = idao.getNotSent();
+						if ( idto != null){
+							AuditoriaRestLetInterface resource = WebServiceFactory.getAuditoriaRestLetInterface();
+							idto.token = UserContainer.getUserDTO().getToken();
+							resource.create(idto);
+							idao.removeSent(idto.getId());
+						}
+					}catch (Exception e){
+						// TODO ver porque viene en null.
+						if (e != null){
+							e.printStackTrace();
+						}
+					} finally{
+						pause(5);
+					}
+				}
+			}
+		}
 	}
-
-	
 }

@@ -15,6 +15,7 @@ import com.diphot.siu.R;
 import com.diphot.siu.SiuConstants;
 import com.diphot.siu.UserContainer;
 import com.diphot.siu.services.AuditTaskSincroService;
+import com.diphot.siu.services.AuditoriaSenderService;
 import com.diphot.siu.services.InspeccionSenderService;
 import com.diphot.siu.services.TipificacionSincroService;
 import com.diphot.siu.views.auditorias.AuditoriaCreate;
@@ -64,11 +65,12 @@ public class MainScreen extends Activity {
 	
 	private void startSincroServices(){
 		// TODO Descomentar
-		// TODO isAlkive para ver que solo este un hilo de ejecuccion.
+		// TODO isAlive para ver que solo este un hilo de ejecuccion.
 
 		TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
 		Thread ttsThread = new Thread(tss);
 		ttsThread.start();
+		
 		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
 		Thread issThread =new Thread(iss); 
 		issThread.start();
@@ -76,6 +78,10 @@ public class MainScreen extends Activity {
 		AuditTaskSincroService atss = AuditTaskSincroService.getInstance(this);
 		Thread atssThread = new Thread(atss);
 		atssThread.start();
+		
+		AuditoriaSenderService auss = AuditoriaSenderService.getInstance(this);
+		Thread aussThread = new Thread(auss);
+		aussThread.start();
 	}
 
 	@Override

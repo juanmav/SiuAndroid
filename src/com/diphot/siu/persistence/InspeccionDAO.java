@@ -12,6 +12,7 @@ import com.diphot.siuweb.shared.dtos.LocalidadDTO;
 import com.diphot.siuweb.shared.dtos.TemaDTO;
 
 public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
+	
 	SiuDBHelper dbhelper; 
 	
 	private Context context;

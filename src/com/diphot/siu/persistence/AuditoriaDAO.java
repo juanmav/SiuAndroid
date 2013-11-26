@@ -36,6 +36,11 @@ public class AuditoriaDAO implements DAOInterface<AuditoriaDTO>{
 		nuevoRegistro.put("enviado", "0");
 		Long id = db.insert("Auditoria", null, nuevoRegistro);
 		db.close();
+		
+		// Marco que la inspeccion ya fue auditada.
+		InspeccionDAO idao = new InspeccionDAO(context);
+		idao.removeAudited(dto.getInspeccionID());
+		
 		return id;
 		
 	}
@@ -59,7 +64,7 @@ public class AuditoriaDAO implements DAOInterface<AuditoriaDTO>{
 
 	@Override
 	public ArrayList<AuditoriaDTO> findbyParentID(Long id) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return null;
 	}
 	
