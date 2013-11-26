@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.diphot.siuweb.shared.dtos.AuditoriaDTO;
+
 
 public class AuditoriaDAO implements DAOInterface<AuditoriaDTO>{
 
@@ -31,6 +32,7 @@ public class AuditoriaDAO implements DAOInterface<AuditoriaDTO>{
 		nuevoRegistro.put("resuelto",dto.getResuelto());
 		nuevoRegistro.put("observaciones",dto.getObservaciones());
 		nuevoRegistro.put("fecha",dto.getFecha());
+		// Este registro no es del Modelo, es solo de la tablet.
 		nuevoRegistro.put("enviado", "0");
 		Long id = db.insert("Auditoria", null, nuevoRegistro);
 		db.close();
@@ -60,4 +62,41 @@ public class AuditoriaDAO implements DAOInterface<AuditoriaDTO>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public AuditoriaDTO getNotSent(){
+		AuditoriaDTO adto = null;
+		SQLiteDatabase db = dbhelper.getReadableDatabase();
+		String[] args = new String[] {};
+		Cursor c = db.rawQuery("SELECT * FROM Auditoria WHERE enviado=0",args);
+		if (c.moveToFirst()){
+			adto = getSimpleDTO(c);
+		}
+		db.close();
+		return adto;
+	}
+	
+	public void removeSent(Long id){
+		SQLiteDatabase db = dbhelper.getWritableDatabase();
+		db.execSQL("UPDATE Auditoria SET enviado = 1 where id=" + id );
+		db.close();
+	}
+	
+	/* Toma el primer registro del cursor y devuelve el dto
+	 * Este metodo no avanza el cursor.
+	 * */
+	private AuditoriaDTO getSimpleDTO(Cursor c){
+		AuditoriaDTO adto = new AuditoriaDTO();
+		adto.setId(c.getLong(0));
+
+		adto.setInspeccionID(c.getLong(1));
+		adto.setImg1(c.getString(2));
+		adto.setImg1(c.getString(3));
+		adto.setImg1(c.getString(4));
+		adto.setResuelto(c.getInt(5) == 1 ? true: false);
+		adto.setObservaciones(c.getString(6));
+		adto.setFecha(c.getString(7));
+			
+		return adto;
+	}
+	
 }
