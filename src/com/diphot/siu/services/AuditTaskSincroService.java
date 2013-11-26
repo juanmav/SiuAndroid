@@ -56,7 +56,7 @@ public class AuditTaskSincroService extends AbstractService implements Runnable 
 					//TODO
 					e.printStackTrace();
 				} finally{
-					this.running = false;
+					pause(10);
 				}
 			}
 			this.running = false;
