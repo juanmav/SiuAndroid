@@ -111,6 +111,10 @@
             android:name="com.diphot.siu.views.inspecciones.InspeccionDetail"
             android:label="@string/title_activity_inspeccion_detail" >
         </activity>
+        <activity
+            android:name="com.diphot.siu.views.auditorias.InspeccionToAuditarList"
+            android:label="@string/title_activity_inspeccion_to_auditar_list" >
+        </activity>
     </application>
 
 </manifest>
