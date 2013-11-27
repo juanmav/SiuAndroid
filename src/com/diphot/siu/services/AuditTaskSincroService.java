@@ -39,6 +39,7 @@ public class AuditTaskSincroService extends AbstractService implements Runnable 
 					ArrayList<InspeccionDTO> inspecciones = resource.getInspeccionesToAuditar(i);
 					InspeccionDAO idao = new InspeccionDAO(context);
 					for (InspeccionDTO ii : inspecciones){
+						idao.deleteUUID(ii.UUID);
 						InspeccionRestLetInterfaceTwo resourceIMG = WebServiceFactory.getInspeccionRestLetInterfaceTwo();
 						InspeccionFilterDTO filter = new InspeccionFilterDTO();
 						filter.inspeccionID = ii.getId();
@@ -56,7 +57,7 @@ public class AuditTaskSincroService extends AbstractService implements Runnable 
 					//TODO
 					e.printStackTrace();
 				} finally{
-					pause(10);
+					pause(2);
 				}
 			}
 			this.running = false;

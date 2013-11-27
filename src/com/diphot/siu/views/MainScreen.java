@@ -60,6 +60,9 @@ public class MainScreen extends Activity {
 			// Oculto el boton de creación.
 			Button btn_crearIns = (Button) findViewById(R.id.btn_crearIns);
 			btn_crearIns.setVisibility(View.INVISIBLE);
+			// Oculto el boton de AuditTask
+			Button auTODO_btn = (Button) findViewById(R.id.auTODO_btn);
+			auTODO_btn.setVisibility(View.INVISIBLE);
 		}
 	}
 	

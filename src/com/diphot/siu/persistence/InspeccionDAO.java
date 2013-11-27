@@ -58,10 +58,10 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 	}
 	
 	@Override
-	public InspeccionDTO findbyId(Long dto) {
-		// TODO Auto-generated method stub
+	public InspeccionDTO findbyId(Long id) {
 		return null;
 	}
+	
 	@Override
 	public ArrayList<InspeccionDTO> getList() {
 		ArrayList<InspeccionDTO> idtos = new ArrayList<InspeccionDTO>();
@@ -165,6 +165,11 @@ public class InspeccionDAO implements DAOInterface<InspeccionDTO>{
 		}
 		db.close();
 		return lista;
+	}
+	
+	public void deleteUUID(String uuid){
+		SQLiteDatabase db = dbhelper.getWritableDatabase();
+		int result = db.delete("Inspeccion", "uuid = '" + uuid + "'", null);
 	}
 	
 }

@@ -95,8 +95,8 @@ public class AuditoriaDAO implements DAOInterface<AuditoriaDTO>{
 
 		adto.setInspeccionID(c.getLong(1));
 		adto.setImg1(c.getString(2));
-		adto.setImg1(c.getString(3));
-		adto.setImg1(c.getString(4));
+		adto.setImg2(c.getString(3));
+		adto.setImg3(c.getString(4));
 		adto.setResuelto(c.getInt(5) == 1 ? true: false);
 		adto.setObservaciones(c.getString(6));
 		adto.setFecha(c.getString(7));
