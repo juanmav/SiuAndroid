@@ -47,10 +47,18 @@ public class InspeccionSenderService extends AbstractService implements Runnable
 							e.printStackTrace();
 						}
 					} finally{
-						pause(5);
+						pause(20);
 					}
 				}
 			}
 		}
+	}
+	
+	protected void pause(int seconds){
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		} 
 	}
 }

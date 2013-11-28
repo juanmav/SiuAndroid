@@ -50,11 +50,11 @@ public class MainScreen extends Activity {
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.INSPECTOR))) {
 			// Dejo todos los botones.
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SUPERVISOR))) {
-			// Oculto el boton de creación.
+			// Oculto el boton de creaciï¿½n.
 			Button btn_crearIns = (Button) findViewById(R.id.btn_crearIns);
 			btn_crearIns.setVisibility(View.INVISIBLE);
 		} else if (role.equals(new RoleDTO(SiuConstants.ROLES.SECRETARIA))) {
-			// Oculto el boton de creación.
+			// Oculto el boton de creaciï¿½n.
 			Button btn_crearIns = (Button) findViewById(R.id.btn_crearIns);
 			btn_crearIns.setVisibility(View.INVISIBLE);
 		}
@@ -64,9 +64,9 @@ public class MainScreen extends Activity {
 		// TODO Descomentar
 		// TODO isAlkive para ver que solo este un hilo de ejecuccion.
 
-		TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
-		Thread ttsThread = new Thread(tss);
-		ttsThread.start();
+//		TipificacionSincroService tss = TipificacionSincroService.getInstance(this);
+//		Thread ttsThread = new Thread(tss);
+//		ttsThread.start();
 		InspeccionSenderService iss = InspeccionSenderService.getInstance(this);
 		Thread issThread =new Thread(iss); 
 		issThread.start();
