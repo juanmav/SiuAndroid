@@ -20,9 +20,9 @@ public class ConversionUtil {
 		
 		String dia = date.getDate() <= 9 ? "0" +(date.getDate()) : "" + (date.getDate());
 		String mes = date.getMonth() <= 8 ? "0" +(date.getMonth() + 1) : "" + (date.getMonth() + 1);
-		String año = ("" + (date.getYear() + 1900));
+		String ano = ("" + (date.getYear() + 1900));
 		
-		result = (dia+ "/" + mes + "/"+ año);
+		result = (dia+ "/" + mes + "/"+ ano);
 		return result;
 	}
 
